@@ -1,0 +1,21 @@
+.header_modal{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 48px;
+    line-height: 56px;
+    text-align: center;
+    color: #FFFFFF;
+}
+.form-control{
+    margin-bottom: 13px;
+}
+.btn{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 60px;
+    font-family: Roboto !important;
+    background-color: #12491E;
+    border: none;
+}

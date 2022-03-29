@@ -1,0 +1,18 @@
+
+# HTID:18127607: DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES BELOW
+php_value display_errors 1
+# DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES ABOVE HTID:18127607:
+
+RewriteEngine On
+RewriteRule ^admin?$ admin.php
+RewriteRule ^preview?$ preview.php
+RewriteRule ^/?$ index.php
+RewriteRule ^user_setting?$ profile.php
+RewriteRule ^register?$ register.php
+RewriteRule ^img_model/([0-9a-zA-Z]+)$ img_page.php?id=$1
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-SSL} !on
+RewriteCond %{HTTP_HOST} ^bluprinthink\.id$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.bluprinthink\.id$
+RewriteRule ^/?$ "https\:\/\/bluprinthink\.id\/" [R=301,L]
+RewriteRule ^kontak?$ kontak.php
