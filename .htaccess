@@ -9,7 +9,7 @@ RewriteRule ^preview?$ preview.php
 RewriteRule ^/?$ index.php
 RewriteRule ^user_setting?$ profile.php
 RewriteRule ^register?$ register.php
-RewriteRule ^img_model/([0-9a-zA-Z]+)$ img_page.php?id=$1
+RewriteRule ^([0-9a-zA-Z]+)$ adopter_page.php?username=$1
 RewriteCond %{HTTPS} off
 RewriteCond %{HTTP:X-Forwarded-SSL} !on
 RewriteCond %{HTTP_HOST} ^bluprinthink\.id$ [OR]

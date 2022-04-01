@@ -11,14 +11,15 @@ html{
 h1{
     font-style: normal;
     font-weight: bold;
-    font-size: 113px;
-    line-height: 132px;
+    font-size: 95px;
+    line-height: 110px;
     text-shadow: 0px 0px 20px #000000;
+    font-family: Roboto;
 }
 p{
     font-style: normal;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 15px;
     line-height: 21px;
     color: #FFFFFF;
     text-shadow: 0px 0px 20px #000000;
@@ -38,13 +39,11 @@ p{
     color: white;
     border-radius: 50%;
 }
-@media (min-width: 1200px){
-    h1{
-        font-size: 95px;
-        line-height: 110px;
-    }
-    p{
-        font-size: 15px;
-        line-height: 21px;
+.urlLanding{
+    display: none;
+}
+@media (max-width: 900px){
+    .textLanding{
+        display: none;
     }
 }

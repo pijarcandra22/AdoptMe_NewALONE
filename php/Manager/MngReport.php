@@ -1,5 +1,5 @@
 <?php 
-    include dirname( dirname(__DIR__ . PHP_EOL) . PHP_EOL)."\php\GlobalFun.php";
+    include "../GlobalFun.php";
 
     
     if (isset($_GET["action"])){

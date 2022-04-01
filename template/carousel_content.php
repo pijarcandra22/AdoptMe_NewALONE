@@ -27,7 +27,7 @@
   $query = mysqli_query($conn, $sql);
   $data = mysqli_fetch_assoc($query);
 ?>
-<div class="slide hi-slide" style="top: 120px; right:-600px">
+<div class="slide hi-slide">
 	<div>
 		<div class="car-content" data-bs-toggle="modal" data-bs-target="#modal_adobt" alt="img 1"></div>
 		<div class="car-content" data-bs-toggle="modal" data-bs-target="#modal_adobt" alt="img 2"></div>

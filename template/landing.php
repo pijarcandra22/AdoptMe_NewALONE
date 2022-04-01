@@ -20,8 +20,8 @@
             <div class="row">
                 <div class="col-5">
                     <div class="position-relative">
-                        <div class="position-absolute top-50 start-0 translate-middle-y">
-                            <h1 style="font-family: Roboto;"><?=$data['plant_tittle']?></h1>
+                        <div class="position-absolute top-50 start-0 translate-middle-y textLanding">
+                            <h1><?=$data['plant_tittle']?></h1>
                             <p><?=$data['plant_desc']?></p>
                             <button type="button" style="margin-top: 20px;" class="btn btn-success">Check Adopt Location <i class="bi bi-geo-alt"></i></button>
                         </div>
@@ -30,8 +30,8 @@
                 <div class="col-7">
                     <div class="position-relative">
                         <div class="position-absolute bottom-0 start-0" style="margin-bottom:20px; display: flex;">
-                            <button class="carousel-control-prev btn rl-btn" data-bs-target="#carouselExampleFade" data-bs-slide="prev" style="position:relative"><i class="bi bi-chevron-left"></i></button>
-                            <button class="carousel-control-next btn rl-btn" data-bs-target="#carouselExampleFade" data-bs-slide="next" style="margin-left: 10px !important; position:relative"><i class="bi bi-chevron-right"></i></button>
+                            <button class="carousel-control-prev btn rl-btn" data-bs-target="#carouselExampleFade" data-bs-slide="prev" style="position:relative" onclick="animatereset()"><i class="bi bi-chevron-left"></i></button>
+                            <button class="carousel-control-next btn rl-btn" data-bs-target="#carouselExampleFade" data-bs-slide="next" style="margin-left: 10px !important; position:relative" onclick="animatereset()"><i class="bi bi-chevron-right"></i></button>
                         </div>
                     </div>
                 </div>

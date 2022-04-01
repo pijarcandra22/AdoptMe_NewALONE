@@ -55,21 +55,25 @@
         body{
             font-family: Roboto !important;
         }
+        #carousel{
+            position: relative;
+        }
+        
     </style>
 </head>
-<body>
+<body onscroll="scrollSet()">
     <div style="position:absolute;">
         <div id="carousel"></div>
     </div>
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active" id="1" style="height: 100%;">
+            <div class="carousel-item active" id="1" style="height: 100%;" data-bs-interval="10000">
                 <div id="c1"></div>
             </div>
-            <div class="carousel-item" id="2" style="height: 100%;">
+            <div class="carousel-item" id="2" style="height: 100%;" data-bs-interval="10000">
                 <div id="c2"></div>
             </div>
-            <div class="carousel-item" id="3" style="height: 100%;">
+            <div class="carousel-item" id="3" style="height: 100%;" data-bs-interval="10000">
                 <div id="c3"></div>
             </div>
         </div>
@@ -154,14 +158,13 @@
     <div id="m2"></div>
 </body>
 </html>
-<script>
+<script>    
     $(document).ready(function(){
         $.ajax({
             url: 'php/Adopter/AdpViewPlant.php',
             type: 'GET',
             success: function(response){
                 dataFull = JSON.parse(response)
-                localStorage.removeItem("dataTanaman")
                 localStorage.setItem("dataTanaman", JSON.stringify(dataFull))
             },
             error: function(error){
@@ -170,7 +173,6 @@
         });
 
         dataProduk = JSON.parse(localStorage.getItem("dataTanaman"))
-        adopter = localStorage.getItem("dataAdopter")
 
         $("#c_maps").load("template/maps_adopter.php")
 
@@ -186,7 +188,8 @@
 
         var myCarousel = document.getElementById('carouselExampleFade')
         myCarousel.addEventListener('slid.bs.carousel', function (event) {
-            $("#carousel").load("template/carousel_content.php?id="+event.relatedTarget.id)
+            $("#carousel").load("template/carousel_content.php?id="+event.relatedTarget.id).animate({'left':"+=1000"},"fast")
+            $("#carousel").animate({'left':"-=1000"},1000)
         })
 
         callContent(dataProduk,"c_important_content")
@@ -233,5 +236,28 @@
             $(element).attr({"onclick":"callModal('"+data[index]['nama_tanaman']+"','"+data[index]['id_pengelola']+"')"});
         });
     }
-    
+
+    //CSS Manipulation
+    heigthPage = parseInt(window.innerHeight)
+    widthPage = parseInt(window.innerWidth)
+
+    $("#carousel").css({
+        'top':(heigthPage/2-223)+"px",
+        'left':widthPage+"px"})
+
+    if(widthPage>900){
+        $("#carousel").animate({'left':"600px"},1000)
+    }
+    else{
+        $("#carousel").animate({'left':"50px"},1000)
+    }
+
+    //Animation Manipulation
+    function scrollSet(){
+        if(window.scrollY>heigthPage*0.5){
+            $("#c4").animate({'top':"-300px"},'slow')
+        }else{
+            $("#c4").animate({'top':"0px"},'slow')
+        }
+    }
 </script>

@@ -1,5 +1,5 @@
 <?php 
-    include dirname( dirname(__DIR__ . PHP_EOL) . PHP_EOL)."\php\GlobalFun.php";
+    include "../GlobalFun.php";
 
     $id_petani      = $_POST['id_petani'];
     $id_tanaman     = $_POST['id_tanaman'];

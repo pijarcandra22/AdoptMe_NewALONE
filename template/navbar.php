@@ -31,10 +31,37 @@
       border:none;
       font-size:12px !important;
     }
+    .navbar{
+      padding: 30px 110px;
+      color:<?='#'.$_GET['color']?> !important
+    }
+    #searchEngine{
+      margin:10px 0 0 30px;
+      border-bottom:1px solid <?='#'.$_GET['color']?>;
+      height: 24px;
+    }
+    #logset{
+      margin-left: 20px;
+      vertical-align:text-bottom;
+      line-height: 40px;
+    }
+    @media (max-width: 1020px){
+        .navbar{
+          padding: 30px 40px;
+        }
+    }
+    @media (max-width: 1000px){
+        #searchEngine{
+          margin:10px 0 0 0px;
+        }
+        #logset{
+          margin-left: 0px;
+        }
+    }
   </style>
-  <nav class="navbar navbar-expand-lg navbar-dark" style="padding: 30px 80px 0 110px; color:<?='#'.$_GET['color']?> !important">
+  <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid"  style="padding-right: 50px;">
-      <a class="navbar-brand" href="#" style="font-size: 30px; font-weight: bold; color:<?='#'.$_GET['color']?> !important; font-family: Roboto;">AdoptMe.com</a>
+      <a class="navbar-brand" href="#" style="font-size: 30px; font-weight: bold; color:<?='#'.$_GET['color']?> !important; font-family: Roboto;">AdoptPlant.com</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -52,19 +79,16 @@
             <a class="nav-link active" aria-current="page" href="#" style="color: <?='#'.$_GET['color']?>!important;"><b>Management</b></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#" style="color: <?='#'.$_GET['color']?>!important;"><b>Agency</b></a>
-          </li>
-          <li class="nav-item">
-            <form class="d-flex" style="border-bottom:1px solid <?='#'.$_GET['color']?>; height: 24px; margin:10px 0 0 30px;">
+            <form id="searchEngine" class="d-flex">
               <input class="form-control" type="search" placeholder="Search" aria-label="Search"  style="background-color: transparent; border: none; width: 200px; font-size:14px; height:20px; color:<?='#'.$_GET['color']?>">
               <button style="font-size: 12px; background-color: transparent ; color: <?='#'.$_GET['color']?>; border: none; height:20px;">
                 <i class='fas fa-search'></i>
               </button>
             </form>
           </li>
-          <li id="logset" class="nav-item" style="margin-left: 20px; vertical-align:text-bottom;line-height: 40px;">
+          <li id="logset" class="nav-item">
             <a id = "ifnotlog" class="nav-link active" aria-current="page" data-bs-toggle="modal" href="#modal_signin"><i class="bi bi-person-circle" style="color: <?='#'.$_GET['color']?>;"></i></a>
-            <a id = "iflog" href="" class="btn btn-light" style="background-color: <?='#'.$_GET['color']?>; color:#<?=$fontColor?> !important;">ADOPTER PAGE</a>
+            <a id = "iflog" href="/adopter/" class="btn btn-light" style="background-color: <?='#'.$_GET['color']?>; color:#<?=$fontColor?> !important;">ADOPTER PAGE</a>
           </li>
         </ul>
       </div>
@@ -72,3 +96,8 @@
   </nav>
 </html>
 <script src="js/adopter.js"></script>
+<script>
+  adopter = JSON.parse(localStorage.getItem("dataAdopter"))
+  console.log(adopter)
+  $("#iflog").attr({'href':'adopter/'+adopter['username']})
+</script>

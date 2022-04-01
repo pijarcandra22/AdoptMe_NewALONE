@@ -1,6 +1,6 @@
 <?php 
 
-include dirname( dirname(__DIR__ . PHP_EOL) . PHP_EOL)."\GlobalFun.php";
+include "../GlobalFun.php";
 
 // DEBUGGING ZONE
 

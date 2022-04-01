@@ -7,7 +7,7 @@
     $pengelolaTanaman   = $_POST['pengelolaTanaman'];
     // DEBUGGING ZONE
     // 2. Lakukan Adopsi
-    include dirname( dirname(__DIR__ . PHP_EOL) . PHP_EOL)."\php\GlobalFun.php";
+    include "../GlobalFun.php";
 
     $sql = "UPDATE `tb_tanaman` SET `status`='waiting',`id_adopter`=$id, `tanggal_transaksi` =  NOW() WHERE nama_tanaman = '$namaTanaman' AND id_pengelola = '$pengelolaTanaman' AND `status`='' ORDER BY `id_tanaman` DESC LIMIT $banyakAdopt";
     mysqli_query($conn, $sql);

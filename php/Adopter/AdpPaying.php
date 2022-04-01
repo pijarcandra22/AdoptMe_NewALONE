@@ -1,5 +1,5 @@
 <?php
-    include dirname( dirname(__DIR__ . PHP_EOL) . PHP_EOL)."\php\GlobalFun.php";
+    include "../GlobalFun.php";
     global $conn;
     // TODO : INNER JOIN (Kondisi Terakhir (inner join tb_data_perawatan)
     $id         = $_POST['id'];
