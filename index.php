@@ -20,6 +20,24 @@
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet"/>
     <style>
+        #map {
+            width: 100%;
+            height: 500px !important;
+        }
+        .marker {
+            background-image: url('image/christmas-tree.png');
+            background-size: cover;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+        }
+        .mapboxgl-popup {
+            max-width: 200px;
+        }
+        .mapboxgl-popup-content {
+            text-align: center;
+            font-family: 'Open Sans', sans-serif;
+        }
         .cat_plan{
             font-size: 24px;
             font-weight: bold;
@@ -58,10 +76,39 @@
         #carousel{
             position: relative;
         }
-        
+        #locList{
+            display: block;
+        }
+        #footer>div>a{
+            color: black;
+            text-decoration: none;
+            font-family: Roboto;
+        }
+        .c_important_content,.c_invest_content,.c_good_content{
+            display: block;
+        }
+        .c_important_content_small,.c_invest_content_small,.c_good_content_small{
+            display: none;
+        }
+        @media (max-width: 1200px){
+            #locList{
+                display: none;
+            }
+        }
+        @media (max-width: 960px){
+            .c_important_content,.c_invest_content,.c_good_content{
+                display: none !important;
+            }
+            .c_important_content_small,.c_invest_content_small,.c_good_content_small{
+                display: inline;
+            }
+        }
     </style>
 </head>
 <body onscroll="scrollSet()">
+    <div id="overlay">
+        <div class="fixed-top" style="height: 500px; width:100%; background:white"></div>
+    </div>
     <div style="position:absolute;">
         <div id="carousel"></div>
     </div>
@@ -82,7 +129,7 @@
     <div class="container" style="margin-bottom: 50px;">
         <div id="c_location" >
             <div class="row">
-                <div class="col-7">
+                <div class="col-12 col-xl-7">
                     <h2>Categories</h2>
                     <div class="horizontal_scroll" style="padding-top:12px !important; padding-bottom: 15px !important;">
                         <button class="btn cat_plan">Mangrove</button>
@@ -93,7 +140,7 @@
                         <button class="btn cat_plan">Mangrove</button>
                     </div>
                 </div>
-                <div class="col-5">
+                <div class="col-5" id="locList">
                     <h2>Location</h2>
                     <div class="horizontal_scroll" style="padding-bottom: 15px !important;">                
                         <a href="" class="loc_plan"><i class="fas fa-map-marked-alt" style="font-size: 24px;"></i><br>Sesetan<br>Beach</a>
@@ -107,50 +154,60 @@
                     </div>
                 </div>
             </div>
-            <div id="c_maps" class="position-relative" style="margin-top:20px;"></div>
+            <div id="map"></div>
         </div>
         <div id="c_important"  style="margin-top: 50px;">
             <h2>Important To Adopt</h2>
             <div class="horizontal_scroll">
-                <?php for($i=0;$i<6;$i++):?>
+                <?php for($i=0;$i<12;$i++):?>
                     <div class="c_important_content" data-bs-toggle="modal" data-bs-target="#modal_adobt" style="display:inline-block; padding-right: 20px"></div>
+                    <button class="btn cat_plan c_important_content_small" data-bs-toggle="modal" data-bs-target="#modal_adobt"></button>
                 <?php endfor?>
             </div>
         </div>
         <div id="c_invest"  style="margin-top: 50px;">
             <h2>Best For Investment</h2>
             <div class="horizontal_scroll">
-                <?php for($i=0;$i<6;$i++):?>
+                <?php for($i=0;$i<12;$i++):?>
                     <div class="c_invest_content" data-bs-toggle="modal" data-bs-target="#modal_adobt" style="display:inline-block; padding-right: 20px"></div>
+                    <button class="btn cat_plan c_invest_content_small" data-bs-toggle="modal" data-bs-target="#modal_adobt"></button>
                 <?php endfor?>
             </div>
         </div>
         <div id="c_good"  style="margin-top: 50px;">
             <h2>Good For Nature</h2>
             <div class="horizontal_scroll">
-                <?php for($i=0;$i<10;$i++):?>
+                <?php for($i=0;$i<12;$i++):?>
                     <div class="c_good_content" data-bs-toggle="modal" data-bs-target="#modal_adobt" style="display:inline-block; padding-right: 20px"></div>
+                    <button class="btn cat_plan c_good_content_small" data-bs-toggle="modal" data-bs-target="#modal_adobt"></button>
                 <?php endfor?>
             </div>
         </div>
     </div>
     <hr>
-    <div class="container" style=" padding-top:20px">
-        <div class="row">
-            <div class="col-2">
-                <h2>Adopt Me</h2>
-                <a href="">Tentang adoptMe</a>
-                <a href="">Kisah adoptMe</a>
-                <a href="">Blog</a>
-                <a href="">Menjadi Pengelola</a>
-                <a href="">Menjadi Adopter</a>
+    <div class="container" style="padding:30px 0">
+        <div class="row" id="footer">
+            <div class="col-3">
+                <h2>Adopt Plant</h2>
+                <a href="">Tentang adoptMe</a><br>
+                <a href="">Kisah adoptMe</a><br>
+                <a href="">Blog</a><br>
+                <a href="">Menjadi Pengelola</a><br>
+                <a href="">Menjadi Adopter</a><br>
                 <h2 style="margin-top: 20px;">About Us</h2>
-                <a href=""><i></i></a>
-                <a href=""><i></i></a>
-                <a href=""><i></i></a>
+                <a href="" style="font-size: 25px; margin-right:5px"><i class="fab fa-facebook"></i></a>
+                <a href="" style="font-size: 25px; margin-right:5px"><i class="fab fa-twitter"></i></a>
+                <a href="" style="font-size: 25px;"><i class="fab fa-instagram"></i></a>
             </div>
-            <div class="col-1">
-
+            <div class="col-4">
+                <h2>Contact Us</h2>
+                Kantor AdoptPlant.com <br>
+                Cohive 101, Lt 17<br>
+                Jl. Mega Kuningan Barat No. 1 RT 5/RW 2<br>
+                Kuningan Timur, Setiabudi, Jakarta Selatan 12950<br>
+                <br>
+                Senin-Minggu 09.00-18.00<br>
+                Email:  help@adoptplant.com<br>
             </div>
         </div>
     </div>
@@ -158,7 +215,8 @@
     <div id="m2"></div>
 </body>
 </html>
-<script>    
+<script src="js/maps_adopter.js"></script>
+<script>
     $(document).ready(function(){
         $.ajax({
             url: 'php/Adopter/AdpViewPlant.php',
@@ -173,8 +231,6 @@
         });
 
         dataProduk = JSON.parse(localStorage.getItem("dataTanaman"))
-
-        $("#c_maps").load("template/maps_adopter.php")
 
         $("#carousel").load("template/carousel_content.php?id=1")
 
@@ -195,6 +251,9 @@
         callContent(dataProduk,"c_important_content")
         callContent(dataProduk,"c_invest_content")
         callContent(dataProduk,"c_good_content")
+        callContentSmall(dataProduk,"c_important_content_small")
+        callContentSmall(dataProduk,"c_invest_content_small")
+        callContentSmall(dataProduk,"c_good_content_small")
 
         function callContent(data, className){
             var $c_important = $('.'+className);
@@ -203,6 +262,16 @@
                 $(element).attr({"onclick":"callModal('"+data[index]['nama_tanaman']+"','"+data[index]['id_pengelola']+"')"});
             });
         }
+        function callContentSmall(data,className){
+            var $c_important = $('.'+className);
+            $c_important.each(function(index, element) {
+                $(element).html(data[index]['nama_tanaman']);
+                $(element).css({'background-image':'url(image/plantimg/'+data[index]['gambar']+')'})
+                $(element).attr({"onclick":"callModal('"+data[index]['nama_tanaman']+"','"+data[index]['id_pengelola']+"')"});
+            });
+        }
+
+        $('#overlay').fadeOut();
     });
     function callModal(nama,id){
         $.ajax({
@@ -251,10 +320,11 @@
     else{
         $("#carousel").animate({'left':"50px"},1000)
     }
+    
 
     //Animation Manipulation
     function scrollSet(){
-        if(window.scrollY>heigthPage*0.5){
+        if(window.scrollY>300){
             $("#c4").animate({'top':"-300px"},'slow')
         }else{
             $("#c4").animate({'top':"0px"},'slow')

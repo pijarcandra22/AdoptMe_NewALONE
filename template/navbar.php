@@ -99,5 +99,5 @@
 <script>
   adopter = JSON.parse(localStorage.getItem("dataAdopter"))
   console.log(adopter)
-  $("#iflog").attr({'href':'adopter/'+adopter['username']})
+  $("#iflog").attr({'href':adopter['username']})
 </script>
