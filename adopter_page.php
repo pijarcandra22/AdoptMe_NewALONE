@@ -92,14 +92,17 @@
     </style>
 </head>
 <body>
-    <div id="c1" class="fixed-top"></div>
-    <div class="row justify-content-center"  style="margin-top: 110px;">
+    <div id="c1"></div>
+    <div class="row justify-content-center">
         <div class="col-5" style="height: 287px; text-align:right; background: url(image/Mangrove1.png); background-size:cover">
             <h1>Adopter</h1>
         </div>
         <div class="col-auto">
             <h1>Page</h1>
-            <h3>Adopter Name</h3>
+            <div style="display: flex; height:max-content">
+                <h3 style="margin-top:14px; color:#12491E; margin-right:10px">Adopter Name</h3>
+                <button onclick="signout()" class="btn btn-success" style="margin-top:8px; font-family:roboto; font-weight:bold; height: 40px; line-height: 10px !important; border-radius:30px; background-color:#12491E; border:none; padding:2px 10px !important; vertical-align:middle">Sign Out</button>
+            </div>
         </div>
         <div class="col-auto">
             <div style="display: flex; padding-top: 88px;">
@@ -122,64 +125,23 @@
 </body>
 </html>
 <script>
-    let id_ofFarmer
     $("#c1").load("template/navbar.php?color=12491E&set=true")
     $("#c2").load("template/form_adopter_plant.php")
-    $("#m1").load("template/modal_bukti_pembayaran.php")
+    $("#m1").load("template/modal_see_report.php")
 
-    function callProof(id){
-        dataProduk = JSON.parse(localStorage.getItem("dataPayment"))
-        checkData = dataProduk.filter(dataProduk => dataProduk.id_tanaman == id);
-
-        $("#report_img").css({'background-image':'url(image/bukti_bayar/'+checkData[0]['bukti_bayar']+')'})
+    function callReport(id){
+        dataReportFarmer = JSON.parse(localStorage.getItem("adopterDanTanaman"))
+        console.log(dataReportFarmer)
+        dataReport = dataReportFarmer.filter(dataReportFarmer => dataReportFarmer.id_perawatan == id);
+        
+        console.log(dataReport[0]['nama_tanaman'])
+        $("#report_img").css({'background-image':'url(image/report/'+dataReport[0]['foto_pelaporan']+')'})
+        $("#report_nama").html(dataReport[0]['id_tanaman']+' | '+dataReport[0]['nama_tanaman'])
+        $("#report_content").html(dataReport[0]['laporan']+' ('+dataReport[0]['tanggal_pelaporan']+')')
     }
 
-    function seePayRek(id){
-        dataProduk = JSON.parse(localStorage.getItem("farmerPay"))
-        checkData = dataProduk.filter(dataProduk => dataProduk.id_petani == id);
-
-        $("#detail_rek").html('No Rekening: '+checkData[0]['no_rekening']+' | Pemilik Rekening: '+checkData[0]['rek_nama']+' | Jumlah Gaji: '+checkData[0]['gaji'])
-        $("#but_rek").attr({'onclick':'confirmGaji('+id+')'})
-    }
-
-    function accPayment(id){
-        var form_data = new FormData();
-        form_data.append("action","adoptAccept");
-        form_data.append("id_tanaman",id);
-        $.ajax({
-			url: 'php/Admin/AdminFun.php',
-            dataType: 'json',
-            cache: false,
-			contentType: false,
-			processData: false,
-            data: form_data,
-			type: 'POST',
-			success: function(response){
-                $("#c2").load("template/form_check_payment.php")
-			},
-			error: function(error){
-                console.log(error)
-			}
-		});
-    }
-
-    function confirmGaji(id){
-        var form_data = new FormData();
-        form_data.append("action","confirmGaji");
-        form_data.append("id",id);
-        $.ajax({
-			url: 'php/Admin/AdminFun.php',
-            dataType: 'json',
-            cache: false,
-			contentType: false,
-			processData: false,
-            data: form_data,
-			type: 'POST',
-			success: function(response){
-			},
-			error: function(error){
-                console.log(error)
-			}
-		});
+    function signout(){
+        localStorage.removeItem("dataAdopter")
+        document.location.replace("/")
     }
 </script>

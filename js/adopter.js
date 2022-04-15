@@ -1,13 +1,12 @@
 $( document ).ready(function() {
-    const dataAdopter = "dataAdopter";
 
     function checkForStorage() {
         return typeof Storage !== "undefined";
     }
 
     if (checkForStorage()) {
-        if (localStorage.getItem(dataAdopter) !== null) {
-            adopter = JSON.parse(localStorage.getItem(dataAdopter))
+        if (localStorage.getItem("dataAdopter") !== null) {
+            adopter = JSON.parse(localStorage.getItem("dataAdopter"))
             $("#ifnotlog").css({"display":"none"})
             $("#iflog").css({"display":"inline"})
             $("#con_idAdopt").val(adopter['id_adopter'])
@@ -45,7 +44,7 @@ $( document ).ready(function() {
                     alert("Email Sudah Digunakan")
                 }else{ 
                     dataFull = JSON.parse(data)
-                    localStorage.setItem(dataAdopter, JSON.stringify(dataFull));    
+                    localStorage.setItem("dataAdopter", JSON.stringify(dataFull));    
                     window.location.reload()
                 }
             }
@@ -53,8 +52,10 @@ $( document ).ready(function() {
         e.stopImmediatePropagation();
         return false;
     });
+
     $('#signin').on('submit', function(){
         var data = $('#signin').serialize();
+        alert(data)
         $.ajax({
             type: 'POST',
             url: "php/Adopter/AdpAcc.php",
@@ -66,7 +67,7 @@ $( document ).ready(function() {
                     alert("Akun Tidak Ditemukan")
                 }else{
                     dataFull = JSON.parse(data)
-                    localStorage.setItem(dataAdopter, JSON.stringify(dataFull));   
+                    localStorage.setItem("dataAdopter", JSON.stringify(dataFull));   
                     window.location.reload()
                 }
             }
@@ -89,7 +90,7 @@ function setDataInTable(response){
                 "<td>"+data[key]['laporan']+"</td>"+
                 "<td><div style='background-image:url(image/report/"+data[key]['foto_pelaporan']+");width:50px; height:50px; border-radius:50%; background-size:cover'></div></td>"+
                 "<td>"+
-                    "<button class='btn btn-success' onclick='callReport("+data[key]['id_perawatan']+")' data-bs-toggle='modal' data-bs-target='#modal_bukti_pembayaran'><i class='fas fa-eye'></i></button>"+
+                    "<button class='btn btn-success' onclick='callReport("+data[key]['id_perawatan']+")' data-bs-toggle='modal' data-bs-target='#modal_see_report'><i class='fas fa-eye'></i></button>"+
                 "</td>"+
             "</tr>"
         );

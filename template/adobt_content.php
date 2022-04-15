@@ -18,7 +18,7 @@
             margin: 0;
         }
     </style>
-    <div class="position-relative" style="width:<?=$width?>px; height:<?=1.48*$width?>px; background: linear-gradient(180deg, rgba(2, 87, 5, 0.248) 0%, rgba(255, 255, 255, 0.341) 100%), url(image/plantimg/<?=$_POST['gambar']?>); <?php if(!$mini){echo "box-shadow: 10px 0px 30px rgba(0, 0, 0, 0.5);";}?> border-radius: 10px; background-size: cover;">
+    <div class="position-relative" style="width:<?=$width?>px; height:250px; background: linear-gradient(180deg, rgba(2, 87, 5, 0.248) 0%, rgba(255, 255, 255, 0.341) 100%), url(image/plantimg/<?=$_POST['gambar']?>); <?php if(!$mini){echo "box-shadow: 10px 0px 30px rgba(0, 0, 0, 0.5);";}?> border-radius: 10px; background-size: cover;">
         <div class="position-absolute bottom-0 start-50 translate-middle-x" style="width:<?=$width-40?>px; color: white; font-size: 13px; font-weight: bold; font-family: Roboto">
             <div style="display:flex; flex-direction: column; margin-bottom:20px;">
                 <div style="display: flex;">

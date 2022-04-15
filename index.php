@@ -14,6 +14,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Unica One" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/global_style.css">
@@ -73,9 +77,6 @@
         body{
             font-family: Roboto !important;
         }
-        #carousel{
-            position: relative;
-        }
         #locList{
             display: block;
         }
@@ -95,25 +96,12 @@
                 display: none;
             }
         }
-        @media (max-width: 960px){
-            .c_important_content,.c_invest_content,.c_good_content{
-                display: none !important;
-            }
-            .c_important_content_small,.c_invest_content_small,.c_good_content_small{
-                display: inline;
-            }
-        }
     </style>
 </head>
-<body onscroll="scrollSet()">
-    <div id="overlay">
-        <div class="fixed-top" style="height: 500px; width:100%; background:white"></div>
-    </div>
-    <div style="position:absolute;">
-        <div id="carousel"></div>
-    </div>
+<body>
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-        <div class="carousel-inner">
+        <div id="c4" style="z-index: 1; left:0; right:0; position:absolute"></div>
+        <div class="carousel-inner" style="z-index:0">
             <div class="carousel-item active" id="1" style="height: 100%;" data-bs-interval="10000">
                 <div id="c1"></div>
             </div>
@@ -125,7 +113,6 @@
             </div>
         </div>
     </div>
-    <div id="c4" class="fixed-top"></div>
     <div class="container" style="margin-bottom: 50px;">
         <div id="c_location" >
             <div class="row">
@@ -161,7 +148,6 @@
             <div class="horizontal_scroll">
                 <?php for($i=0;$i<12;$i++):?>
                     <div class="c_important_content" data-bs-toggle="modal" data-bs-target="#modal_adobt" style="display:inline-block; padding-right: 20px"></div>
-                    <button class="btn cat_plan c_important_content_small" data-bs-toggle="modal" data-bs-target="#modal_adobt"></button>
                 <?php endfor?>
             </div>
         </div>
@@ -170,7 +156,6 @@
             <div class="horizontal_scroll">
                 <?php for($i=0;$i<12;$i++):?>
                     <div class="c_invest_content" data-bs-toggle="modal" data-bs-target="#modal_adobt" style="display:inline-block; padding-right: 20px"></div>
-                    <button class="btn cat_plan c_invest_content_small" data-bs-toggle="modal" data-bs-target="#modal_adobt"></button>
                 <?php endfor?>
             </div>
         </div>
@@ -179,7 +164,6 @@
             <div class="horizontal_scroll">
                 <?php for($i=0;$i<12;$i++):?>
                     <div class="c_good_content" data-bs-toggle="modal" data-bs-target="#modal_adobt" style="display:inline-block; padding-right: 20px"></div>
-                    <button class="btn cat_plan c_good_content_small" data-bs-toggle="modal" data-bs-target="#modal_adobt"></button>
                 <?php endfor?>
             </div>
         </div>
@@ -187,7 +171,7 @@
     <hr>
     <div class="container" style="padding:30px 0">
         <div class="row" id="footer">
-            <div class="col-3">
+            <div class="col-4 col-sm-3">
                 <h2>Adopt Plant</h2>
                 <a href="">Tentang adoptMe</a><br>
                 <a href="">Kisah adoptMe</a><br>
@@ -199,7 +183,7 @@
                 <a href="" style="font-size: 25px; margin-right:5px"><i class="fab fa-twitter"></i></a>
                 <a href="" style="font-size: 25px;"><i class="fab fa-instagram"></i></a>
             </div>
-            <div class="col-4">
+            <div class="col-8 col-sm-4">
                 <h2>Contact Us</h2>
                 Kantor AdoptPlant.com <br>
                 Cohive 101, Lt 17<br>
@@ -232,8 +216,6 @@
 
         dataProduk = JSON.parse(localStorage.getItem("dataTanaman"))
 
-        $("#carousel").load("template/carousel_content.php?id=1")
-
         $("#m1").load("template/modal_log.php")
         $("#m2").load("template/modal_adobt.php")        
         
@@ -242,31 +224,14 @@
         $("#c3").load("template/landing.php?id_landing=3")
         $("#c4").load("template/navbar.php?color=FFFFFF")
 
-        var myCarousel = document.getElementById('carouselExampleFade')
-        myCarousel.addEventListener('slid.bs.carousel', function (event) {
-            $("#carousel").load("template/carousel_content.php?id="+event.relatedTarget.id).animate({'left':"+=1000"},"fast")
-            $("#carousel").animate({'left':"-=1000"},1000)
-        })
-
         callContent(dataProduk,"c_important_content")
         callContent(dataProduk,"c_invest_content")
         callContent(dataProduk,"c_good_content")
-        callContentSmall(dataProduk,"c_important_content_small")
-        callContentSmall(dataProduk,"c_invest_content_small")
-        callContentSmall(dataProduk,"c_good_content_small")
 
         function callContent(data, className){
             var $c_important = $('.'+className);
             $c_important.each(function(index, element) {
                 $(element).load("template/adobt_content.php",{width:"170",lok:data[index]['nama_alamat'],nama:data[index]['nama_tanaman'],gambar:data[index]['gambar'],harga:data[index]['harga'],des:data[index]['deskripsi'],pengelola:data[index]['nama_pengelola']});
-                $(element).attr({"onclick":"callModal('"+data[index]['nama_tanaman']+"','"+data[index]['id_pengelola']+"')"});
-            });
-        }
-        function callContentSmall(data,className){
-            var $c_important = $('.'+className);
-            $c_important.each(function(index, element) {
-                $(element).html(data[index]['nama_tanaman']);
-                $(element).css({'background-image':'url(image/plantimg/'+data[index]['gambar']+')'})
                 $(element).attr({"onclick":"callModal('"+data[index]['nama_tanaman']+"','"+data[index]['id_pengelola']+"')"});
             });
         }
@@ -280,11 +245,15 @@
                 success: function(response){
                     data = JSON.parse(response)
                     console.log(data)
-                    $("#back_img").css({'background':'linear-gradient(270.04deg, #FFFFFF 0.04%, #FFFFFF 79.15%, rgba(0, 0, 0, 0) 79.39%), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(180deg, rgba(2, 87, 5, 0.248) 0%, rgba(255, 255, 255, 0.341) 100%), url(image/plantimg/'+data[0]['gambar']+')'})
+                    if(window.innerWidth<=560){
+                        $("#back_img").css({'background':'white'})
+                    }else{
+                        $("#back_img").css({'background':'linear-gradient(270.04deg, #FFFFFF 0.04%, #FFFFFF 79.15%, rgba(0, 0, 0, 0) 79.39%), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(180deg, rgba(2, 87, 5, 0.248) 0%, rgba(255, 255, 255, 0.341) 100%), url(image/plantimg/'+data[0]['gambar']+')'})
+                    }
                     $("#front_img").css({'background':'linear-gradient(180deg, rgba(2, 87, 5, 0.248) 0%, rgba(255, 255, 255, 0.341) 100%), url(image/plantimg/'+data[0]['gambar']+')'})
                     $("#front_img").css({'background-size':'cover','background-position':'center'})
                     $("#namaTanaman").html(data[0]['nama_tanaman'])
-                    $("#lokasiTanaman").html(data[0]['lokasi_tanaman'])
+                    $("#lokasiTanaman").html(data[0]['nama_alamat'])
                     $("#descTanaman").html(data[0]['deskripsi'])
                     $("#banyakTanaman").attr({'max':data[0]['total_tanaman']})
                     $("#hargaTanaman").html('IDR. '+data[0]['harga'])
@@ -301,33 +270,13 @@
     function callContent(data, className){
         var $c_important = $('.'+className);
         $c_important.each(function(index, element) {
-            $(element).load("template/adobt_content.php",{width:"130",lok:data[index]['nama_alamat'],nama:data[index]['nama_tanaman'],gambar:data[index]['gambar'],harga:data[index]['harga'],des:data[index]['deskripsi'],pengelola:data[index]['nama_pengelola']});
+            $(element).load("template/adobt_content.php",{width:"170",lok:data[index]['nama_alamat'],nama:data[index]['nama_tanaman'],gambar:data[index]['gambar'],harga:data[index]['harga'],des:data[index]['deskripsi'],pengelola:data[index]['nama_pengelola']});
             $(element).attr({"onclick":"callModal('"+data[index]['nama_tanaman']+"','"+data[index]['id_pengelola']+"')"});
         });
     }
 
     //CSS Manipulation
     heigthPage = parseInt(window.innerHeight)
-    widthPage = parseInt(window.innerWidth)
+    widthPage = parseInt(window.innerWidth)    
 
-    $("#carousel").css({
-        'top':(heigthPage/2-223)+"px",
-        'left':widthPage+"px"})
-
-    if(widthPage>900){
-        $("#carousel").animate({'left':"600px"},1000)
-    }
-    else{
-        $("#carousel").animate({'left':"50px"},1000)
-    }
-    
-
-    //Animation Manipulation
-    function scrollSet(){
-        if(window.scrollY>300){
-            $("#c4").animate({'top':"-300px"},'slow')
-        }else{
-            $("#c4").animate({'top':"0px"},'slow')
-        }
-    }
 </script>

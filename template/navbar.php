@@ -88,7 +88,7 @@
           </li>
           <li id="logset" class="nav-item">
             <a id = "ifnotlog" class="nav-link active" aria-current="page" data-bs-toggle="modal" href="#modal_signin"><i class="bi bi-person-circle" style="color: <?='#'.$_GET['color']?>;"></i></a>
-            <a id = "iflog" href="/adopter/" class="btn btn-light" style="background-color: <?='#'.$_GET['color']?>; color:#<?=$fontColor?> !important;">ADOPTER PAGE</a>
+            <a id = "iflog" href="/adopter/" class="btn btn-light" style="background-color: <?='#'.$_GET['color']?>; color:#<?=$fontColor?> !important;">ADOPTER</a>
           </li>
         </ul>
       </div>
