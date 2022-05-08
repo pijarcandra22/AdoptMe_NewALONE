@@ -5,6 +5,7 @@
     $banyakAdopt        = $_POST['banyak_adopt'];
     $namaTanaman        = $_POST['namaTanaman'];
     $pengelolaTanaman   = $_POST['pengelolaTanaman'];
+    $email              = $_POST['email'];
     // DEBUGGING ZONE
     // 2. Lakukan Adopsi
     include "../GlobalFun.php";
@@ -43,24 +44,24 @@
     try {
         $mail->SMTPDebug = 0;                                       
         $mail->isSMTP();                                            
-        $mail->Host       = 'smtp.gmail.com';                    
+        $mail->Host       = 'mail.adoptplant.com';                    
         $mail->SMTPAuth   = true;                             
-        $mail->Username   = 'adoptmeindonesia2022@gmail.com';                 
+        $mail->Username   = 'help@adoptplant.com';                 
         $mail->Password   = 'adoptme2022';                        
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;                              
         $mail->Port       = 587;  
     
-        $mail->setFrom('adoptmeindonesia2022@gmail.com', 'AdoptMe Admin');           
-        $mail->addAddress('pijarcandra22@gmail.com');
+        $mail->setFrom('help@adoptplant.com', 'AdoptMe Admin');           
+        $mail->addAddress($email);
          
         $mail->isHTML(true);                                  
         $mail->Subject = 'Subject';
-        $mail->Body    = 'Pemesanan Anda Sudah Berhasil, Silahkan klik link berikut untuk melakukan mengirimkan bukti pembayaran<br>';
+        $mail->Body    = 'Your adoption successfull. Please Transfer to Permata Bank: 01237816664/Lavandaia Dharma Bal(IDR), Please click this link to send your evidence of transfer<br>';
         $mail->Body   .= $table;
-        $mail->Body   .= '<br><a href="https://www.w3schools.com/html/html_tables.asp" style=" margin:10px 0; background-color:#12491E;padding: 10px 20px; color:white; border-radius:10px !important;">UPLOAD BUKTI PEMBAYARAN</a><br>';
+        $mail->Body   .= '<br><a href="https://adoptplant.com/pay_page.php" style=" margin:10px 0; background-color:#12491E;padding: 10px 20px; color:white; border-radius:10px !important;">UPLOAD BUKTI PEMBAYARAN</a><br>';
         $mail->AltBody = 'Body in plain text for non-HTML mail clients';
         $mail->send();
-        echo "Mail has been sent successfully!";
+        echo "1";
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }

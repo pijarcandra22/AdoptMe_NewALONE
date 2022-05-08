@@ -19,10 +19,11 @@ function createFarmer() {
     $farmerName     = $_POST['farmer-name'];
     $farmerLocation = $_POST['farmer-location'];
     $farmerManager  = $_POST['farmer-manager'];
+    $farmerRek      = $_POST['farmer-rek'];
 
 
-    $sql = 'INSERT INTO tb_petani (id_pengelola, nama_petani, lokasi_petani) 
-            VALUES ( "'.$farmerManager.'", "'.$farmerName.'", "'.$farmerLocation.'")';
+    $sql = 'INSERT INTO tb_petani (id_pengelola, nama_petani, lokasi_petani, no_rekening) 
+            VALUES ( "'.$farmerManager.'", "'.$farmerName.'", "'.$farmerLocation.'","'.$farmerRek.'")';
 
     $conn -> query($sql);
 }

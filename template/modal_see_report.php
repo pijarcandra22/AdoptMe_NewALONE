@@ -6,10 +6,10 @@
                     <button style="position: absolute; top:20px; right:20px" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <form role="form" enctype = "multipart/form-data">
                         <div class="row">
-                            <div class="col-5">
-                                <div id="report_img" style="background-size: cover; width:100%; height:400px"></div>
+                            <div class="col-12 col-sm-5">
+                                <div id="report_img" style="width:100%; height:400px; overflow-y: scroll;"></div>
                             </div>
-                            <div class="col-7">
+                            <div class="col-12 col-sm-7">
                                 <h2 id="report_nama"></h2>
                                 <p id="report_content"></p>
                             </div>

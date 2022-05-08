@@ -10,8 +10,8 @@
         .marker {
             background-image: url('image/christmas-tree.png');
             background-size: cover;
-            width: 25px;
-            height: 25px;
+            width: 40px;
+            height: 40px;
             cursor: pointer;
         }
         .farmer {

@@ -61,7 +61,7 @@ $( document ).ready(function() {
             data: form_data,
 			type: 'POST',
 			success: function(response){
-                setDataInTable3(response)
+                window.location.reload()
 			},
 			error: function(error){
                 console.log(error)
@@ -112,8 +112,7 @@ function setDataInTable3(response){
                 "<td>"+data[key]['nama_pengelola']+"</td>"+
                 "<td>"+data[key]['email']+"</td>"+
                 "<td>"+
-                    "<button class='btn btn-success' onclick='callProof("+data[key]['id_tanaman']+")' data-bs-toggle='modal' data-bs-target='#modal_bukti_pembayaran'><i class='fas fa-eye'></i></button>"+
-                    "<button class='btn btn-success' onclick='accPayment("+data[key]['id_tanaman']+")' data-bs-toggle='modal' data-bs-target='#modal_farmerToPlant' style='margin-left:10px'><i class='far fa-check-circle'></i></button>"+
+                    "<button class='btn btn-success' onclick='callProof("+data[key]['id_tanaman']+")' data-bs-toggle='modal' data-bs-target='#modal_bukti_pembayaran'>UDATE</button>"+
                 "</td>"+
             "</tr>"
         );

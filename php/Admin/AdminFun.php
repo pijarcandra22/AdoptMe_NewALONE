@@ -1,5 +1,5 @@
 <?php 
-include dirname( dirname(__DIR__ . PHP_EOL) . PHP_EOL)."\php\GlobalFun.php";
+include "../GlobalFun.php";
 
 if ( !empty($_GET['action']) ) {
     if ($_GET['action'] == "adopt-payment") return adoptPayment();
@@ -60,7 +60,7 @@ function createManager(){
 
     $managerName     = $_POST['manager-name'];
     $managerEmail    = $_POST['manager-email'];
-    $managerPass     = $_POST['manager-pass'];
+    $managerPass     = password_hash(htmlspecialchars($_POST['manager-pass']), PASSWORD_DEFAULT);
 
     $sql = "INSERT INTO `tb_pengelola`(`nama_pengelola`, `email`, `password`)
             VALUES ('$managerName','$managerEmail','$managerPass')";

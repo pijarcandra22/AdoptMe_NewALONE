@@ -46,15 +46,21 @@ function managerSignUp() {
 function managerSignIn() {
     global $conn;
 
-    $email    = $_POST["email"]; 
-    $password = htmlspecialchars(hash('sha256', $_POST["password"]));
+    $username = htmlspecialchars($_POST["username"]);
+    $password = htmlspecialchars($_POST["password"]);
 
-    $sql = "SELECT * FROM tb_pengelola WHERE email ='$email' AND password = '$password'";
+    $sql = "SELECT * FROM tb_pengelola WHERE nama_pengelola ='$username'";
     $query = mysqli_query($conn, $sql);
-    $result = mysqli_num_rows( $query );
-    if($result == 0) return closeAndDirect("sign in.php", "login pengelola - GAGAL");
-    // set session
-    return closeAndDirect("sign in.php", "login pengelola - BERHASIL");
+    $data = mysqli_fetch_assoc($query);
+    if($data){
+        if(password_verify($password,$data['password'])){
+            echo json_encode($data);
+        }else{
+            echo "1";
+        }
+    }else{
+        echo "2";
+    }
 }
 
 function updateProfile($id) {

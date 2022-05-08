@@ -88,51 +88,105 @@
             background-size:200%;
             color: #FFFFFF;
         }
+        #namebackImg{
+            height: 287px;
+            text-align:right;
+            background: url(image/Mangrove1.png);
+            background-size:cover;
+        }
+        .tabpad{
+            margin-top: 88px;
+        }
+        .see-480{
+            display: none;
+        }
+        @media (max-width: 960px){
+            h1{
+                font-size: 80px;
+                padding-top: 69px;
+                line-height: 90px;
+            }
+            #namebackImg{
+                height:230px;
+            }
+            .tabpad{
+                margin-top: 55px;
+            }
+        }
+        @media (max-width: 480px){
+            h1{
+                font-size: 70px;
+            }
+            #namebackImg{
+                height:160px;
+                display: flex;
+            }
+            .tabpad{
+                margin-top: 55px;
+            }
+            .out-480{
+                display: none;
+            }
+            .see-480{
+                display: block;
+            }
+            .menu-flex{
+                display: flex !important;
+            }
+            .btn-adobt{
+                font-size: 16px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div id="c1" class="fixed-top"></div>
-    <div class="row justify-content-center"  style="margin-top: 110px;">
-        <div class="col-5" style="height: 287px; text-align:right; background: url(image/Mangrove1.png); background-size:cover">
-            <h1>Manager</h1>
-        </div>
-        <div class="col-auto">
-            <h1>Page</h1>
-            <h3>Company Name</h3>
-        </div>
-        <div class="col-auto">
-            <div style="display: flex; padding-top: 88px;">
-                <div class="manage_data_green">
-                    <h4>PLANT</h4>
-                    <h5>99</h5>
+    <div id="c1"></div>
+    <div class="container-xl">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-6" id="namebackImg">
+                <h1 style="margin-right: 10px;">Manager</h1>
+                <h1 class="see-480">Page</h1>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div style="display: flex;">
+                    <h1 class="out-480">Page</h1>
+                    <div class="tabpad manage_data_green out-480" style="margin-left: 20px;">
+                        <h4>PLANT</h4>
+                        <h5>99</h5>
+                    </div>
+                    <div class="tabpad manage_data_white out-480">
+                        <h4 style="color: #12491E;">FARMER</h4>
+                        <h5 style="color: #12491E;">99</h5>
+                    </div>
+                    <div class="tabpad manage_data_green out-480">
+                        <h4>ADOPTER</h4>
+                        <h5>99</h5>
+                    </div>
                 </div>
-                <div class="manage_data_white">
-                    <h4 style="color: #12491E;">FARMER</h4>
-                    <h5 style="color: #12491E;">99</h5>
-                </div>
-                <div class="manage_data_green">
-                    <h4>ADOPTER</h4>
-                    <h5>99</h5>
+                <div style="display: flex; height:max-content">
+                    <h3 style="margin-top:14px; color:#12491E; margin-right:10px" id="com_name">Company Name</h3>
+                    <button onclick="signout()" class="btn btn-success" style="margin-top:8px; font-family:roboto; font-weight:bold; height: 40px; line-height: 10px !important; border-radius:30px; background-color:#12491E; border:none; padding:2px 10px !important; vertical-align:middle">Sign Out</button>
                 </div>
             </div>
         </div>
-    </div>
-    <div style="margin-top: 100px;" class="container">
-        <div class="row">
-            <div class="col-3">
-                <div class="d-grid gap-2">
-                    <button class="btn btn-adobt on" id="pmanage">Plant Manage</button>
-                    <button class="btn btn-adobt" id="fmanage">Farmer Manage</button>
-                    <button class="btn btn-adobt" id="rmanage">Report Manage</button>
+        <div style="margin-top: 50px;">
+            <div class="row">
+                <div class="col-12 col-sm-3">
+                    <div class="d-grid gap-2 menu-flex">
+                        <button class="btn btn-adobt on" id="pmanage">Plant Manage</button>
+                        <button class="btn btn-adobt" id="fmanage">Farmer Manage</button>
+                        <button class="btn btn-adobt" id="rmanage">Report Manage</button>
+                    </div>
                 </div>
-            </div>
-            <div class="col-9">
-                <div id="c2"></div>
+                <div class="col-12 col-sm-9">
+                    <div id="c2"></div>
+                </div>
             </div>
         </div>
     </div>
     <div id="m1"></div>
     <div id="m2"></div>
+    <div id="m3"></div>
 </body>
 </html>
 <script>
@@ -142,7 +196,8 @@
     $("#c2").load("template/form_add_plant.php")
     $("#m1").load("template/modal_plant.php")
     $("#m2").load("template/modal_see_report.php")
-    
+    $("#m3").load("template/modal_log_manager.php")
+
     $("#pmanage").click(function(){
         $("#pmanage").addClass("on");
         $("#fmanage").removeClass("on");
@@ -180,7 +235,7 @@
     function callModal2(id){
         dataFarmerMentah = JSON.parse(localStorage.getItem("dataFarmerManager"))
         dataFarmer = dataFarmerMentah.filter(dataFarmerMentah => dataFarmerMentah.id_petani == id);
-        
+        id_ofFarmer = id;
         var objects = {};features = [];
         for (var x = 0; x < dataFarmer.length; x++) {
             lokasi = dataFarmer[x]['lokasi_petani'].split(", ");
@@ -248,7 +303,6 @@
 
     function addFarmerToPlant(id){
         var form_data = new FormData();
-
         form_data.append("action","pairing-plant");
         form_data.append("id_tanaman",id);
         form_data.append("id_petani",id_ofFarmer);
@@ -262,6 +316,7 @@
             data: form_data,
 			type: 'POST',
 			success: function(response){
+                $("#c2").load(location.href+" template/form_add_farmer.php")
 			},
 			error: function(error){
                 console.log(error)

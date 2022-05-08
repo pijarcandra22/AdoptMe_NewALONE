@@ -1,6 +1,4 @@
 <html lang="en">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/modal_style.css">
     <div class="modal fade" id="modal_signin" tabindex="-1" aria-labelledby="modal_signin" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -16,13 +14,14 @@
                             <input id="user-in" type="text" class="form-control" name="username">
                             <label for="user-in">Username</label>
                         </div>
-                        <div class="form-floating">
-                            <input id="pass-in" type="password" class="form-control" name="password">
+                        <div class="input-group mb-3 form-floating">
+                            <input id="pass-in" type="password" class="form-control" name="password" style="border-right:none;">
                             <label for="pass-in">Password</label>
+                            <button class="btn btn-light seepass" type="button" style="height: 58px; border: 1px solid #ced4da; border-left:none; background-color:white"><i class="far fa-eye"></i></button>
                         </div>
                     </div>
                     <div class="modal-footer mx-auto" style="border: none;; padding-bottom:40px">
-                        <button type="submit" class="btn btn-success" >SIGN IN</button>
+                        <button type="button" class="btn btn-success" id="signinBut" >SIGN IN</button>
                         <button type="button" class="btn btn-success" onclick="openModal(0)">SIGN UP</button>
                     </div>
                 </form>
@@ -51,9 +50,10 @@
                             <input id="email-up" type="email" class="form-control" name="email">
                             <label for="email-up">Email</label>
                         </div>
-                        <div class="form-floating">
+                        <div class="form-floating input-group mb-3">
                             <input id="pass-up" type="password" class="form-control" name="password">
                             <label for="pass-up">Password</label>
+                            <button class="btn btn-light seepass" type="button" style="height: 58px; border: 1px solid #ced4da; border-left:none; background-color:white"><i class="far fa-eye"></i></button>
                         </div>
                         <div class="form-floating">
                             <input id="repass-up" type="password" class="form-control" name="repassword">
@@ -84,6 +84,17 @@
             signin.toggle()
             signup.toggle()
         }
+        $('.seepass').on('click', function(){
+            if($('#pass-in').attr('type')=="password" || $('#pass-up').attr('type')=="password"){
+                $('#pass-in').attr({'type':'text'})
+                $('#pass-up').attr({'type':'text'})
+                $('.seepass>i').attr({'class':'far fa-eye-slash'})
+            }else{
+                $('#pass-in').attr({'type':'password'})
+                $('#pass-up').attr({'type':'password'})
+                $('.seepass>i').attr({'class':'far fa-eye'})
+            }
+        })
     </script>
 </html>
 <script src="js/adopter.js"></script>

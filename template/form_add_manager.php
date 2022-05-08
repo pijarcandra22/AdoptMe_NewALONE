@@ -32,6 +32,7 @@
             <div class="form_add">
                 <h3>Add Manager</h3>
                 <form role="form">
+                    <input id="manager_aksi" type="hidden" value="add">
                     <input id="manager_name" class="form-control" style="margin-top:8px;" type="text" placeholder="Manager Name">
                     <input id="manager_email" class="form-control" style="margin-top:8px;" type="text" placeholder="Manager Email">
                     <div style="display: flex; margin-top:8px">

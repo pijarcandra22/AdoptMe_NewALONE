@@ -1,6 +1,8 @@
 $( document ).ready(function() {
+    dataAkunManager = JSON.parse(localStorage.getItem("dataAkunManager"))
+    $("#com_name").html(dataAkunManager['nama_pengelola'])
     $.ajax({
-        url: 'php/Manager/MngCrudPlant.php?action=read-all-plant&id=1',
+        url: 'php/Manager/MngCrudPlant.php?action=read-all-plant&id='+dataAkunManager['id_pengelola'],
         type: 'GET',
         success: function(response){
             setDataInTable(response)
@@ -11,7 +13,7 @@ $( document ).ready(function() {
     });
 
     $.ajax({
-        url: 'php/Manager/MngCrudFarmer.php?action=read-all-farmer&id=1',
+        url: 'php/Manager/MngCrudFarmer.php?action=read-all-farmer&id='+dataAkunManager['id_pengelola'],
         type: 'GET',
         success: function(response){
             setDataInTable2(response)
@@ -22,7 +24,7 @@ $( document ).ready(function() {
     });
 
     $.ajax({
-        url: 'php/Manager/MngReport.php?id=1&action=get-report',
+        url: 'php/Manager/MngReport.php?action=get-report&id='+dataAkunManager['id_pengelola'],
         type: 'GET',
         success: function(response){
             setDataInTable3(response)
@@ -75,7 +77,7 @@ $( document ).ready(function() {
         form_data.append("deskripsi",deskripsi);
         form_data.append("harga",harga);
         form_data.append("alamat",alamat);
-        form_data.append("id_manager","1");
+        form_data.append("id_manager",dataAkunManager['id_pengelola']);
         $.ajax({
 			url: 'php/Manager/MngCrudPlant.php',
             dataType: 'json',
@@ -120,7 +122,7 @@ $( document ).ready(function() {
         form_data.append("deskripsi",deskripsi);
         form_data.append("harga",harga);
         form_data.append("id_tanaman",id);
-        form_data.append("id_manager",'1')
+        form_data.append("id_manager",dataAkunManager['id_pengelola'])
         $.ajax({
 			url: 'php/Manager/MngCrudPlant.php',
             dataType: 'json',
@@ -142,7 +144,7 @@ $( document ).ready(function() {
         id = $("#update_pid").val()
         var form_data = new FormData();
         form_data.append("action","delete-plant");
-        form_data.append("id_manager",'1')
+        form_data.append("id_manager",dataAkunManager['id_pengelola'])
         form_data.append("id_tanaman",id);
         $.ajax({
 			url: 'php/Manager/MngCrudPlant.php',
@@ -164,22 +166,25 @@ $( document ).ready(function() {
     $('#addfarmer-but').on('click', function(){
         $("#farmer_name").removeClass("is-invalid")
         $("#farmer_loc").removeClass("is-invalid")
+        $("#farmer_rek").removeClass("is-invalid")
 
         Pnama         = $("#farmer_name").val()
         Plokasi       = $("#farmer_loc").val()
-        Pmanager      = $("#farmer_manager").val()
+        Prek          = $("#farmer_rek").val()
         errorTotal    = 0
 
         var form_data = new FormData();
 
         if(Pnama==""){errorTotal++;$("#plant_name").addClass("is-invalid")}
         if(Plokasi==""){errorTotal++;$("#plant_loc").addClass("is-invalid")}
+        if(Prek==""){errorTotal++;$("#farmer_rek").addClass("is-invalid")}
         if(errorTotal>0){return}
 
         form_data.append("action","create-farmer");
         form_data.append("farmer-name",Pnama);
         form_data.append("farmer-location",Plokasi);
-        form_data.append("farmer-manager",Pmanager);
+        form_data.append("farmer-manager",dataAkunManager['id_pengelola']);
+        form_data.append("farmer-rek",Prek);
 
         $.ajax({
 			url: 'php/Manager/MngCrudFarmer.php',
@@ -214,7 +219,7 @@ function setDataInTable(response){
                 "<td><div style='background-image:url(image/plantimg/"+data[key]['gambar']+");width:50px; height:50px; border-radius:50%; background-size:cover'></div></td>"+
                 "<td>"+statusTanaman+"</td>"+
                 "<td>"+
-                    "<button class='btn btn-success' onclick='callModal("+data[key]['id_tanaman']+")' data-bs-toggle='modal' data-bs-target='#modal_plant'>UPDATE & SEE</button>"+
+                    "<button class='btn btn-success' onclick='callModal("+data[key]['id_tanaman']+")' data-bs-toggle='modal' data-bs-target='#modal_plant'><i class='fas fa-pencil-ruler'></i></button>"+
                 "</td>"+
             "</tr>"
         );
@@ -231,7 +236,7 @@ function setDataInTable2(response){
                 "<th scope='row'>"+(parseInt(key)+1)+"</th>"+
                 "<td>"+data[key]['nama_petani']+"</td>"+
                 "<td>"+
-                    "<button class='btn btn-success' onclick='callModal2("+data[key]['id_petani']+")'>PLACE FARMER</button>"+
+                    "<button class='btn btn-success' onclick='callModal2("+data[key]['id_petani']+")'><i class='fas fa-map-marked-alt'></i></button>"+
                 "</td>"+
             "</tr>"
         );
@@ -250,8 +255,8 @@ function setDataInTable3(response){
                 "<th scope='row'>"+(parseInt(key)+1)+"</th>"+
                 "<td>"+data[key]['nama_tanaman']+"</td>"+
                 "<td>"+data[key]['nama_petani']+"</td>"+
-                "<td>"+data[key]['laporan']+"</td>"+
-                "<td><div style='background-image:url(image/report/"+data[key]['foto_pelaporan']+");width:50px; height:50px; border-radius:50%; background-size:cover'></div></td>"+
+                "<td class='out-480'>"+data[key]['laporan']+"</td>"+
+                "<td class='out-480'><div style='background-image:url(image/report/"+data[key]['foto_pelaporan']+");width:50px; height:50px; border-radius:50%; background-size:cover'></div></td>"+
                 "<td>"+data[key]['tanggal_pelaporan']+"</td>"+
                 "<td>"+
                     "<button class='btn btn-success' onclick='callReport("+data[key]['id_perawatan']+")' data-bs-toggle='modal' data-bs-target='#modal_see_report'><i class='fas fa-eye'></i></button>"+

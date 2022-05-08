@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="css/global_style.css">
     <style>
         #landing{
-            background: linear-gradient(180.41deg, rgba(0, 0, 0, 0) 31.84%, rgba(0, 0, 0, 0.5) 99.64%), linear-gradient(180deg, rgba(2, 87, 5, 0.248) 0%, rgba(255, 255, 255, 0.341) 100%), url(image/landing/Mangrove1.png);
+            background: linear-gradient(180.41deg, rgba(0, 0, 0, 0) 31.84%, rgba(0, 0, 0, 0.5) 99.64%), linear-gradient(180deg, rgba(2, 87, 5, 0.248) 0%, rgba(255, 255, 255, 0.341) 100%), url(image/landing/c1.png);
             background-size:cover;
         }
         #laporan{
@@ -25,15 +25,30 @@
             width: 500px;
             box-shadow: 10px 0px 30px rgba(0, 0, 0, 0.5);
         }
+        #pay_title{
+            line-height: 0.6;
+            font-family:Roboto;
+            font-weight: bold !important;
+            font-size:40pt;
+            color:#FFFFFF
+        }
+        @media (max-width: 500px){
+            #laporan{
+                width: 300px;
+            }
+            #pay_title{
+                font-size:30pt;
+            }
+        }
     </style>
 </head>
 <body>
     <center>
         <div id="landing" class="position-relative">
             <div id="laporan" class="position-absolute top-50 start-50 translate-middle">
-                <div class="position-relative" style="border-radius: 10px 10px 0 0; padding: 20px; background-size:cover !important; height:200px; background:linear-gradient(180deg, rgba(255, 255, 255, 0) 95.76%, #FFFFFF 95.8%), linear-gradient(180deg, rgba(255, 255, 255, 0.341) 0%, rgba(2, 87, 5, 0.248) 55.26%), url(image/landing/Mangrove1.png);">
+                <div class="position-relative" style="border-radius: 10px 10px 0 0; padding: 20px; background-size:cover !important; height:200px; background:linear-gradient(180deg, rgba(255, 255, 255, 0) 95.76%, #FFFFFF 95.8%), linear-gradient(180deg, rgba(255, 255, 255, 0.341) 0%, rgba(2, 87, 5, 0.248) 55.26%), url(image/landing/c1.png);">
                     <div style="width: max-content;" class="position-absolute bottom-0 start-50 translate-middle-x">
-                        <h1 style="line-height: 0.6; font-family:Roboto; font-weight: bold !important; font-size:40pt; color:#FFFFFF">PAYING PAGE</h1>
+                        <h1 id="pay_title">PAYING PAGE</h1>
                     </div>
                 </div>
                 <div style="padding: 20px;">
@@ -84,17 +99,25 @@
         form_data.append("id" , idTanaman.toString());
         $.ajax({
 			url: 'php/Adopter/AdpPaying.php',
-            dataType: 'json',
             cache: false,
 			contentType: false,
 			processData: false,
             data: form_data,
 			type: 'POST',
 			success: function(response){
-                setDataInTable(JSON.stringify(response))
+                if (window.confirm(response)){
+                    if(localStorage.getItem("dataAdopter")===null){
+                        document.location.replace('/')
+                    }else{
+                        dataAkun = JSON.parse(localStorage.getItem("dataAdopter"))
+                        location.replace(dataAkun['username']);
+                    }
+                }
 			},
 			error: function(error){
-                console.log(error)
+                if (window.confirm(error)){
+                    document.location.replace('/')
+                }
 			}
 		});
     })

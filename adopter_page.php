@@ -26,7 +26,6 @@
             line-height: 132px;
             color: #FFFFFF;
             text-shadow: 0px 0px 20px #000000;
-            font-style: normal;
         }
         h3{
             font-family: Roboto;
@@ -34,7 +33,6 @@
             font-weight: bold;
             font-size: 24px;
             line-height: 28px;
-
             color: #12491E;
         }
         .manage_data_green{
@@ -89,39 +87,106 @@
             background-size:200%;
             color: #FFFFFF;
         }
+        #namebackImg{
+            height: 287px;
+            text-align:right;
+            background: url(image/Mangrove1.png);
+            background-size:cover;
+        }
+        .tabpad{
+            margin-top: 88px;
+        }
+        .see-480{
+            display: none;
+        }
+        .adp_plant_name{
+            line-height:50px;
+            vertical-align:middle;
+            height: 50px;
+            width:50%;
+            background-size: cover;
+            background-image:url(image/plantimg/625ae8c6a6680.jpg);
+            text-align:right;
+            color:#FFFFFF;
+            font-size: 15px;
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: bold;
+            padding-right: 10px;
+            text-shadow: 0px 0px 10px #000000;
+            border-radius: 10px 0 0 10px;
+        }
+        .adp_plant_item{
+            line-height:50px;
+            vertical-align:middle;
+            padding: 0 10px;
+            border-left: #12491E 2px solid;
+        }
+        @media (max-width: 960px){
+            h1{
+                font-size: 80px;
+                padding-top: 69px;
+                line-height: 90px;
+            }
+            #namebackImg{
+                height:230px;
+            }
+            .tabpad{
+                margin-top: 55px;
+            }
+        }
+        @media (max-width: 480px){
+            h1{
+                font-size: 70px;
+            }
+            #namebackImg{
+                height:260px;
+                text-align: center;
+            }
+            .tabpad{
+                margin-top: 55px;
+            }
+            .out-480{
+                display: none;
+            }
+            .see-480{
+                display: inline;
+            }
+        }
     </style>
 </head>
 <body>
     <div id="c1"></div>
-    <div class="row justify-content-center">
-        <div class="col-5" style="height: 287px; text-align:right; background: url(image/Mangrove1.png); background-size:cover">
-            <h1>Adopter</h1>
-        </div>
-        <div class="col-auto">
-            <h1>Page</h1>
-            <div style="display: flex; height:max-content">
-                <h3 style="margin-top:14px; color:#12491E; margin-right:10px">Adopter Name</h3>
-                <button onclick="signout()" class="btn btn-success" style="margin-top:8px; font-family:roboto; font-weight:bold; height: 40px; line-height: 10px !important; border-radius:30px; background-color:#12491E; border:none; padding:2px 10px !important; vertical-align:middle">Sign Out</button>
+    <div class="container-xl">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-6" id="namebackImg">
+                <h1 style="margin-right: 10px;">Adopter</h1>
+                <button onclick="signout()" class="btn btn-success see-480" style="font-family:roboto; font-weight:bold; height: 40px; line-height: 10px !important; border-radius:30px; background-color:#12491E; border:none; padding:2px 10px !important; vertical-align:middle">Sign Out</button>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div style="display: flex;">
+                    <h1 class="out-480">Page</h1>
+                    <div class="tabpad manage_data_green out-480" style="margin-left: 20px;">
+                        <h4>PLANT</h4>
+                        <h5>99</h5>
+                    </div>
+                    <div class="tabpad manage_data_white out-480">
+                        <h4 style="color: #12491E;">FARMER</h4>
+                        <h5 style="color: #12491E;">99</h5>
+                    </div>
+                </div>
+                <div style="display: flex; height:max-content">
+                    <h3 id="adopter_name" class="out-480" style="margin-top:14px; color:#12491E; margin-right:10px">Adopter Name</h3>
+                    <button onclick="signout()" class="btn btn-success out-480" style="margin-top:8px; font-family:roboto; font-weight:bold; height: 40px; line-height: 10px !important; border-radius:30px; background-color:#12491E; border:none; padding:2px 10px !important; vertical-align:middle">Sign Out</button>
+                </div>
             </div>
         </div>
-        <div class="col-auto">
-            <div style="display: flex; padding-top: 88px;">
-                <div class="manage_data_green">
-                    <h4>PLANT</h4>
-                    <h5>99</h5>
-                </div>
-                <div class="manage_data_white">
-                    <h4 style="color: #12491E;">FARMER</h4>
-                    <h5 style="color: #12491E;">99</h5>
-                </div>
-            </div>
+        <div style="margin-top: 20px;">
+            <div id="c2"></div>
         </div>
+        <div id="m1"></div>
+        <div id="m2"></div>
     </div>
-    <div style="margin-top: 100px;" class="container">
-        <div id="c2"></div>
-    </div>
-    <div id="m1"></div>
-    <div id="m2"></div>
 </body>
 </html>
 <script>
@@ -135,7 +200,7 @@
         dataReport = dataReportFarmer.filter(dataReportFarmer => dataReportFarmer.id_perawatan == id);
         
         console.log(dataReport[0]['nama_tanaman'])
-        $("#report_img").css({'background-image':'url(image/report/'+dataReport[0]['foto_pelaporan']+')'})
+        $("#report_img").html('<img src="'+'image/report/'+dataReport[0]['foto_pelaporan']+'" width="100%" alt="">')
         $("#report_nama").html(dataReport[0]['id_tanaman']+' | '+dataReport[0]['nama_tanaman'])
         $("#report_content").html(dataReport[0]['laporan']+' ('+dataReport[0]['tanggal_pelaporan']+')')
     }
@@ -145,3 +210,4 @@
         document.location.replace("/")
     }
 </script>
+<script src="js/adopter.js"></script>

@@ -28,21 +28,21 @@
         }
     </style>
     <div class="row">
-        <div class="col-5">
+        <div class="col-12 col-sm-5">
             <div class="form_add">
                 <h3>Add Farmer</h3>
                 <form role="form">
                     <input id="farmer_name" class="form-control" style="margin-top:8px;" type="text" placeholder="Farmer Name">
-                    <input id="farmer_manager" type="hidden" value="1">
+                    <input id="farmer_rek" class="form-control" style="margin-top:8px;" type="text" placeholder="Farmer Rekening">
                     <div style="display: flex; margin-top:8px">
                         <input id="farmer_loc" class="form-control" type="text" placeholder="Farmer Address">
                         <button id="addfarmer-but" type="button" style="margin-left: 8px; font-family:Roboto; font-weight:bold" class="btn btn-success">UPLOAD</button>
                     </div>
                 </form>
             </div>
-            <div id="c_maps" class="position-relative" style="height: 500px; margin-top: 20px;"></div>
+            <div id="c_maps" class="position-relative" style="height: 300px; margin-top: 20px;"></div>
         </div>
-        <div class="col-7">
+        <div class="col-12 col-sm-7">
             <div style="display: flex; margin-bottom:10px">
                 <h3 style="margin-top:14px; color:#12491E; margin-right:10px">Farmer List</h3>
                 <button class="btn btn-success" style="margin-top:8px; font-family:roboto; font-weight:bold; height: 40px; line-height: 10px !important; border-radius:30px; background-color:#12491E; border:none; padding:2px 10px !important; vertical-align:middle">Show Map <i class="bi bi-geo-alt"></i></button>

@@ -31,6 +31,14 @@
       border:none;
       font-size:12px !important;
     }
+    #ifnotlog{
+      border-radius: 30px;
+      font-style: normal;
+      font-weight: bold;
+      font-family: Roboto;
+      border:none;
+      font-size:12px !important;
+    }
     .navbar{
       padding: 30px 110px;
       color:<?='#'.$_GET['color']?> !important
@@ -60,10 +68,10 @@
     }
   </style>
   <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container-fluid"  style="padding-right: 50px;">
-      <a class="navbar-brand" href="#" style="font-size: 30px; font-weight: bold; color:<?='#'.$_GET['color']?> !important; font-family: Roboto;">AdoptPlant.com</a>
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/" style="font-size: 25px; font-weight: bold; color:<?='#'.$_GET['color']?> !important; font-family: Roboto;">AdoptPlant.com</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <span style="color:<?='#'.$_GET['color']?>"><i class="fas fa-grip-lines"></i></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
@@ -87,7 +95,7 @@
             </form>
           </li>
           <li id="logset" class="nav-item">
-            <a id = "ifnotlog" class="nav-link active" aria-current="page" data-bs-toggle="modal" href="#modal_signin"><i class="bi bi-person-circle" style="color: <?='#'.$_GET['color']?>;"></i></a>
+            <a id = "ifnotlog" class="btn btn-light" data-bs-toggle="modal" href="#modal_signin" style="background-color: <?='#'.$_GET['color']?>; color:#<?=$fontColor?> !important;">SIGN IN <i class="bi bi-person-circle"></i></a>
             <a id = "iflog" href="/adopter/" class="btn btn-light" style="background-color: <?='#'.$_GET['color']?>; color:#<?=$fontColor?> !important;">ADOPTER</a>
           </li>
         </ul>

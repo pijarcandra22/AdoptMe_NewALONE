@@ -10,6 +10,7 @@ $( document ).ready(function() {
             $("#ifnotlog").css({"display":"none"})
             $("#iflog").css({"display":"inline"})
             $("#con_idAdopt").val(adopter['id_adopter'])
+            $("#adopter_name").html(adopter['username'])
             $.ajax({
                 url: 'php/Adopter/AdpAdoptedPlant.php?id='+adopter['id_adopter'],
                 type: 'GET',
@@ -20,6 +21,26 @@ $( document ).ready(function() {
                     console.log(error)
                 }
             });
+
+            $.ajax({
+                url: 'php/Adopter/AdpPlantStatus.php?id='+adopter['id_adopter'],
+                type: 'GET',
+                success: function(response){
+                    data = JSON.parse(response)
+                    $("#plant_status").empty()
+                    Object.keys(data).forEach(function(key){
+                        $("#plant_status").append(
+                            '<button class="btn cat_plan" style="background:linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(image/plantimg/'+data[key]["gambar"]+'); background-position:center !important">'+
+                            data[key]["nama_tanaman"]+' | '+data[key]["status"]+'</button>'
+                        );
+                    });
+                    localStorage.setItem("adoptStatus", JSON.stringify(data));
+                },
+                error: function(error){
+                    console.log(error)
+                }
+            });
+
         }else{
             $("#iflog").css({"display":"none"})
             $("#ifnotlog").css({"display":"inline"})
@@ -53,9 +74,8 @@ $( document ).ready(function() {
         return false;
     });
 
-    $('#signin').on('submit', function(){
+    $('#signinBut').on('click', function(){
         var data = $('#signin').serialize();
-        alert(data)
         $.ajax({
             type: 'POST',
             url: "php/Adopter/AdpAcc.php",
@@ -68,13 +88,14 @@ $( document ).ready(function() {
                 }else{
                     dataFull = JSON.parse(data)
                     localStorage.setItem("dataAdopter", JSON.stringify(dataFull));   
-                    window.location.reload()
+                    location.replace(dataFull['username']);
                 }
             }
         });
         e.stopImmediatePropagation();
         return false;
     });
+
 })
 
 function setDataInTable(response){
@@ -86,9 +107,9 @@ function setDataInTable(response){
                 "<th scope='row'>"+(parseInt(key)+1)+"</th>"+
                 "<td>"+data[key]['nama_tanaman']+"</td>"+
                 "<td>"+data[key]['lokasi_tanaman']+"</td>"+
-                "<td>"+data[key]['tanggal_pelaporan']+"</td>"+
-                "<td>"+data[key]['laporan']+"</td>"+
-                "<td><div style='background-image:url(image/report/"+data[key]['foto_pelaporan']+");width:50px; height:50px; border-radius:50%; background-size:cover'></div></td>"+
+                "<td class='out-480'>"+data[key]['tanggal_pelaporan']+"</td>"+
+                "<td class='out-480'>"+data[key]['laporan']+"</td>"+
+                "<td class='out-480'><div style='background-image:url(image/report/"+data[key]['foto_pelaporan']+");width:50px; height:50px; border-radius:50%; background-size:cover'></div></td>"+
                 "<td>"+
                     "<button class='btn btn-success' onclick='callReport("+data[key]['id_perawatan']+")' data-bs-toggle='modal' data-bs-target='#modal_see_report'><i class='fas fa-eye'></i></button>"+
                 "</td>"+

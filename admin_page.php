@@ -26,7 +26,6 @@
             line-height: 132px;
             color: #FFFFFF;
             text-shadow: 0px 0px 20px #000000;
-            font-style: normal;
         }
         h3{
             font-family: Roboto;
@@ -89,50 +88,99 @@
             background-size:200%;
             color: #FFFFFF;
         }
+        #namebackImg{
+            height: 287px;
+            text-align:right;
+            background: url(image/Mangrove1.png);
+            background-size:cover;
+        }
+        .tabpad{
+            margin-top: 88px;
+        }
+        .see-480{
+            display: none;
+        }
+        @media (max-width: 960px){
+            h1{
+                font-size: 80px;
+                padding-top: 69px;
+                line-height: 90px;
+            }
+            #namebackImg{
+                height:230px;
+            }
+            .tabpad{
+                margin-top: 55px;
+            }
+        }
+        @media (max-width: 480px){
+            h1{
+                font-size: 70px;
+            }
+            .tabpad{
+                margin-top: 55px;
+            }
+            .out-480{
+                display: none;
+            }
+            .see-480{
+                display: block;
+            }
+            .menu-flex{
+                display: flex !important;
+            }
+            .btn-adobt{
+                font-size: 16px;
+            }
+            #namebackImg{
+                height:260px;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
-    <div id="c1" class="fixed-top"></div>
-    <div class="row justify-content-center"  style="margin-top: 110px;">
-        <div class="col-5" style="height: 287px; text-align:right; background: url(image/Mangrove1.png); background-size:cover">
-            <h1>Admin</h1>
-        </div>
-        <div class="col-auto">
-            <h1>Page</h1>
-            <h3>Company Name</h3>
-        </div>
-        <div class="col-auto">
-            <div style="display: flex; padding-top: 88px;">
-                <div class="manage_data_green">
-                    <h4>PLANT</h4>
-                    <h5>99</h5>
-                </div>
-                <div class="manage_data_white">
-                    <h4 style="color: #12491E;">FARMER</h4>
-                    <h5 style="color: #12491E;">99</h5>
-                </div>
-                <div class="manage_data_green">
-                    <h4>ADOPTER</h4>
-                    <h5>99</h5>
+    <div id="c1"></div>
+    <div class="container-xl">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-6" id="namebackImg">
+                <h1 style="margin-right: 10px;">Admin</h1>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div style="display: flex;">
+                    <h1 class="out-480">Page</h1>
+                    <div class="tabpad manage_data_green out-480" style="margin-left: 20px;">
+                        <h4>PLANT</h4>
+                        <h5>99</h5>
+                    </div>
+                    <div class="tabpad manage_data_white out-480">
+                        <h4 style="color: #12491E;">FARMER</h4>
+                        <h5 style="color: #12491E;">99</h5>
+                    </div>
+                    <div class="tabpad manage_data_green out-480">
+                        <h4>ADOPTER</h4>
+                        <h5>99</h5>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div style="margin-top: 100px;" class="container">
-        <div class="row">
-            <div class="col-3">
-                <div class="d-grid gap-2">
-                    <button class="btn btn-adobt on" id="adopt_payment">Adopt Payment</button>
-                    <button class="btn btn-adobt" id="manager_regis">Manager Register</button>
+        <div style="margin-top: 50px;">
+            <div class="row">
+                <div class="col-12 col-sm-3">
+                    <div class="d-grid gap-2 menu-flex">
+                        <button class="btn btn-adobt on" id="adopt_payment">Adopt Payment</button>
+                        <button class="btn btn-adobt" id="manager_regis">Manager Register</button>
+                    </div>
                 </div>
-            </div>
-            <div class="col-9">
-                <div id="c2"></div>
+                <div class="col-12 col-sm-9">
+                    <div id="c2"></div>
+                </div>
             </div>
         </div>
     </div>
     <div id="m1"></div>
     <div id="m2"></div>
+    <div id="m3"></div>
 </body>
 </html>
 <script>
@@ -141,6 +189,7 @@
     $("#c2").load("template/form_check_payment.php")
     $("#m1").load("template/modal_bukti_pembayaran.php")
     $("#m2").load("template/modal_see_rek.php")
+    $("#m3").load("template/modal_log_admin.php")
     
     $("#adopt_payment").click(function(){
         $("#adopt_payment").addClass("on");

@@ -1,4 +1,37 @@
 $( document ).ready(function() {
+    dataAkunPetani = JSON.parse(localStorage.getItem("dataPetani"))
+    $('#farmer_idPetani').val(dataAkunPetani['id_petani'])
+    $('#farmer_namaPetani').val(dataAkunPetani['nama_petani'])
+    $.ajax({
+        url: 'php/Farmer/FrmAcc.php?action=need_report&id='+dataAkunPetani['id_petani'],
+        type: 'GET',
+        success: function(response){
+            data = JSON.parse(response)
+            $("#plant-that-manage").empty()
+            Object.keys(data).forEach(function(key){
+                $("#plant-that-manage").append(
+                    '<button onclick="callModal('+data[key]["id_tanaman"]+')" data-bs-toggle="modal" data-bs-target="#modal_report_plant" class="btn cat_plan" style="background:linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(image/plantimg/'+data[key]["gambar"]+'); background-position:center !important">'+
+                    data[key]["nama_tanaman"]+' | Id Tanaman: '+data[key]["id_tanaman"]+'</button>'
+                );
+            });
+            localStorage.setItem("plantNeedReport", JSON.stringify(data));
+        },
+        error: function(error){
+            console.log(error)
+        }
+    });
+
+    $.ajax({
+        url: 'php/Farmer/FrmAcc.php?action=all_report&id='+dataAkunPetani['id_petani'],
+        type: 'GET',
+        success: function(response){
+            setDataInTable(response)
+        },
+        error: function(error){
+            console.log(error)
+        }
+    });
+
     $('#upload-reoport-but').on('click', function(){
         $("#farmer_idPetani").removeClass("is-invalid")
         $("#farmer_namaPetani").removeClass("is-invalid")
@@ -44,6 +77,10 @@ $( document ).ready(function() {
 			success: function(response){
                 if (response == 1){
                     alert("Petani Tidak Ditemukan")
+                }else{
+                    alert("Laporan sudah terkirim")
+                    $("#farmer_plantImage").val('')
+                    $("#farmer_report").val('')
                 }
 			},
 			error: function(error){
@@ -55,9 +92,23 @@ $( document ).ready(function() {
         validate_report()
     })
 })
-
-function validate_report(){
-    
-
-    return form_data
+function setDataInTable(response){
+    data = JSON.parse(response)
+    $("#tableReport").empty()
+    Object.keys(data).forEach(function(key){
+        $("#tableReport").append(
+            "<tr class='table-body-green'>"+
+                "<th scope='row'>"+(parseInt(key)+1)+"</th>"+
+                "<td>"+data[key]['nama_tanaman']+"</td>"+
+                "<td>"+data[key]['lokasi_tanaman']+"</td>"+
+                "<td class='out-480'>"+data[key]['tanggal_pelaporan']+"</td>"+
+                "<td class='out-480'>"+data[key]['laporan']+"</td>"+
+                "<td class='out-480'><div style='background-image:url(image/report/"+data[key]['foto_pelaporan']+");width:50px; height:50px; border-radius:50%; background-size:cover'></div></td>"+
+                "<td>"+
+                    "<button class='btn btn-success' onclick='callReport("+data[key]['id_perawatan']+")' data-bs-toggle='modal' data-bs-target='#modal_see_report'><i class='fas fa-eye'></i></button>"+
+                "</td>"+
+            "</tr>"
+        );
+    });
+    localStorage.setItem("adopterDanTanaman", JSON.stringify(data));
 }

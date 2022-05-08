@@ -43,11 +43,12 @@
             font-family: 'Open Sans', sans-serif;
         }
         .cat_plan{
-            font-size: 24px;
+            font-size: 16px;
             font-weight: bold;
             background-size: cover !important;
             background-repeat: no-repeat;
             background-position: center;
+            border-radius: 99px;
             margin-right: 10px;
             padding:10px 20px;
             background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(image/Mangrove1.png);
@@ -99,6 +100,9 @@
     </style>
 </head>
 <body>
+    <div id="loader" class="position-relative" style="width: 100% !important;">
+        <div class="position-absolute top-50 start-50 translate-middle"><img src="/img/Loader.gif" class="shadow bg-body" width="30%" style="border-radius: 50%;" alt=""></div>    
+    </div>
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div id="c4" style="z-index: 1; left:0; right:0; position:absolute"></div>
         <div class="carousel-inner" style="z-index:0">
@@ -111,6 +115,14 @@
             <div class="carousel-item" id="3" style="height: 100%;" data-bs-interval="10000">
                 <div id="c3"></div>
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
     </div>
     <div class="container" style="margin-bottom: 50px;">
@@ -141,37 +153,25 @@
                     </div>
                 </div>
             </div>
-            <div id="map"></div>
+            <!--<div id="map"></div>-->
         </div>
         <div id="c_important"  style="margin-top: 50px;">
-            <h2>Important To Adopt</h2>
-            <div class="horizontal_scroll">
-                <?php for($i=0;$i<12;$i++):?>
-                    <div class="c_important_content" data-bs-toggle="modal" data-bs-target="#modal_adobt" style="display:inline-block; padding-right: 20px"></div>
-                <?php endfor?>
-            </div>
+            <h2>Vegetables</h2>
+            <div class="horizontal_scroll" id="c_important_content"></div>
         </div>
         <div id="c_invest"  style="margin-top: 50px;">
-            <h2>Best For Investment</h2>
-            <div class="horizontal_scroll">
-                <?php for($i=0;$i<12;$i++):?>
-                    <div class="c_invest_content" data-bs-toggle="modal" data-bs-target="#modal_adobt" style="display:inline-block; padding-right: 20px"></div>
-                <?php endfor?>
-            </div>
+            <h2>Good For Nature</h2>
+            <div class="horizontal_scroll" id="c_invest_content"></div>
         </div>
         <div id="c_good"  style="margin-top: 50px;">
-            <h2>Good For Nature</h2>
-            <div class="horizontal_scroll">
-                <?php for($i=0;$i<12;$i++):?>
-                    <div class="c_good_content" data-bs-toggle="modal" data-bs-target="#modal_adobt" style="display:inline-block; padding-right: 20px"></div>
-                <?php endfor?>
-            </div>
+            <h2>Spesial Purpose</h2>
+            <div class="horizontal_scroll" id="c_good_content"></div>
         </div>
     </div>
     <hr>
     <div class="container" style="padding:30px 0">
         <div class="row" id="footer">
-            <div class="col-4 col-sm-3">
+            <div class="col-12 col-sm-3">
                 <h2>Adopt Plant</h2>
                 <a href="">Tentang adoptMe</a><br>
                 <a href="">Kisah adoptMe</a><br>
@@ -183,15 +183,13 @@
                 <a href="" style="font-size: 25px; margin-right:5px"><i class="fab fa-twitter"></i></a>
                 <a href="" style="font-size: 25px;"><i class="fab fa-instagram"></i></a>
             </div>
-            <div class="col-8 col-sm-4">
+            <div class="col-12 col-sm-4">
                 <h2>Contact Us</h2>
                 Kantor AdoptPlant.com <br>
-                Cohive 101, Lt 17<br>
-                Jl. Mega Kuningan Barat No. 1 RT 5/RW 2<br>
-                Kuningan Timur, Setiabudi, Jakarta Selatan 12950<br>
+                Gg. Sriti, Peguyangan, Kota Denpasar, Bali <br>
                 <br>
                 Senin-Minggu 09.00-18.00<br>
-                Email:  help@adoptplant.com<br>
+                Email:  adoptmeindonesia2022@gmail.com<br>
             </div>
         </div>
     </div>
@@ -199,8 +197,18 @@
     <div id="m2"></div>
 </body>
 </html>
-<script src="js/maps_adopter.js"></script>
+<!--<script src="js/maps_adopter.js"></script>-->
 <script>
+    document.onreadystatechange = function() {
+        if(document.readyState !== "complete"){
+            document.querySelector("body").style.visibility = "hidden";
+            document.querySelector("#loader").style.visibility = "visible";
+        }else{
+            document.querySelector("#loader").style.display = "none";
+            document.querySelector("body").style.visibility = "visible";
+        }
+    };
+    dataAkun = JSON.parse(localStorage.getItem("dataAdopter"))
     $(document).ready(function(){
         $.ajax({
             url: 'php/Adopter/AdpViewPlant.php',
@@ -215,7 +223,7 @@
         });
 
         dataProduk = JSON.parse(localStorage.getItem("dataTanaman"))
-
+        
         $("#m1").load("template/modal_log.php")
         $("#m2").load("template/modal_adobt.php")        
         
@@ -224,12 +232,17 @@
         $("#c3").load("template/landing.php?id_landing=3")
         $("#c4").load("template/navbar.php?color=FFFFFF")
 
-        callContent(dataProduk,"c_important_content")
-        callContent(dataProduk,"c_invest_content")
-        callContent(dataProduk,"c_good_content")
+        callContent(dataProduk,"c_important_content",'vegetables')
+        callContent(dataProduk,"c_invest_content",'nature')
+        callContent(dataProduk,"c_good_content",'spesialpurpose')
 
-        function callContent(data, className){
-            var $c_important = $('.'+className);
+        function callContent(data, className,kategori){
+            data = data.filter(data => data.kategori.includes(kategori))
+            console.log(data.length)
+            for (i=0; i<data.length; i++){
+                $('#'+className).append('<div class="" data-bs-toggle="modal" data-bs-target="#modal_adobt" style="display:inline-block; padding-right: 20px"></div>')
+            }
+            var $c_important = $('#'+className+">div");
             $c_important.each(function(index, element) {
                 $(element).load("template/adobt_content.php",{width:"170",lok:data[index]['nama_alamat'],nama:data[index]['nama_tanaman'],gambar:data[index]['gambar'],harga:data[index]['harga'],des:data[index]['deskripsi'],pengelola:data[index]['nama_pengelola']});
                 $(element).attr({"onclick":"callModal('"+data[index]['nama_tanaman']+"','"+data[index]['id_pengelola']+"')"});
@@ -240,7 +253,7 @@
     });
     function callModal(nama,id){
         $.ajax({
-                url: 'php/Manager/MngCrudPlant.php?action=read-detail-plant&id='+id+'&nama='+nama,
+                url: 'php/Manager/MngCrudPlant.php?action=read-detail-plant&id='+id+'&nama='+nama.replace("&", "%26"),
                 type: 'GET',
                 success: function(response){
                     data = JSON.parse(response)
@@ -256,9 +269,12 @@
                     $("#lokasiTanaman").html(data[0]['nama_alamat'])
                     $("#descTanaman").html(data[0]['deskripsi'])
                     $("#banyakTanaman").attr({'max':data[0]['total_tanaman']})
-                    $("#hargaTanaman").html('IDR. '+data[0]['harga'])
+                    $("#banyakTanaman").attr({'onchange':'moneyval('+data[0]['total_tanaman']+','+data[0]['harga']+')'})
+                    $("#banyakTanaman").attr({'onkeyup':'moneyval('+data[0]['total_tanaman']+','+data[0]['harga']+')'})
+                    $("#hargaTanaman").html(data[0]['harga'])
                     $("#con_namePlant").val(data[0]['nama_tanaman'])
                     $("#con_managerPlant").val(data[0]['id_pengelola'])
+                    $("#con_email").val(dataAkun['email'])
                 },
                 error: function(error){
                     console.log(error)
@@ -266,6 +282,13 @@
             });
         var $c_good = $('.c_modal_ad');
         callContent(dataProduk,"c_modal_ad")
+    }
+    function moneyval(max,harga){
+        jumlah = $("#banyakTanaman").val()
+        if(jumlah>max){
+            $("#banyakTanaman").val(max)
+            jumlah = max
+        }$("#hargaTanaman").html(harga*jumlah)
     }
     function callContent(data, className){
         var $c_important = $('.'+className);
