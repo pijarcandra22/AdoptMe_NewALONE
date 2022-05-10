@@ -238,6 +238,7 @@
 
         function callContent(data, className,kategori){
             data = data.filter(data => data.kategori.includes(kategori))
+            
             console.log(data.length)
             for (i=0; i<data.length; i++){
                 $('#'+className).append('<div class="" data-bs-toggle="modal" data-bs-target="#modal_adobt" style="display:inline-block; padding-right: 20px"></div>')

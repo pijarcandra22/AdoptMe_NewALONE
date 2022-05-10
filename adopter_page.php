@@ -17,16 +17,6 @@
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet"/>
     <style>
-        h1{
-            font-family: Roboto;
-            font-style: normal;
-            font-weight: bold;
-            font-size: 113px;
-            padding-top: 69px;
-            line-height: 132px;
-            color: #FFFFFF;
-            text-shadow: 0px 0px 20px #000000;
-        }
         h3{
             font-family: Roboto;
             font-style: normal;
@@ -43,7 +33,7 @@
             background-size: cover;
         }
         .manage_data_white{
-            border: 1px solid rgba(18, 73, 30, 1);
+            border: 1px solid white;
             border-radius: 10px;
             background-size: cover;
             width: 94px;
@@ -59,15 +49,6 @@
             padding-top: 10px;
             text-align: center;
             margin: 0;
-        }
-        h5{
-            margin: 0;
-            font-style: normal;
-            font-weight: bold;
-            font-size: 43px;
-            line-height: 50px;
-            text-align: center;
-            color: #FFFFFF;
         }
         .btn-adobt{
             width: 100%;
@@ -87,14 +68,32 @@
             background-size:200%;
             color: #FFFFFF;
         }
-        #namebackImg{
-            height: 287px;
-            text-align:right;
-            background: url(image/Mangrove1.png);
+        #landing{
+            background: url(image/AdoptLanding.png);
             background-size:cover;
+            background-position: center;
         }
         .tabpad{
-            margin-top: 88px;
+            margin-top: 20px;
+        }
+        .tabpad > h5{
+            margin: 0;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 43px;
+            line-height: 50px;
+            text-align: center;
+            color: #FFFFFF;
+        }
+        .tabpad > h4{
+            font-style: normal;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 16px;
+            color: white;
+            padding-top: 10px;
+            text-align: center;
+            margin: 0;
         }
         .see-480{
             display: none;
@@ -122,29 +121,39 @@
             padding: 0 10px;
             border-left: #12491E 2px solid;
         }
+        #page_heading{
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 113px;
+            line-height: 132px;
+            color: #FFFFFF;
+            text-shadow: 0px 0px 20px #000000;
+        }
         @media (max-width: 960px){
-            h1{
-                font-size: 80px;
-                padding-top: 69px;
+            #page_heading{
+                font-size: 100px;
                 line-height: 90px;
             }
-            #namebackImg{
-                height:230px;
-            }
             .tabpad{
-                margin-top: 55px;
+                margin-top: 10px;
             }
         }
         @media (max-width: 480px){
-            h1{
-                font-size: 70px;
+            .manage_data_green{
+                width: auto;
+                height: auto;
             }
-            #namebackImg{
-                height:260px;
-                text-align: center;
+            .manage_data_white{
+                width: auto;
+                height: auto;
             }
             .tabpad{
-                margin-top: 55px;
+                display: flex;
+                padding: 0px 10px;
+            }
+            .tabpad > h5{
+                font-size: 20px;
             }
             .out-480{
                 display: none;
@@ -156,31 +165,35 @@
     </style>
 </head>
 <body>
-    <div id="c1"></div>
-    <div class="container-xl">
-        <div class="row justify-content-center">
-            <div class="col-12 col-sm-6" id="namebackImg">
-                <h1 style="margin-right: 10px;">Adopter</h1>
-                <button onclick="signout()" class="btn btn-success see-480" style="font-family:roboto; font-weight:bold; height: 40px; line-height: 10px !important; border-radius:30px; background-color:#12491E; border:none; padding:2px 10px !important; vertical-align:middle">Sign Out</button>
-            </div>
-            <div class="col-12 col-sm-6">
-                <div style="display: flex;">
-                    <h1 class="out-480">Page</h1>
-                    <div class="tabpad manage_data_green out-480" style="margin-left: 20px;">
-                        <h4>PLANT</h4>
-                        <h5>99</h5>
-                    </div>
-                    <div class="tabpad manage_data_white out-480">
-                        <h4 style="color: #12491E;">FARMER</h4>
-                        <h5 style="color: #12491E;">99</h5>
-                    </div>
+    <div id="c1" style="z-index: 1; left:0; right:0; position:absolute"></div>
+    <div id="landing" class="position-relative" style="z-index:0">
+        <div class="container-xl position-absolute top-50 start-50 translate-middle">
+            <div class="row justify-content-sm-center">
+                <div class="col-12 col-sm-auto">
+                    <h1 id="page_heading">Adopter Page</h1>
                 </div>
-                <div style="display: flex; height:max-content">
-                    <h3 id="adopter_name" class="out-480" style="margin-top:14px; color:#12491E; margin-right:10px">Adopter Name</h3>
-                    <button onclick="signout()" class="btn btn-success out-480" style="margin-top:8px; font-family:roboto; font-weight:bold; height: 40px; line-height: 10px !important; border-radius:30px; background-color:#12491E; border:none; padding:2px 10px !important; vertical-align:middle">Sign Out</button>
+                <div class="col-12 col-sm-auto">
+                    <div style="display: flex;">
+                        <div class="tabpad manage_data_green">
+                            <h4 class="out-480">PLANT</h4>
+                            <h5 class="see-480">Plant: </h5>
+                            <h5 id="adp_total_tanaman">99</h5>
+                        </div>
+                        <div class="tabpad manage_data_white">
+                            <h4 class="out-480">WAITING</h4>
+                            <h5 class="see-480">Waiting: </h5>
+                            <h5 id="adp_waiting_tanaman">99</h5>
+                        </div>
+                    </div>
+                    <div style="display: flex; height:max-content">
+                        <h3 id="adopter_name"  style="margin-top:14px; color:white; margin-right:10px">Adopter Name</h3>
+                        <button onclick="signout()" class="btn btn-success" style="margin-top:8px; font-family:roboto; font-weight:bold; height: 40px; line-height: 10px !important; border-radius:30px; background-color:#12491E; border:none; padding:2px 10px !important; vertical-align:middle">Sign Out</button>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="container-xl">
         <div style="margin-top: 20px;">
             <div id="c2"></div>
         </div>
@@ -190,6 +203,7 @@
 </body>
 </html>
 <script>
+    $("#landing").css({"height":window.innerHeight+"px"})
     $("#c1").load("template/navbar.php?color=12491E&set=true")
     $("#c2").load("template/form_adopter_plant.php")
     $("#m1").load("template/modal_see_report.php")
