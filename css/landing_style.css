@@ -1,6 +1,4 @@
-html{
-    font-family: 'Roboto';
-}
+
 #landing {
     color: #FFFFFF;
     background-repeat: no-repeat;
@@ -25,13 +23,7 @@ html{
     min-width: 300px;
     max-width:400px;
 }
-.btn-success{
-    background: #12491E;
-    border-radius: 30px;
-    font-style: normal;
-    font-weight: bold;
-    color: #FFFFFF;
-}
+
 .rl-btn{
     width: 60px;
     height: 60px;
