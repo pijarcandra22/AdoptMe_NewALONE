@@ -238,14 +238,17 @@
 
         function callContent(data, className,kategori){
             data = data.filter(data => data.kategori.includes(kategori))
-            
             console.log(data.length)
             for (i=0; i<data.length; i++){
                 $('#'+className).append('<div class="" data-bs-toggle="modal" data-bs-target="#modal_adobt" style="display:inline-block; padding-right: 20px"></div>')
             }
             var $c_important = $('#'+className+">div");
             $c_important.each(function(index, element) {
-                $(element).load("template/adobt_content.php",{width:"170",lok:data[index]['nama_alamat'],nama:data[index]['nama_tanaman'],gambar:data[index]['gambar'],harga:data[index]['harga'],des:data[index]['deskripsi'],pengelola:data[index]['nama_pengelola']});
+                status_tanaman = ''
+                if(data[index]['jumlah_tanaman']!='0'){
+                    status_tanaman = 'display:none'
+                }
+                $(element).load("template/adobt_content.php",{width:"170",lok:data[index]['nama_alamat'],nama:data[index]['nama_tanaman'],gambar:data[index]['gambar'],harga:data[index]['harga'],des:data[index]['deskripsi'],pengelola:data[index]['nama_pengelola'],status_tanaman:status_tanaman});
                 $(element).attr({"onclick":"callModal('"+data[index]['nama_tanaman']+"','"+data[index]['id_pengelola']+"')"});
             });
         }
