@@ -90,6 +90,7 @@ if ($width < 190) {
                     <!--Masalah Ada disini, Gimana caranya bawa ketengah-->
                 </p>
             </div>
+            <h1>test</h1>
         </div>
     </div>
 </div>
