@@ -10,12 +10,3 @@
 .form-control{
     margin-bottom: 13px;
 }
-.btn-success{
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    border-radius: 60px;
-    font-family: Roboto !important;
-    background-color: #12491E;
-    border: none;
-}
