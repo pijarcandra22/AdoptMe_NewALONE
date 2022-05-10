@@ -27,14 +27,23 @@ $( document ).ready(function() {
                 type: 'GET',
                 success: function(response){
                     data = JSON.parse(response)
+                    readyplant = 0
+                    notplant = 0
                     $("#plant_status").empty()
                     Object.keys(data).forEach(function(key){
                         $("#plant_status").append(
                             '<button class="btn cat_plan" style="background:linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(image/plantimg/'+data[key]["gambar"]+'); background-position:center !important">'+
                             data[key]["nama_tanaman"]+' | '+data[key]["status"]+'</button>'
                         );
+                        if(data[key]["status"]=="adopsi"){
+                            readyplant += 1
+                        }else{
+                            notplant += 1
+                        }
                     });
                     localStorage.setItem("adoptStatus", JSON.stringify(data));
+                    $("#adp_total_tanaman").html(readyplant)
+                    $("#adp_waiting_tanaman").html(notplant)
                 },
                 error: function(error){
                     console.log(error)
