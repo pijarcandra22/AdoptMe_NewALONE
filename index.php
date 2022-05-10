@@ -3,6 +3,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <meta charset="UTF-8">
@@ -22,12 +23,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/global_style.css">
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
-    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet"/>
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />
     <style>
         #map {
             width: 100%;
             height: 500px !important;
         }
+
         .marker {
             background-image: url('image/christmas-tree.png');
             background-size: cover;
@@ -35,26 +37,17 @@
             height: 25px;
             cursor: pointer;
         }
+
         .mapboxgl-popup {
             max-width: 200px;
         }
+
         .mapboxgl-popup-content {
             text-align: center;
             font-family: 'Open Sans', sans-serif;
         }
-        .cat_plan{
-            font-size: 16px;
-            font-weight: bold;
-            background-size: cover !important;
-            background-repeat: no-repeat;
-            background-position: center;
-            border-radius: 99px;
-            margin-right: 10px;
-            padding:10px 20px;
-            background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(image/Mangrove1.png);
-            color: white;
-        }
-        .loc_plan{
+
+        .loc_plan {
             font-family: Roboto;
             font-style: normal;
             font-weight: bold;
@@ -63,45 +56,63 @@
             text-align: center;
             color: #12491E;
             display: inline-block;
-            padding-left:10px;
+            padding-left: 10px;
         }
-        #c_location{
+
+        #c_location {
             margin-top: 40px;
         }
-        h2{
+
+        h2 {
             font-style: normal;
             font-weight: bold;
             font-size: 24px;
             line-height: 28px;
             color: #12491E;
         }
-        body{
+
+        body {
             font-family: Roboto !important;
         }
-        #locList{
+
+        #locList {
             display: block;
         }
-        #footer>div>a{
+
+        #footer>div>a {
             color: black;
             text-decoration: none;
             font-family: Roboto;
         }
-        .c_important_content,.c_invest_content,.c_good_content{
+
+        .c_important_content,
+        .c_invest_content,
+        .c_good_content {
             display: block;
         }
-        .c_important_content_small,.c_invest_content_small,.c_good_content_small{
+
+        .c_important_content_small,
+        .c_invest_content_small,
+        .c_good_content_small {
             display: none;
         }
-        @media (max-width: 1200px){
-            #locList{
+
+        @media (max-width: 1200px) {
+            #locList {
                 display: none;
             }
         }
+
+        .horizontal_scroll {
+            gap: 1rem;
+            padding: 1rem 0 !important;
+        }
     </style>
 </head>
+
 <body>
     <div id="loader" class="position-relative" style="width: 100% !important;">
-        <div class="position-absolute top-50 start-50 translate-middle"><img src="/img/Loader.gif" class="shadow bg-body" width="30%" style="border-radius: 50%;" alt=""></div>    
+        <div class="position-absolute top-50 start-50 translate-middle"><img src="/img/Loader.gif" class="shadow bg-body" width="30%" style="border-radius: 50%;" alt=""></div>
     </div>
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div id="c4" style="z-index: 1; left:0; right:0; position:absolute"></div>
@@ -126,22 +137,22 @@
         </div>
     </div>
     <div class="container" style="margin-bottom: 50px;">
-        <div id="c_location" >
+        <div id="c_location">
             <div class="row">
                 <div class="col-12 col-xl-7">
                     <h2>Categories</h2>
-                    <div class="horizontal_scroll" style="padding-top:12px !important; padding-bottom: 15px !important;">
-                        <button class="btn cat_plan">Mangrove</button>
-                        <button class="btn cat_plan">Mangrove</button>
-                        <button class="btn cat_plan">Mangrove</button>
-                        <button class="btn cat_plan">Mangrove</button>
-                        <button class="btn cat_plan">Mangrove</button>
-                        <button class="btn cat_plan">Mangrove</button>
+                    <div class="horizontal_scroll d-flex">
+                        <button class="btn btn-outline-success rounded-pill">Mangrove</button>
+                        <button class="btn btn-outline-success rounded-pill">Mangrove</button>
+                        <button class="btn btn-outline-success rounded-pill">Mangrove</button>
+                        <button class="btn btn-outline-success rounded-pill">Mangrove</button>
+                        <button class="btn btn-outline-success rounded-pill">Mangrove</button>
+                        <button class="btn btn-outline-success rounded-pill">Mangrove</button>
                     </div>
                 </div>
                 <div class="col-5" id="locList">
                     <h2>Location</h2>
-                    <div class="horizontal_scroll" style="padding-bottom: 15px !important;">                
+                    <div class="horizontal_scroll" style="padding-bottom: 15px !important;">
                         <a href="" class="loc_plan"><i class="fas fa-map-marked-alt" style="font-size: 24px;"></i><br>Sesetan<br>Beach</a>
                         <a href="" class="loc_plan"><i class="fas fa-map-marked-alt" style="font-size: 24px;"></i><br>Sesetan<br>Beach</a>
                         <a href="" class="loc_plan"><i class="fas fa-map-marked-alt" style="font-size: 24px;"></i><br>Sesetan<br>Beach</a>
@@ -155,15 +166,15 @@
             </div>
             <!--<div id="map"></div>-->
         </div>
-        <div id="c_important"  style="margin-top: 50px;">
+        <div id="c_important" style="margin-top: 50px;">
             <h2>Vegetables</h2>
             <div class="horizontal_scroll" id="c_important_content"></div>
         </div>
-        <div id="c_invest"  style="margin-top: 50px;">
+        <div id="c_invest" style="margin-top: 50px;">
             <h2>Good For Nature</h2>
             <div class="horizontal_scroll" id="c_invest_content"></div>
         </div>
-        <div id="c_good"  style="margin-top: 50px;">
+        <div id="c_good" style="margin-top: 50px;">
             <h2>Spesial Purpose</h2>
             <div class="horizontal_scroll" id="c_good_content"></div>
         </div>
@@ -189,121 +200,161 @@
                 Gg. Sriti, Peguyangan, Kota Denpasar, Bali <br>
                 <br>
                 Senin-Minggu 09.00-18.00<br>
-                Email:  adoptmeindonesia2022@gmail.com<br>
+                Email: adoptmeindonesia2022@gmail.com<br>
             </div>
         </div>
     </div>
     <div id="m1"></div>
     <div id="m2"></div>
 </body>
+
 </html>
 <!--<script src="js/maps_adopter.js"></script>-->
 <script>
     document.onreadystatechange = function() {
-        if(document.readyState !== "complete"){
+        if (document.readyState !== "complete") {
             document.querySelector("body").style.visibility = "hidden";
             document.querySelector("#loader").style.visibility = "visible";
-        }else{
+        } else {
             document.querySelector("#loader").style.display = "none";
             document.querySelector("body").style.visibility = "visible";
         }
     };
     dataAkun = JSON.parse(localStorage.getItem("dataAdopter"))
-    $(document).ready(function(){
+    $(document).ready(function() {
         $.ajax({
             url: 'php/Adopter/AdpViewPlant.php',
             type: 'GET',
-            success: function(response){
+            success: function(response) {
                 dataFull = JSON.parse(response)
                 localStorage.setItem("dataTanaman", JSON.stringify(dataFull))
             },
-            error: function(error){
+            error: function(error) {
                 console.log(error)
             }
         });
 
         dataProduk = JSON.parse(localStorage.getItem("dataTanaman"))
-        
+
         $("#m1").load("template/modal_log.php")
-        $("#m2").load("template/modal_adobt.php")        
-        
+        $("#m2").load("template/modal_adobt.php")
+
         $("#c1").load("template/landing.php?id_landing=1")
         $("#c2").load("template/landing.php?id_landing=2")
         $("#c3").load("template/landing.php?id_landing=3")
         $("#c4").load("template/navbar.php?color=FFFFFF")
 
-        callContent(dataProduk,"c_important_content",'vegetables')
-        callContent(dataProduk,"c_invest_content",'nature')
-        callContent(dataProduk,"c_good_content",'spesialpurpose')
+        callContent(dataProduk, "c_important_content", 'vegetables')
+        callContent(dataProduk, "c_invest_content", 'nature')
+        callContent(dataProduk, "c_good_content", 'spesialpurpose')
 
-        function callContent(data, className,kategori){
+        function callContent(data, className, kategori) {
             data = data.filter(data => data.kategori.includes(kategori))
             console.log(data.length)
-            for (i=0; i<data.length; i++){
-                $('#'+className).append('<div class="" data-bs-toggle="modal" data-bs-target="#modal_adobt" style="display:inline-block; padding-right: 20px"></div>')
+            for (i = 0; i < data.length; i++) {
+                $('#' + className).append('<div class="" data-bs-toggle="modal" data-bs-target="#modal_adobt" style="display:inline-block; padding-right: 20px"></div>')
             }
-            var $c_important = $('#'+className+">div");
+            var $c_important = $('#' + className + ">div");
             $c_important.each(function(index, element) {
                 status_tanaman = ''
-                if(data[index]['jumlah_tanaman']!='0'){
+                if (data[index]['jumlah_tanaman'] != '0') {
                     status_tanaman = 'display:none'
                 }
-                $(element).load("template/adobt_content.php",{width:"170",lok:data[index]['nama_alamat'],nama:data[index]['nama_tanaman'],gambar:data[index]['gambar'],harga:data[index]['harga'],des:data[index]['deskripsi'],pengelola:data[index]['nama_pengelola'],status_tanaman:status_tanaman});
-                $(element).attr({"onclick":"callModal('"+data[index]['nama_tanaman']+"','"+data[index]['id_pengelola']+"')"});
+                $(element).load("template/adobt_content.php", {
+                    width: "170",
+                    lok: data[index]['nama_alamat'],
+                    nama: data[index]['nama_tanaman'],
+                    gambar: data[index]['gambar'],
+                    harga: data[index]['harga'],
+                    des: data[index]['deskripsi'],
+                    pengelola: data[index]['nama_pengelola'],
+                    status_tanaman: status_tanaman
+                });
+                $(element).attr({
+                    "onclick": "callModal('" + data[index]['nama_tanaman'] + "','" + data[index]['id_pengelola'] + "')"
+                });
             });
         }
 
         $('#overlay').fadeOut();
     });
-    function callModal(nama,id){
+
+    function callModal(nama, id) {
         $.ajax({
-                url: 'php/Manager/MngCrudPlant.php?action=read-detail-plant&id='+id+'&nama='+nama.replace("&", "%26"),
-                type: 'GET',
-                success: function(response){
-                    data = JSON.parse(response)
-                    console.log(data)
-                    if(window.innerWidth<=560){
-                        $("#back_img").css({'background':'white'})
-                    }else{
-                        $("#back_img").css({'background':'linear-gradient(270.04deg, #FFFFFF 0.04%, #FFFFFF 79.15%, rgba(0, 0, 0, 0) 79.39%), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(180deg, rgba(2, 87, 5, 0.248) 0%, rgba(255, 255, 255, 0.341) 100%), url(image/plantimg/'+data[0]['gambar']+')'})
-                    }
-                    $("#front_img").css({'background':'linear-gradient(180deg, rgba(2, 87, 5, 0.248) 0%, rgba(255, 255, 255, 0.341) 100%), url(image/plantimg/'+data[0]['gambar']+')'})
-                    $("#front_img").css({'background-size':'cover','background-position':'center'})
-                    $("#namaTanaman").html(data[0]['nama_tanaman'])
-                    $("#lokasiTanaman").html(data[0]['nama_alamat'])
-                    $("#descTanaman").html(data[0]['deskripsi'])
-                    $("#banyakTanaman").attr({'max':data[0]['total_tanaman']})
-                    $("#banyakTanaman").attr({'onchange':'moneyval('+data[0]['total_tanaman']+','+data[0]['harga']+')'})
-                    $("#banyakTanaman").attr({'onkeyup':'moneyval('+data[0]['total_tanaman']+','+data[0]['harga']+')'})
-                    $("#hargaTanaman").html(data[0]['harga'])
-                    $("#con_namePlant").val(data[0]['nama_tanaman'])
-                    $("#con_managerPlant").val(data[0]['id_pengelola'])
-                    $("#con_email").val(dataAkun['email'])
-                },
-                error: function(error){
-                    console.log(error)
+            url: 'php/Manager/MngCrudPlant.php?action=read-detail-plant&id=' + id + '&nama=' + nama.replace("&", "%26"),
+            type: 'GET',
+            success: function(response) {
+                data = JSON.parse(response)
+                console.log(data)
+                if (window.innerWidth <= 560) {
+                    $("#back_img").css({
+                        'background': 'white'
+                    })
+                } else {
+                    $("#back_img").css({
+                        'background': 'linear-gradient(270.04deg, #FFFFFF 0.04%, #FFFFFF 79.15%, rgba(0, 0, 0, 0) 79.39%), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(180deg, rgba(2, 87, 5, 0.248) 0%, rgba(255, 255, 255, 0.341) 100%), url(image/plantimg/' + data[0]['gambar'] + ')'
+                    })
                 }
-            });
+                $("#front_img").css({
+                    'background': 'linear-gradient(180deg, rgba(2, 87, 5, 0.248) 0%, rgba(255, 255, 255, 0.341) 100%), url(image/plantimg/' + data[0]['gambar'] + ')'
+                })
+                $("#front_img").css({
+                    'background-size': 'cover',
+                    'background-position': 'center'
+                })
+                $("#namaTanaman").html(data[0]['nama_tanaman'])
+                $("#lokasiTanaman").html(data[0]['nama_alamat'])
+                $("#descTanaman").html(data[0]['deskripsi'])
+                $("#banyakTanaman").attr({
+                    'max': data[0]['total_tanaman']
+                })
+                $("#banyakTanaman").attr({
+                    'onchange': 'moneyval(' + data[0]['total_tanaman'] + ',' + data[0]['harga'] + ')'
+                })
+                $("#banyakTanaman").attr({
+                    'onkeyup': 'moneyval(' + data[0]['total_tanaman'] + ',' + data[0]['harga'] + ')'
+                })
+                $("#hargaTanaman").html(data[0]['harga'])
+                $("#con_namePlant").val(data[0]['nama_tanaman'])
+                $("#con_managerPlant").val(data[0]['id_pengelola'])
+                $("#con_email").val(dataAkun['email'])
+            },
+            error: function(error) {
+                console.log(error)
+            }
+        });
         var $c_good = $('.c_modal_ad');
-        callContent(dataProduk,"c_modal_ad")
+        callContent(dataProduk, "c_modal_ad")
     }
-    function moneyval(max,harga){
+
+    function moneyval(max, harga) {
         jumlah = $("#banyakTanaman").val()
-        if(jumlah>max){
+        if (jumlah > max) {
             $("#banyakTanaman").val(max)
             jumlah = max
-        }$("#hargaTanaman").html(harga*jumlah)
+        }
+        $("#hargaTanaman").html(harga * jumlah)
     }
-    function callContent(data, className){
-        var $c_important = $('.'+className);
+
+    function callContent(data, className) {
+        var $c_important = $('.' + className);
         $c_important.each(function(index, element) {
-            $(element).load("template/adobt_content.php",{width:"170",lok:data[index]['nama_alamat'],nama:data[index]['nama_tanaman'],gambar:data[index]['gambar'],harga:data[index]['harga'],des:data[index]['deskripsi'],pengelola:data[index]['nama_pengelola']});
-            $(element).attr({"onclick":"callModal('"+data[index]['nama_tanaman']+"','"+data[index]['id_pengelola']+"')"});
+            $(element).load("template/adobt_content.php", {
+                width: "170",
+                lok: data[index]['nama_alamat'],
+                nama: data[index]['nama_tanaman'],
+                gambar: data[index]['gambar'],
+                harga: data[index]['harga'],
+                des: data[index]['deskripsi'],
+                pengelola: data[index]['nama_pengelola']
+            });
+            $(element).attr({
+                "onclick": "callModal('" + data[index]['nama_tanaman'] + "','" + data[index]['id_pengelola'] + "')"
+            });
         });
     }
 
     //CSS Manipulation
     heigthPage = parseInt(window.innerHeight)
-    widthPage = parseInt(window.innerWidth)    
-
+    widthPage = parseInt(window.innerWidth)
 </script>
