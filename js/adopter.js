@@ -112,6 +112,21 @@ function setDataInTable(response){
     $("#tableReport").empty()
     $("#dataReport").empty()
     Object.keys(data).forEach(function(key){
+        var divElem = $('<div/>').load("template/report_content.php",{
+                                            width:"170",
+                                            lok:data[key]['nama_alamat'],
+                                            nama:data[key]['nama_tanaman'],
+                                            gambar:"report/"+data[key]['foto_pelaporan'],
+                                            status_tanaman:'display:none',
+                                            tanggal_pelaporan:data[key]['tanggal_pelaporan']
+                                        })
+                                .attr({"onclick":"callReport("+data[key]['id_perawatan']+")",
+                                           "data-bs-toggle":'modal',
+                                           "data-bs-target":'#modal_see_report',
+                                           "class":"col-auto",
+                                           "style":"margin-top: 20px"
+                                        });
+        divElem.appendTo('#dataReport');
         $("#tableReport").append(
             "<tr class='table-body-green'>"+
                 "<th scope='row'>"+(parseInt(key)+1)+"</th>"+
