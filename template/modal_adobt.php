@@ -47,7 +47,7 @@
                                         <i class="fas fa-map-marker-alt" style="font-size: 26px; padding-right:5px"></i>
                                         <p id="lokasiTanaman" style="text-shadow:none; font-family:Roboto; width:20px;font-style: normal;font-weight: bold;font-size: 12px;line-height: 14px;color: #12491E;">Sesetan Beach</p>
                                     </div>
-                                    <div class="input-group mb-3" style="margin-left:60px; width:250px !important">
+                                    <div id="all_but_adopt" class="input-group mb-3" style="margin-left:60px; width:250px !important">
                                         <input id="con_idAdopt" name="id_adopt" type="hidden" value="1">
                                         <input id="con_namePlant"name="namaTanaman" type="hidden" value="salwdjsa">
                                         <input id="con_managerPlant" name="pengelolaTanaman" type="hidden" value="1">

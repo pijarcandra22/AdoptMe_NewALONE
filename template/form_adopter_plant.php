@@ -18,7 +18,10 @@
             color: #FFFFFF;
             margin-top:14px;
             color:#12491E;
-            margin-right:10px
+            margin-right:10px;
+            background-color:white;
+            padding: 5px 20px;
+            border-radius: 20px;
         }
         .table-head-green{
             font-family: Roboto;
@@ -57,6 +60,9 @@
     </div>
     <div style="height: 450px !important; overflow-y:scroll">
         <div id="plant_status" class="horizontal_scroll" style="padding-top:12px !important; padding-bottom: 15px !important;">
+        </div>
+        <div style="display:flex" id="dataReport">
+
         </div>
         <table class="table" style="font-size: 12px;">
             <thead>

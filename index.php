@@ -40,22 +40,8 @@
         }
         .mapboxgl-popup-content {
             text-align: center;
-            font-family: 'Open Sans', sans-serif;
-        }
-        .cat_plan{
-            font-size: 16px;
-            font-weight: bold;
-            background-size: cover !important;
-            background-repeat: no-repeat;
-            background-position: center;
-            border-radius: 99px;
-            margin-right: 10px;
-            padding:10px 20px;
-            background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(image/Mangrove1.png);
-            color: white;
         }
         .loc_plan{
-            font-family: Roboto;
             font-style: normal;
             font-weight: bold;
             font-size: 12px;
@@ -75,21 +61,21 @@
             line-height: 28px;
             color: #12491E;
         }
-        body{
-            font-family: Roboto !important;
-        }
         #locList{
-            display: block;
+            display: none;
         }
         #footer>div>a{
             color: black;
             text-decoration: none;
-            font-family: Roboto;
         }
-        .c_important_content,.c_invest_content,.c_good_content{
+        .c_important_content,
+        .c_invest_content,
+        .c_good_content{
             display: block;
         }
-        .c_important_content_small,.c_invest_content_small,.c_good_content_small{
+        .c_important_content_small,
+        .c_invest_content_small,
+        .c_good_content_small{
             display: none;
         }
         @media (max-width: 1200px){
@@ -100,11 +86,11 @@
     </style>
 </head>
 <body>
+    <div id="c4"></div>
     <div id="loader" class="position-relative" style="width: 100% !important;">
         <div class="position-absolute top-50 start-50 translate-middle"><img src="/img/Loader.gif" class="shadow bg-body" width="30%" style="border-radius: 50%;" alt=""></div>    
     </div>
     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-        <div id="c4" style="z-index: 1; left:0; right:0; position:absolute"></div>
         <div class="carousel-inner" style="z-index:0">
             <div class="carousel-item active" id="1" style="height: 100%;" data-bs-interval="10000">
                 <div id="c1"></div>
@@ -128,20 +114,17 @@
     <div class="container" style="margin-bottom: 50px;">
         <div id="c_location" >
             <div class="row">
-                <div class="col-12 col-xl-7">
+                <div class="col-12">
                     <h2>Categories</h2>
-                    <div class="horizontal_scroll" style="padding-top:12px !important; padding-bottom: 15px !important;">
-                        <button class="btn cat_plan">Mangrove</button>
-                        <button class="btn cat_plan">Mangrove</button>
-                        <button class="btn cat_plan">Mangrove</button>
-                        <button class="btn cat_plan">Mangrove</button>
-                        <button class="btn cat_plan">Mangrove</button>
-                        <button class="btn cat_plan">Mangrove</button>
+                    <div class="horizontal_scroll" style="padding-top:12px !important;">
+                        <button class="btn btn-outline-success rounded-pill">Vegetables</button>
+                        <button class="btn btn-outline-success rounded-pill">Good For Nature</button>
+                        <button class="btn btn-outline-success rounded-pill">Spesial Purpose</button>
                     </div>
                 </div>
                 <div class="col-5" id="locList">
                     <h2>Location</h2>
-                    <div class="horizontal_scroll" style="padding-bottom: 15px !important;">                
+                    <div class="horizontal_scroll">                
                         <a href="" class="loc_plan"><i class="fas fa-map-marked-alt" style="font-size: 24px;"></i><br>Sesetan<br>Beach</a>
                         <a href="" class="loc_plan"><i class="fas fa-map-marked-alt" style="font-size: 24px;"></i><br>Sesetan<br>Beach</a>
                         <a href="" class="loc_plan"><i class="fas fa-map-marked-alt" style="font-size: 24px;"></i><br>Sesetan<br>Beach</a>
@@ -155,15 +138,15 @@
             </div>
             <!--<div id="map"></div>-->
         </div>
-        <div id="c_important"  style="margin-top: 50px;">
+        <div id="c_important"  style="margin-top: 20px;">
             <h2>Vegetables</h2>
             <div class="horizontal_scroll" id="c_important_content"></div>
         </div>
-        <div id="c_invest"  style="margin-top: 50px;">
+        <div id="c_invest"  style="margin-top: 20px;">
             <h2>Good For Nature</h2>
             <div class="horizontal_scroll" id="c_invest_content"></div>
         </div>
-        <div id="c_good"  style="margin-top: 50px;">
+        <div id="c_good"  style="margin-top: 20px;">
             <h2>Spesial Purpose</h2>
             <div class="horizontal_scroll" id="c_good_content"></div>
         </div>
@@ -248,7 +231,7 @@
                 if(data[index]['jumlah_tanaman']!='0'){
                     status_tanaman = 'display:none'
                 }
-                $(element).load("template/adobt_content.php",{width:"170",lok:data[index]['nama_alamat'],nama:data[index]['nama_tanaman'],gambar:data[index]['gambar'],harga:data[index]['harga'],des:data[index]['deskripsi'],pengelola:data[index]['nama_pengelola'],status_tanaman:status_tanaman});
+                $(element).load("template/adobt_content.php",{width:"170",lok:data[index]['nama_alamat'],nama:data[index]['nama_tanaman'],gambar:"plantimg/"+data[index]['gambar'],harga:data[index]['harga'],des:data[index]['deskripsi'],pengelola:data[index]['nama_pengelola'],status_tanaman:status_tanaman});
                 $(element).attr({"onclick":"callModal('"+data[index]['nama_tanaman']+"','"+data[index]['id_pengelola']+"')"});
             });
         }
@@ -262,6 +245,9 @@
                 success: function(response){
                     data = JSON.parse(response)
                     console.log(data)
+                    if(data[0]['total_tanaman']=='0'){
+                        $("#all_but_adopt").css({'display':'none'})
+                    }
                     if(window.innerWidth<=560){
                         $("#back_img").css({'background':'white'})
                     }else{
@@ -297,7 +283,11 @@
     function callContent(data, className){
         var $c_important = $('.'+className);
         $c_important.each(function(index, element) {
-            $(element).load("template/adobt_content.php",{width:"170",lok:data[index]['nama_alamat'],nama:data[index]['nama_tanaman'],gambar:data[index]['gambar'],harga:data[index]['harga'],des:data[index]['deskripsi'],pengelola:data[index]['nama_pengelola']});
+            status_tanaman = ''
+            if(data[index]['jumlah_tanaman']!='0'){
+                status_tanaman = 'display:none'
+            }
+            $(element).load("template/adobt_content.php",{width:"170",lok:data[index]['nama_alamat'],nama:data[index]['nama_tanaman'],gambar:"plantimg/"+data[index]['gambar'],harga:data[index]['harga'],des:data[index]['deskripsi'],pengelola:data[index]['nama_pengelola'],status_tanaman:status_tanaman});
             $(element).attr({"onclick":"callModal('"+data[index]['nama_tanaman']+"','"+data[index]['id_pengelola']+"')"});
         });
     }

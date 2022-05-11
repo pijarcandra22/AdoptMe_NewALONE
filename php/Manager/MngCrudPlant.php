@@ -56,7 +56,7 @@ function readAllPlant($id) {
 function readPlantDetail($namaTanaman,$idManager) {
     global $conn;
     // TODO : INNER JOIN (Kondisi Terakhir (inner join tb_data_perawatan)
-    $sql = "SELECT *, COUNT(id_tanaman)  AS total_tanaman FROM `tb_tanaman` WHERE nama_tanaman = '$namaTanaman' AND id_pengelola = '$idManager' AND `status` = '' GROUP BY nama_tanaman";
+    $sql = "SELECT ta.*, COUNT(CASE WHEN ta.status='' THEN 1 END) AS total_tanaman FROM `tb_tanaman` AS ta WHERE nama_tanaman = '$namaTanaman' AND id_pengelola = '$idManager' GROUP BY nama_tanaman";
     $readTable = mysqli_query($conn, $sql);
     $rows = array();
     while ($getTableData = mysqli_fetch_assoc( $readTable )) $rows[]=$getTableData;

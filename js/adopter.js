@@ -33,7 +33,7 @@ $( document ).ready(function() {
                     Object.keys(data).forEach(function(key){
                         $("#plant_status").append(
                             '<button class="btn cat_plan" style="background:linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(image/plantimg/'+data[key]["gambar"]+'); background-position:center !important">'+
-                            data[key]["nama_tanaman"]+' | '+data[key]["status"]+'</button>'
+                            data[key]["id_tanaman"]+' | '+ data[key]["nama_tanaman"]+' | '+data[key]["status"]+'</button>'
                         );
                         if(data[key]["status"]=="adopsi"){
                             readyplant += 1
@@ -110,6 +110,7 @@ $( document ).ready(function() {
 function setDataInTable(response){
     data = JSON.parse(response)
     $("#tableReport").empty()
+    $("#dataReport").empty()
     Object.keys(data).forEach(function(key){
         $("#tableReport").append(
             "<tr class='table-body-green'>"+
