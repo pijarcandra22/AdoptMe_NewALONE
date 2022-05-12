@@ -8,49 +8,62 @@ if (isset($_GET['set'])) {
   echo "<script>$('#logset').css({'display':'none'})</script>";
 }
 ?>
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-</head>
 <style>
-  #ifnotlog {
+  ::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: <?= '#' . $_GET['color'] ?> !important;
+    opacity: 1;
+    /* Firefox */
+  }
+
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: <?= '#' . $_GET['color'] ?> !important;
+  }
+
+  ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: <?= '#' . $_GET['color'] ?> !important;
+  }
+
+  #iflog {
+    border-radius: 30px;
     font-style: normal;
     font-weight: bold;
-    padding: 1em;
+    font-family: Roboto;
     border: none;
     font-size: 12px !important;
   }
 
-
-  @media (max-width: 1020px) {
-    .navbar {
-      padding: 30px 40px;
-    }
+  #ifnotlog {
+    border-radius: 30px;
+    font-style: normal;
+    font-weight: bold;
+    font-family: Roboto;
+    border: none;
+    font-size: 12px !important;
   }
 
-  @media (max-width: 1000px) {
-    #searchEngine {
-      margin: 10px 0 0 0px;
-    }
-
-    #logset {
-      margin-left: 0px;
-    }
+  .navbar {
+    padding: 20px 80px;
+    color: <?= '#' . $_GET['color'] ?>
   }
 
-  .linkColor a {
+  #searchEngine {
+    margin: 10px 0 0 30px;
+    height: 24px;
+  }
+
+  #logset {
+    margin-left: 20px;
+    vertical-align: text-bottom;
+    line-height: 40px;
+  }
+
+  .linkColor a,
+  .linkColor button {
     color: black !important;
   }
 
@@ -61,49 +74,71 @@ if (isset($_GET['set'])) {
   .scrolled {
     background-color: white;
   }
+
+  .engscroll {
+    border-bottom: 1px solid black !important;
+  }
+
+  @media (max-width: 1020px) {
+    .navbar {
+      padding: 30px 40px;
+    }
+  }
+
+  #logset {
+    margin-left: 0px;
+  }
 </style>
-
-<body>
-
-  <nav class="navbar navbar-expand-lg fixed-top my-navbar">
-    <div class="container-lg test py-lg-2">
-      <a class="navbar-brand fw-bold" href="/">AdoptPlant.com</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <div class="navbar-nav mx-auto">
-          <a class="nav-link" href="#">News</a>
-          <a class="nav-link" href="#">Contact</a>
-          <a class="nav-link" href="#">Management</a>
-        </div>
-        <form class="d-flex align-items-center mt-3 mt-md-0 me-auto mb-3 mb-lg-0">
-          <input class="form-control me-2 my-auto" type="search" placeholder="Search plant..." aria-label="Search">
-          <button class="btn btn-success" type="submit">Search</button>
-        </form>
-        <div id="logset my-auto ms-3">
-          <button id="ifnotlog" class="btn btn-primary" data-bs-toggle="modal" href="#modal_signin">SIGN IN <i class="bi bi-person-circle"></i></button>
-          <a id="iflog" href="/adopter/" class="btn btn-light" style="background-color: <?= '#' . $_GET['color'] ?>; color:#<?= $fontColor ?> !important;">ADOPTER</a>
-        </div>
+<nav class="navbar navbar-expand-lg fixed-top my-navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/" style="font-size: 25px; font-weight: bold; color:<?= '#' . $_GET['color'] ?>; font-family: Roboto;">AdoptPlant.com</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span style="color:<?= '#' . $_GET['color'] ?>"><i class="fas fa-grip-lines"></i></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+      <div class="d-flex" style="width:fit-content; justify-content: space-around;">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active fw-bold" aria-current="page" href="#">News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active fw-bold" aria-current="page" href="#">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active fw-bold" aria-current="page" href="#">Management</a>
+          </li>
+          <li class="nav-item">
+            <form id="searchEngine" class="d-flex" style="border-bottom:1px solid <?= '#' . $_GET['color'] ?>;">
+              <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="background-color: transparent; border: none; width: 200px; font-size:14px; height:20px; color:<?= '#' . $_GET['color'] ?>">
+              <button style="font-size: 12px; background-color: transparent ; color: <?= '#' . $_GET['color'] ?>; border: none; height:20px;">
+                <i class='fas fa-search'></i>
+              </button>
+            </form>
+          </li>
+          <li id="logset" class="nav-item">
+            <a id="ifnotlog" class="btn btn-light" data-bs-toggle="modal" href="#modal_signin" style="background-color: <?= '#' . $_GET['color'] ?>; color:#<?= $fontColor ?> !important;">SIGN IN <i class="bi bi-person-circle"></i></a>
+            <a id="iflog" href="/adopter/" class="btn btn-light" style="background-color: <?= '#' . $_GET['color'] ?>; color:#<?= $fontColor ?> !important;">ADOPTER</a>
+          </li>
+        </ul>
       </div>
     </div>
-  </nav>
-  <script src="js/adopter.js"></script>
-  <script>
-    $(function() {
-      $(document).scroll(function() {
-        var $nav = $(".my-navbar");
-        $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
-        $nav.toggleClass('linkColor', $(this).scrollTop() > $nav.height());
-      });
-    });
-
-    adopter = JSON.parse(localStorage.getItem("dataAdopter"))
-    console.log(adopter)
-    $("#iflog").attr({
-      'href': adopter['username']
-    })
-  </script>
-</body>
+</nav>
 
 </html>
+<script src="js/adopter.js"></script>
+<script>
+  $(function() {
+    $(document).scroll(function() {
+      var $nav = $(".my-navbar");
+      $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+      $nav.toggleClass('linkColor', $(this).scrollTop() > $nav.height());
+      $("#searchEngine").toggleClass('engscroll', $(this).scrollTop() > $nav.height());
+    });
+  });
+  adopter = JSON.parse(localStorage.getItem("dataAdopter"))
+  console.log(adopter)
+  $("#iflog").attr({
+    'href': adopter['username']
+  })
+</script>

@@ -98,23 +98,6 @@
         .see-480{
             display: none;
         }
-        .adp_plant_name{
-            line-height:50px;
-            vertical-align:middle;
-            height: 50px;
-            width:50%;
-            background-size: cover;
-            background-image:url(image/plantimg/625ae8c6a6680.jpg);
-            text-align:right;
-            color:#FFFFFF;
-            font-size: 15px;
-            font-family: Roboto;
-            font-style: normal;
-            font-weight: bold;
-            padding-right: 10px;
-            text-shadow: 0px 0px 10px #000000;
-            border-radius: 10px 0 0 10px;
-        }
         .adp_plant_item{
             line-height:50px;
             vertical-align:middle;
@@ -166,44 +149,47 @@
 </head>
 <body>
     <div id="c1" style="z-index: 1; left:0; right:0; position:absolute"></div>
-    <div id="landing" class="position-relative" style="z-index:0">
-        <div class="container-xl position-absolute top-50 start-50 translate-middle">
-            <div class="row justify-content-sm-center">
-                <div class="col-12 col-sm-auto">
-                    <h1 id="page_heading">Adopter Page</h1>
-                </div>
-                <div class="col-12 col-sm-auto">
-                    <div style="display: flex;">
-                        <div class="tabpad manage_data_green">
-                            <h4 class="out-480">PLANT</h4>
-                            <h5 class="see-480">Plant: </h5>
-                            <h5 id="adp_total_tanaman">99</h5>
-                        </div>
-                        <div class="tabpad manage_data_white">
-                            <h4 class="out-480">WAITING</h4>
-                            <h5 class="see-480">Waiting: </h5>
-                            <h5 id="adp_waiting_tanaman">99</h5>
-                        </div>
+    <div id="landing">
+        <div id="landing-text" class="position-relative" style="z-index:0">
+            <div class="container-xl position-absolute bottom-0 start-50 translate-middle-x">
+                <div class="row justify-content-sm-center">
+                    <div class="col-12 col-sm-auto">
+                        <h1 id="page_heading">Adopter Page</h1>
                     </div>
-                    <div style="display: flex; height:max-content">
-                        <h3 id="adopter_name"  style="margin-top:14px; color:white; margin-right:10px">Adopter Name</h3>
-                        <button onclick="signout()" class="btn btn-success" style="margin-top:8px; font-family:roboto; font-weight:bold; height: 40px; line-height: 10px !important; border-radius:30px; background-color:#12491E; border:none; padding:2px 10px !important; vertical-align:middle">Sign Out</button>
+                    <div class="col-12 col-sm-auto">
+                        <div style="display: flex;">
+                            <div class="tabpad manage_data_green">
+                                <h4 class="out-480">PLANT</h4>
+                                <h5 class="see-480">Plant: </h5>
+                                <h5 id="adp_total_tanaman">99</h5>
+                            </div>
+                            <div class="tabpad manage_data_white">
+                                <h4 class="out-480">WAITING</h4>
+                                <h5 class="see-480">Waiting: </h5>
+                                <h5 id="adp_waiting_tanaman">99</h5>
+                            </div>
+                        </div>
+                        <div style="display: flex; height:max-content">
+                            <h3 id="adopter_name"  style="margin-top:14px; color:white; margin-right:10px">Adopter Name</h3>
+                            <button onclick="signout()" class="btn btn-success" style="margin-top:8px; font-family:roboto; font-weight:bold; height: 40px; line-height: 10px !important; border-radius:30px; background-color:#12491E; border:none; padding:2px 10px !important; vertical-align:middle">Sign Out</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container-xl">
-        <div style="margin-top: 20px;">
-            <div id="c2"></div>
+        <div class="container-xl">
+            <div style="margin-top: 40px;">
+                <div id="c2"></div>
+            </div>
+            <div id="m1"></div>
+            <div id="m2"></div>
         </div>
-        <div id="m1"></div>
-        <div id="m2"></div>
     </div>
 </body>
 </html>
 <script>
     $("#landing").css({"height":window.innerHeight+"px"})
+    $("#landing-text").css({"height":(window.innerHeight*0.63)+"px"})
     $("#c1").load("template/navbar.php?color=12491E&set=true")
     $("#c2").load("template/form_adopter_plant.php")
     $("#m1").load("template/modal_see_report.php")

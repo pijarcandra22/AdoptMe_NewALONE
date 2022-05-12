@@ -19,19 +19,6 @@ if ($width < 190) {
         margin: 0;
     }
 
-    .condition_tag {
-        background-color: red;
-        font-weight: 900;
-        margin-top: 15px;
-        margin-left: 50px;
-        font-size: 10px;
-        padding: 2px 20px;
-        -ms-transform: rotate(45deg);
-        /* IE 9 */
-        transform: rotate(45deg);
-        color: white;
-    }
-
     .overlay {
         width: 100%;
         height: 100%;
@@ -43,15 +30,15 @@ if ($width < 190) {
     .notready-badge {
         z-index: 11;
         color: white;
-        background: #5a5d61;
+        background: red;
         font-size: .9rem;
     }
 </style>
-<div class="position-relative" style="width:<?= $width ?>px; height:250px; background: linear-gradient(180deg, rgba(2, 87, 5, 0.248) 0%, rgba(255, 255, 255, 0.341) 100%), url(image/plantimg/<?= $_POST['gambar'] ?>); <?php if (!$mini) {
-                                                                                                                                                                                                                            echo "box-shadow: 10px 0px 30px rgba(0, 0, 0, 0.5);";
-                                                                                                                                                                                                                        } ?> border-radius: 10px; background-size: cover;">
+<div class="position-relative" style="width:<?= $width ?>px; height:250px; background: linear-gradient(180deg, rgba(2, 87, 5, 0.248) 0%, rgba(255, 255, 255, 0.341) 100%), url(image/<?= $_POST['gambar'] ?>); <?php if (!$mini) {
+                                                                                                                                                                                                                echo "box-shadow: 10px 0px 30px rgba(0, 0, 0, 0.5);";
+                                                                                                                                                                                                            } ?> border-radius: 10px; background-size: cover;">
     <div class="position-absolute overlay" style="<?= $_POST['status_tanaman'] ?>"></div>
-    <div class="position-absolute notready-badge top-0 start-0 mt-3 ms-2 px-2 py-1 rounded fw-bold">
+    <div style="<?= $_POST['status_tanaman'] ?>" class="position-absolute notready-badge top-0 start-0 mt-3 ms-2 px-2 py-1 rounded fw-bold">
         <p>Not Ready</p>
     </div>
     <div class="position-absolute bottom-0 start-50 translate-middle-x" style="width:<?= $width - 40 ?>px; color: white; font-size: 13px; font-weight: bold; font-family: Roboto">
@@ -90,9 +77,9 @@ if ($width < 190) {
                     <!--Masalah Ada disini, Gimana caranya bawa ketengah-->
                 </p>
             </div>
-            <h1>test</h1>
         </div>
     </div>
+</div>
 </div>
 
 </html>

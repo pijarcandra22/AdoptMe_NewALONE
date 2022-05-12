@@ -18,7 +18,10 @@
             color: #FFFFFF;
             margin-top:14px;
             color:#12491E;
-            margin-right:10px
+            margin-right:10px;
+            background-color:white;
+            padding: 5px 20px;
+            border-radius: 20px;
         }
         .table-head-green{
             font-family: Roboto;
@@ -55,23 +58,6 @@
     <div style="display: flex; margin-bottom:10px">
         <h3 id="title_form">Report Farmer List & Paying Salary</h3>
     </div>
-    <div style="height: 450px !important; overflow-y:scroll">
-        <div id="plant_status" class="horizontal_scroll" style="padding-top:12px !important; padding-bottom: 15px !important;">
-        </div>
-        <table class="table" style="font-size: 12px;">
-            <thead>
-                <tr class="table-head-green">
-                    <th scope="col"></th>
-                    <th scope="col">Nama Tanaman</th>
-                    <th scope="col">Lokasi Tanaman</th>
-                    <th scope="col" class="out-480">Tanggal Laporan</th>
-                    <th scope="col" class="out-480">Laporan</th>
-                    <th scope="col" class="out-480">Foto Pelaporan</th>
-                    <th scope="col">Aksi</th>
-                </tr>
-            </thead>    
-            <tbody id="tableReport">
-            </tbody>
-        </table>
-    </div>
+    <div id="plant_status" class="horizontal_scroll" style="padding-top:12px !important; padding-bottom: 15px !important;"></div>
+    <div class="row" id="dataReport"></div>
 </html>
