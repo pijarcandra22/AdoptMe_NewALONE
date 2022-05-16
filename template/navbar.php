@@ -68,7 +68,7 @@ if (isset($_GET['set'])) {
   }
 
   .my-navbar a {
-    color: white;
+    color: <?= '#' . $_GET['color'] ?>;
   }
 
   .scrolled {
@@ -142,9 +142,4 @@ if (isset($_GET['set'])) {
       $("#searchEngine").toggleClass('engscroll', $(this).scrollTop() > $nav.height());
     });
   });
-  adopter = JSON.parse(localStorage.getItem("dataAdopter"))
-  console.log(adopter)
-  $("#iflog").attr({
-    'href': adopter['username']
-  })
 </script>

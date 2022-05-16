@@ -15,6 +15,7 @@
     $sql = "SELECT ta.*, pe.nama_pengelola FROM `tb_tanaman` AS ta LEFT JOIN `tb_pengelola` AS pe USING (id_pengelola) WHERE ta.`id_adopter`=$id AND ta.`status` = 'waiting' AND ta.nama_tanaman = '$namaTanaman'";
     $readTable  = mysqli_query($conn, $sql);
     $totalBayar = 0;
+    $id_tanaman = '';
     $table ='<table>
                 <tr>
                     <th>id Tanaman</th>
@@ -29,6 +30,7 @@
                     <td>".$getTableData['nama_pengelola']."</td>
                     <td>".$getTableData['harga']."</td>
                 </tr>";
+        $id_tanaman .= $getTableData['id_tanaman'].',';
         $totalBayar += (int)$getTableData['harga'];
     };
     $table .= '<tr><td colspan="3" style="border-top:solid 1px black">Biaya Total</td><td style="border-top:solid 1px black">'.$totalBayar.'</td></tr>';
@@ -36,7 +38,6 @@
 
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
-    use PHPMailer\PHPMailer\SMTP;
     
     require '../../vendor/autoload.php';
     $mail = new PHPMailer(true);
@@ -58,7 +59,7 @@
         $mail->Subject = 'Subject';
         $mail->Body    = 'Your adoption successfull. Please Transfer to Permata Bank: 01237816664/Lavandaia Dharma Bal(IDR), Please click this link to send your evidence of transfer<br>';
         $mail->Body   .= $table;
-        $mail->Body   .= '<br><a href="https://adoptplant.com/pay_page.php" style=" margin:10px 0; background-color:#12491E;padding: 10px 20px; color:white; border-radius:10px !important;">UPLOAD BUKTI PEMBAYARAN</a><br>';
+        $mail->Body   .= '<br><a href="https://adoptplant.com/pay_page.php?id='.$id_tanaman.'" style=" margin:10px 0; background-color:#12491E;padding: 10px 20px; color:white; border-radius:10px !important;">UPLOAD BUKTI PEMBAYARAN</a><br>';
         $mail->AltBody = 'Body in plain text for non-HTML mail clients';
         $mail->send();
         echo "1";

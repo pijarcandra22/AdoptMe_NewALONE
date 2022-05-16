@@ -59,6 +59,7 @@ $( document ).ready(function() {
         deskripsi   = $("#plant_desc").val()
         harga       = $("#plant_price").val()
         alamat      = $("#plant_address").val()
+        status_plant= $('#plant_status').val()      
         errorTotal  = 0
 
         if(namaTanaman==""){errorTotal++;$("#plant_name").addClass("is-invalid")}
@@ -77,6 +78,7 @@ $( document ).ready(function() {
         form_data.append("deskripsi",deskripsi);
         form_data.append("harga",harga);
         form_data.append("alamat",alamat);
+        form_data.append("status",status_plant);
         form_data.append("id_manager",dataAkunManager['id_pengelola']);
         $.ajax({
 			url: 'php/Manager/MngCrudPlant.php',
@@ -114,6 +116,9 @@ $( document ).ready(function() {
                 form_data.append("gambar", document.getElementById('update_pimg').files[x]);
             }
         }
+        dataProduk = JSON.parse(localStorage.getItem("dataPlantManager"))
+        checkData = dataProduk.filter(dataProduk => dataProduk.id_tanaman == id);
+        form_data.append("nama-tanaman-lama",checkData[0]['nama_tanaman'])
         form_data.append("action","update-plant");
         form_data.append("nama-tanaman",namaTanaman);
         form_data.append("lokasi-tanaman",lokasi);
@@ -208,20 +213,35 @@ function setDataInTable(response){
     data = JSON.parse(response)
     $("#tableData").empty()
     Object.keys(data).forEach(function(key){
-        statusTanaman = data[key]['status']
-        if(data[key]['status']==""){
-            statusTanaman = "Not Adopted"
-        }
         $("#tableData").append(
-            "<tr class='table-body-green'>"+
-                "<th scope='row'>"+(parseInt(key)+1)+"</th>"+
-                "<td>"+data[key]['nama_tanaman']+"</td>"+
-                "<td><div style='background-image:url(image/plantimg/"+data[key]['gambar']+");width:50px; height:50px; border-radius:50%; background-size:cover'></div></td>"+
-                "<td>"+statusTanaman+"</td>"+
-                "<td>"+
-                    "<button class='btn btn-success' onclick='callModal("+data[key]['id_tanaman']+")' data-bs-toggle='modal' data-bs-target='#modal_plant'><i class='fas fa-pencil-ruler'></i></button>"+
-                "</td>"+
-            "</tr>"
+            '<div class="card mb-3" style="max-width: 540px; border:none">'+
+                '<div class="row g-0">'+
+                    '<div class="col-4 position-relative" style="background-image:url(image/plantimg/'+data[key]['gambar']+'); background-size:cover; border-radius:5px 0 0 5px">'+
+                        '<div class="position-absolute top-50 end-0 translate-middle-y" style="margin-right:10px;">'+
+                            "<button style='font-size:11px' class='btn btn-light' onclick='callModal("+data[key]['id_tanaman']+")' data-bs-toggle='modal' data-bs-target='#modal_plant'><i class='fas fa-pencil-ruler'></i></button>"+
+                            "<button style='font-size:11px; margin-left:10px' class='btn btn-light' onclick='AddingPlant("+data[key]['id_tanaman']+")'><i class='fas fa-plus'></i></button>"+
+                        '</div>'+
+                    '</div>'+
+                    '<div class="col-8">'+
+                        '<div class="card-body">'+
+                            '<h5 class="card-title" style="line-height: 10px;">'+data[key]['nama_tanaman']+'</h5>'+
+                            '<p class="card-text" style="margin: 0; font-size:10px;">Belum Teradopsi : '+data[key]['jumlah_takadop']+
+                                ' Waiting : '+data[key]['jumlah_waiting']+' Adopsi : '+data[key]['tanaman_adopsi']+
+                            '</p>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>'+
+            '</div>'
+            // "<tr class='table-body-green'>"+
+            //     "<th scope='row'>"+(parseInt(key)+1)+"</th>"+
+            //     "<td>"+data[key]['nama_tanaman']+"</td>"+
+            //     "<td><div style='background-image:url(image/plantimg/"+data[key]['gambar']+");width:50px; height:50px; border-radius:50%; background-size:cover'></div></td>"+
+            //     "<td>"+statusTanaman+"</td>"+
+            //     "<td>"+
+            //         "<button class='btn btn-success' onclick='callModal("+data[key]['id_tanaman']+")' data-bs-toggle='modal' data-bs-target='#modal_plant'><i class='fas fa-pencil-ruler'></i></button>"+
+            //         "<button class='btn btn-success' onclick='AddingPlant("+data[key]['id_tanaman']+")' style='margin-left:10px'><i class='fas fa-plus'></i></button>"+
+            //     "</td>"+
+            // "</tr>"
         );
     });
     localStorage.setItem("dataPlantManager", JSON.stringify(data));
