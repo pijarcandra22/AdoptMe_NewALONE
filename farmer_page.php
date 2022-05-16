@@ -100,6 +100,45 @@
         .see-480{
             display: none;
         }
+        #landing{
+            background: url(image/AdoptLanding.png);
+            background-size:cover;
+            background-position: center;
+        }
+        .tabpad > h5{
+            margin: 0;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 43px;
+            line-height: 50px;
+            text-align: center;
+            color: #FFFFFF;
+        }
+        .tabpad > h4{
+            font-style: normal;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 16px;
+            color: white;
+            padding-top: 10px;
+            text-align: center;
+            margin: 0;
+        }
+        #page_heading{
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 113px;
+            line-height: 132px;
+            color: #FFFFFF;
+            text-shadow: 0px 0px 20px #000000;
+        }
+        .adp_plant_item{
+            line-height:50px;
+            vertical-align:middle;
+            padding: 0 10px;
+            border-left: #12491E 2px solid;
+        }
         @media (max-width: 960px){
             h1{
                 font-size: 80px;
@@ -140,39 +179,32 @@
     </style>
 </head>
 <body>
-    <div id="c1"></div>
-    <div class="container-xl">
-        <div class="row justify-content-center">
-            <div class="col-12 col-sm-6" id="namebackImg">
-                <h1 style="margin-right: 10px;">Farmer</h1>
-                <h1 class="see-480">Page</h1>
-            </div>
-            <div class="col-12 col-sm-6">
-                <div style="display: flex;">
-                    <h1 class="out-480">Page</h1>
-                    <div class="tabpad manage_data_green out-480" style="margin-left: 20px;">
-                        <h4>PLANT</h4>
-                        <h5>99</h5>
+    <div id="c1" style="z-index: 1; left:0; right:0; position:absolute"></div>
+    <div id="landing">
+        <div id="landing-text" class="position-relative" style="z-index:0">
+            <div class="container-xl position-absolute bottom-0 start-50 translate-middle-x">
+                <div class="row justify-content-sm-center">
+                    <div class="col-12 col-sm-auto">
+                        <h1 id="page_heading">Farmer Page</h1>
                     </div>
-                    <div class="tabpad manage_data_white out-480">
-                        <h4 style="color: #12491E;">FARMER</h4>
-                        <h5 style="color: #12491E;">99</h5>
+                    <div class="col-12 col-sm-auto">
+                        <div style="display: flex;">
+                            <div class="tabpad manage_data_green">
+                                <h4 class="out-480">PLANT</h4>
+                                <h5 class="see-480">Plant: </h5>
+                                <h5 id="adp_total_tanaman">99</h5>
+                            </div>
+                        </div>
                     </div>
-                    <div class="tabpad manage_data_green out-480">
-                        <h4>ADOPTER</h4>
-                        <h5>99</h5>
-                    </div>
-                </div>
-                <div style="display: flex; height:max-content">
-                    <h3 style="margin-top:14px; color:#12491E; margin-right:10px" id="com_name">Company Name</h3>
-                    <button onclick="signout()" class="btn btn-success" style="margin-top:8px; font-family:roboto; font-weight:bold; height: 40px; line-height: 10px !important; border-radius:30px; background-color:#12491E; border:none; padding:2px 10px !important; vertical-align:middle">Sign Out</button>
                 </div>
             </div>
         </div>
-        <div style="margin-top: 50px;">
-            <div class="row">
-                <div class="col-12">
-                    <div id="c2"></div>
+        <div class="container-xl">
+            <div style="margin-top: 50px;">
+                <div class="row">
+                    <div class="col-12">
+                        <div id="c2"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -183,7 +215,8 @@
 </html>
 <script>
     let id_ofFarmer
-
+    $("#landing").css({"height":window.innerHeight+"px"})
+    $("#landing-text").css({"height":(window.innerHeight*0.63)+"px"})
     $("#c1").load("template/navbar.php?color=12491E&set=true")
     $("#c2").load("template/form_report_farmer.php")
     $("#m1").load("template/modal_report_plant.php")

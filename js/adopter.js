@@ -9,6 +9,7 @@ $( document ).ready(function() {
             adopter = JSON.parse(localStorage.getItem("dataAdopter"))
             $("#ifnotlog").css({"display":"none"})
             $("#iflog").css({"display":"inline"})
+            $("#iflog").attr({'href':adopter['username']})
             $("#con_idAdopt").val(adopter['id_adopter'])
             $("#adopter_name").html(adopter['username'])
             $.ajax({
@@ -109,7 +110,6 @@ $( document ).ready(function() {
 
 function setDataInTable(response){
     data = JSON.parse(response)
-    $("#tableReport").empty()
     $("#dataReport").empty()
     Object.keys(data).forEach(function(key){
         var divElem = $('<div/>').load("template/report_content.php",{
@@ -127,19 +127,6 @@ function setDataInTable(response){
                                            "style":"margin-top: 20px"
                                         });
         divElem.appendTo('#dataReport');
-        $("#tableReport").append(
-            "<tr class='table-body-green'>"+
-                "<th scope='row'>"+(parseInt(key)+1)+"</th>"+
-                "<td>"+data[key]['nama_tanaman']+"</td>"+
-                "<td>"+data[key]['lokasi_tanaman']+"</td>"+
-                "<td class='out-480'>"+data[key]['tanggal_pelaporan']+"</td>"+
-                "<td class='out-480'>"+data[key]['laporan']+"</td>"+
-                "<td class='out-480'><div style='background-image:url(image/report/"+data[key]['foto_pelaporan']+");width:50px; height:50px; border-radius:50%; background-size:cover'></div></td>"+
-                "<td>"+
-                    "<button class='btn btn-success' onclick='callReport("+data[key]['id_perawatan']+")' data-bs-toggle='modal' data-bs-target='#modal_see_report'><i class='fas fa-eye'></i></button>"+
-                "</td>"+
-            "</tr>"
-        );
     });
     localStorage.setItem("adopterDanTanaman", JSON.stringify(data));
 }

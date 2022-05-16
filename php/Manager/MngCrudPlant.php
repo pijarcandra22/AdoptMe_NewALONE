@@ -19,11 +19,12 @@ if ( !empty($_POST['action']) ) {
     if ($_POST['action'] == "create-plant") return createPlant();
     if ($_POST['action'] == "update-plant") return updatePlant();
     if ($_POST['action'] == "delete-plant") return deletePlant();
+    if ($_POST['action'] == "copy-plant") return copyPlant();
     if ($_POST['action'] == "pairing-plant") return pairingPlantToFarmer();
 }
 
 function createPlant() {
-    global $conn, $idPengelola;
+    global $conn;
     
     $namaTanaman    = $_POST['nama-tanaman'];
     $lokasiTanaman  = $_POST['lokasi-tanaman'];
@@ -33,20 +34,42 @@ function createPlant() {
     $harga          = $_POST['harga'];
     $idPengelola    = $_POST['id_manager'];
     $alamat         = $_POST['alamat'];
+    $status_plant   = $_POST['status'];
     $image          = uploadImage('gambar',"../../image/plantimg/");
     
     for($i=0;$i<$jumlah;$i++){
-        $sql = 'INSERT INTO `tb_tanaman`(`nama_tanaman`, `lokasi_tanaman`, `id_pengelola`, `kategori`, `gambar`, `harga`, `deskripsi`, `nama_alamat`)
-        VALUES ("'.$namaTanaman.'","'.$lokasiTanaman.'","'.$idPengelola.'","'.$kategiri.'","'.$image.'","'.$harga.'","'.$deskripsi.'", "'.$alamat.'")';
+        $sql = 'INSERT INTO `tb_tanaman`(`status`, `nama_tanaman`, `lokasi_tanaman`, `id_pengelola`, `kategori`, `gambar`, `harga`, `deskripsi`, `nama_alamat`)
+        VALUES ("'.$status_plant.'","'.$namaTanaman.'","'.$lokasiTanaman.'","'.$idPengelola.'","'.$kategiri.'","'.$image.'","'.$harga.'","'.$deskripsi.'", "'.$alamat.'")';
         $conn -> query($sql);
     }
+    readAllPlant($idPengelola);
+}
+
+function copyPlant(){
+    global $conn;
+    $namaTanaman    = $_POST['nama-tanaman'];
+    $lokasiTanaman  = $_POST['lokasi-tanaman'];
+    $kategiri       = $_POST['kategori'];
+    $deskripsi      = $_POST['deskripsi'];
+    $harga          = $_POST['harga'];
+    $idPengelola    = $_POST['id_manager'];
+    $alamat         = $_POST['alamat'];
+    $image          = $_POST['gambar'];
+
+    $sql = 'INSERT INTO `tb_tanaman`(`nama_tanaman`, `lokasi_tanaman`, `id_pengelola`, `kategori`, `gambar`, `harga`, `deskripsi`, `nama_alamat`)
+        VALUES ("'.$namaTanaman.'","'.$lokasiTanaman.'","'.$idPengelola.'","'.$kategiri.'","'.$image.'","'.$harga.'","'.$deskripsi.'", "'.$alamat.'")';
+    
+    $conn -> query($sql);
+    
     readAllPlant($idPengelola);
 }
 
 function readAllPlant($id) {
     global $conn;
     // TODO : INNER JOIN (Kondisi Terakhir (inner join tb_data_perawatan)
-    $sql = "SELECT * FROM tb_tanaman WHERE id_pengelola = '$id'";
+    $sql = "SELECT COUNT(*) as jumlah_tanaman, COUNT(CASE WHEN ta.status='adopsi' THEN 1 END) as tanaman_adopsi,
+    COUNT(CASE WHEN ta.status='waiting' THEN 1 END) as jumlah_waiting,COUNT(CASE WHEN ta.status='' THEN 1 END) as jumlah_takadop,ta.* 
+    FROM `tb_tanaman` AS ta GROUP BY ta.nama_tanaman HAVING id_pengelola = '$id'";
     $readTable = mysqli_query($conn, $sql);
     $rows = array();
     while ($getTableData = mysqli_fetch_assoc( $readTable )) $rows[]=$getTableData;
@@ -67,6 +90,7 @@ function updatePlant() {
     global $conn;
 
     // WARNING : Data Jamak - kalau udah ada => tanaman sudah ada, jangan nambah data lagi
+    $namaTanamanlama= $_POST['nama-tanaman-lama'];
     $namaTanaman    = $_POST['nama-tanaman'];
     $lokasiTanaman  = $_POST['lokasi-tanaman'];
     $kategiri       = $_POST['kategori'];
@@ -81,12 +105,11 @@ function updatePlant() {
     }else{
         $image          = $_POST['gambarSebelum'];
     }
-
     $sql = "UPDATE `tb_tanaman` 
             SET `nama_tanaman`='$namaTanaman',`lokasi_tanaman`='$lokasiTanaman',
             `kategori`='$kategiri',`gambar`='$image',`harga`='$harga',
             `deskripsi`='$deskripsi',`nama_alamat`='$alamat'
-            WHERE `id_tanaman`= $idTanaman";
+            WHERE `nama_tanaman`= '$namaTanamanlama' AND `id_pengelola`= '$idPengelola'";
     $conn -> query($sql);
     readAllPlant($idPengelola);
 }

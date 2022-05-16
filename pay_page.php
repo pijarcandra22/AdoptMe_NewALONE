@@ -53,7 +53,8 @@
                 </div>
                 <div style="padding: 20px;">
                     <form action="">
-                        <textarea type="text" class="form-control" id="pay_idplant" placeholder="Plant Id; Separate id with ',' (Semi-collon) without space example: 1,2,39,13" style="height:200px"></textarea>
+                        <div id="pay_check"></div>
+                        <!--<textarea type="text" class="form-control" id="pay_idplant" placeholder="Plant Id; Separate id with ',' (Semi-collon) without space example: 1,2,39,13" style="height:200px"></textarea>-->
                         <div class="input-group mb-3" style="margin: 10px 0 0 0 !important;">
                             <label class="input-group-text" for="pay_proveplant">Bukti Pembayaran</label>
                             <input type="file" class="form-control" id="pay_proveplant">
@@ -68,58 +69,84 @@
 </body>
 </html>
 <script>
-    $('#pay_report_but').on('click', function(){
-        $("#pay_idplant").removeClass("is-invalid")
-        $("#pay_proveplant").removeClass("is-invalid")
-        
-        idTanaman   = $("#pay_idplant").val().split(',')
-        for (i in idTanaman){
-            idTanaman[i] = idTanaman[i].trim()
-            idTanaman[i] = parseInt(idTanaman[i])
+    data = '<?=$_GET['id']?>'.slice(0, -1);
+    $.ajax({
+        url: 'php/Adopter/AdpCheckPaying.php?id='+data,
+        type: 'GET',
+        success: function(response){
+            check_create(response)
+        },
+        error: function(error){
+            console.log(error)
         }
-        idTanaman = idTanaman.filter(function(value, index, arr){ 
-            if(isNaN(value) == false){
-                return value
-            }
-        });
-        if(idTanaman.length==0){
-            $("#pay_idplant").addClass("is-invalid")
-            return
-        }
+    });
 
-        var form_data = new FormData();
+    function check_create(response){
+        data = JSON.parse(response)
+        $("#pay_check").empty()
+        Object.keys(data).forEach(function(key){
+            $("#pay_check").append(
+                '<input type="checkbox" class="btn-check pay_check_data" id="plant-'+data[key]['id_tanaman']+'" checked autocomplete="off" value="'+data[key]['id_tanaman']+'">'+
+                '<label class="btn btn-outline-success m-1" for="plant-'+data[key]['id_tanaman']+'">Checked</label>'
+            )
+        })
+    }
+
+    $('#pay_report_but').on('click', function(){
+        $(".pay_check_data").each(function(index, element){
+            alert($(element).val())
+        })
+        //$("#pay_idplant").removeClass("is-invalid")
+        //$("#pay_proveplant").removeClass("is-invalid")
         
-        var ins = document.getElementById('pay_proveplant').files.length;
-        if(ins == 0) {
-            $("#pay_proveplant").addClass("is-invalid")
-            return;
-        }for (var x = 0; x < ins; x++) {
-            form_data.append("gambar", document.getElementById('pay_proveplant').files[x]);
-        }
-        form_data.append("id" , idTanaman.toString());
-        $.ajax({
-			url: 'php/Adopter/AdpPaying.php',
-            cache: false,
-			contentType: false,
-			processData: false,
-            data: form_data,
-			type: 'POST',
-			success: function(response){
-                if (window.confirm(response)){
-                    if(localStorage.getItem("dataAdopter")===null){
-                        document.location.replace('/')
-                    }else{
-                        dataAkun = JSON.parse(localStorage.getItem("dataAdopter"))
-                        location.replace(dataAkun['username']);
-                    }
-                }
-			},
-			error: function(error){
-                if (window.confirm(error)){
-                    document.location.replace('/')
-                }
-			}
-		});
+        // idTanaman   = $("#pay_idplant").val().split(',')
+        // for (i in idTanaman){
+        //     idTanaman[i] = idTanaman[i].trim()
+        //     idTanaman[i] = parseInt(idTanaman[i])
+        // }
+        // idTanaman = idTanaman.filter(function(value, index, arr){ 
+        //     if(isNaN(value) == false){
+        //         return value
+        //     }
+        // });
+        // if(idTanaman.length==0){
+        //     $("#pay_idplant").addClass("is-invalid")
+        //     return
+        // }
+
+        // var form_data = new FormData();
+        
+        // var ins = document.getElementById('pay_proveplant').files.length;
+        // if(ins == 0) {
+        //     $("#pay_proveplant").addClass("is-invalid")
+        //     return;
+        // }for (var x = 0; x < ins; x++) {
+        //     form_data.append("gambar", document.getElementById('pay_proveplant').files[x]);
+        // }
+        // form_data.append("id" , idTanaman.toString());
+        // $.ajax({
+		// 	url: 'php/Adopter/AdpPaying.php',
+        //     cache: false,
+		// 	contentType: false,
+		// 	processData: false,
+        //     data: form_data,
+		// 	type: 'POST',
+		// 	success: function(response){
+        //         if (window.confirm(response)){
+        //             if(localStorage.getItem("dataAdopter")===null){
+        //                 document.location.replace('/')
+        //             }else{
+        //                 dataAkun = JSON.parse(localStorage.getItem("dataAdopter"))
+        //                 location.replace(dataAkun['username']);
+        //             }
+        //         }
+		// 	},
+		// 	error: function(error){
+        //         if (window.confirm(error)){
+        //             document.location.replace('/')
+        //         }
+		// 	}
+		// });
     })
     $("#landing").css({"height":window.innerHeight+"px"})
 </script>

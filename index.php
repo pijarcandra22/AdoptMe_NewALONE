@@ -235,7 +235,6 @@
                 $(element).attr({"onclick":"callModal('"+data[index]['nama_tanaman']+"','"+data[index]['id_pengelola']+"')"});
             });
         }
-
         $('#overlay').fadeOut();
     });
     function callModal(nama,id){
@@ -247,6 +246,8 @@
                     console.log(data)
                     if(data[0]['total_tanaman']=='0'){
                         $("#all_but_adopt").css({'display':'none'})
+                    }else{
+                        $("#all_but_adopt").css({'display':'flex'})
                     }
                     if(window.innerWidth<=560){
                         $("#back_img").css({'background':'white'})

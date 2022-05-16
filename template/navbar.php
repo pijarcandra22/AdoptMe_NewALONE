@@ -55,7 +55,7 @@
     }
 
     .my-navbar a {
-      color: white;
+      color: <?='#'.$_GET['color']?>;
     }
 
     .scrolled {
@@ -125,7 +125,4 @@
         $("#searchEngine").toggleClass('engscroll', $(this).scrollTop() > $nav.height());
       });
   });
-  adopter = JSON.parse(localStorage.getItem("dataAdopter"))
-  console.log(adopter)
-  $("#iflog").attr({'href':adopter['username']})
 </script>

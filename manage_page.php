@@ -44,7 +44,7 @@
             background-size: cover;
         }
         .manage_data_white{
-            border: 1px solid rgba(18, 73, 30, 1);
+            border: 1px solid white;
             border-radius: 10px;
             background-size: cover;
             width: 94px;
@@ -61,7 +61,7 @@
             text-align: center;
             margin: 0;
         }
-        h5{
+        .tabpad h5{
             margin: 0;
             font-style: normal;
             font-weight: bold;
@@ -99,6 +99,45 @@
         }
         .see-480{
             display: none;
+        }
+        #landing{
+            background: url(image/AdoptLanding.png);
+            background-size:cover;
+            background-position: center;
+        }
+        .tabpad > h5{
+            margin: 0;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 43px;
+            line-height: 50px;
+            text-align: center;
+            color: #FFFFFF;
+        }
+        .tabpad > h4{
+            font-style: normal;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 16px;
+            color: white;
+            padding-top: 10px;
+            text-align: center;
+            margin: 0;
+        }
+        #page_heading{
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 113px;
+            line-height: 132px;
+            color: #FFFFFF;
+            text-shadow: 0px 0px 20px #000000;
+        }
+        .adp_plant_item{
+            line-height:50px;
+            vertical-align:middle;
+            padding: 0 10px;
+            border-left: #12491E 2px solid;
         }
         @media (max-width: 960px){
             h1{
@@ -140,36 +179,36 @@
     </style>
 </head>
 <body>
-    <div id="c1"></div>
-    <div class="container-xl">
-        <div class="row justify-content-center">
-            <div class="col-12 col-sm-6" id="namebackImg">
-                <h1 style="margin-right: 10px;">Manager</h1>
-                <h1 class="see-480">Page</h1>
-            </div>
-            <div class="col-12 col-sm-6">
-                <div style="display: flex;">
-                    <h1 class="out-480">Page</h1>
-                    <div class="tabpad manage_data_green out-480" style="margin-left: 20px;">
-                        <h4>PLANT</h4>
-                        <h5>99</h5>
+    <div id="c1" style="z-index: 1; left:0; right:0; position:absolute"></div>
+    <div id="landing">
+        <div id="landing-text" class="position-relative" style="z-index:0">
+            <div class="container-xl position-absolute bottom-0 start-50 translate-middle-x">
+                <div class="row justify-content-sm-center">
+                    <div class="col-12 col-sm-auto">
+                        <h1 id="page_heading">Manager Page</h1>
                     </div>
-                    <div class="tabpad manage_data_white out-480">
-                        <h4 style="color: #12491E;">FARMER</h4>
-                        <h5 style="color: #12491E;">99</h5>
+                    <div class="col-12 col-sm-auto">
+                        <div style="display: flex;">
+                            <div class="tabpad manage_data_green">
+                                <h4 class="out-480">PLANT</h4>
+                                <h5 class="see-480">Plant: </h5>
+                                <h5 id="adp_total_tanaman">99</h5>
+                            </div>
+                            <div class="tabpad manage_data_white">
+                                <h4 class="out-480">FARMER</h4>
+                                <h5 class="see-480">Farmer: </h5>
+                                <h5 id="adp_waiting_tanaman">99</h5>
+                            </div>
+                        </div>
+                        <div style="display: flex; height:max-content">
+                            <h3 id="adopter_name"  style="margin-top:14px; color:white; margin-right:10px">Adopter Name</h3>
+                            <button onclick="signout()" class="btn btn-success" style="margin-top:8px; font-family:roboto; font-weight:bold; height: 40px; line-height: 10px !important; border-radius:30px; background-color:#12491E; border:none; padding:2px 10px !important; vertical-align:middle">Sign Out</button>
+                        </div>
                     </div>
-                    <div class="tabpad manage_data_green out-480">
-                        <h4>ADOPTER</h4>
-                        <h5>99</h5>
-                    </div>
-                </div>
-                <div style="display: flex; height:max-content">
-                    <h3 style="margin-top:14px; color:#12491E; margin-right:10px" id="com_name">Company Name</h3>
-                    <button onclick="signout()" class="btn btn-success" style="margin-top:8px; font-family:roboto; font-weight:bold; height: 40px; line-height: 10px !important; border-radius:30px; background-color:#12491E; border:none; padding:2px 10px !important; vertical-align:middle">Sign Out</button>
                 </div>
             </div>
         </div>
-        <div style="margin-top: 50px;">
+        <div class="container-xl" style="margin-top: 50px">
             <div class="row">
                 <div class="col-12 col-sm-3">
                     <div class="d-grid gap-2 menu-flex">
@@ -191,7 +230,8 @@
 </html>
 <script>
     let id_ofFarmer
-
+    $("#landing").css({"height":window.innerHeight+"px"})
+    $("#landing-text").css({"height":(window.innerHeight*0.63)+"px"})
     $("#c1").load("template/navbar.php?color=12491E&set=true")
     $("#c2").load("template/form_add_plant.php")
     $("#m1").load("template/modal_plant.php")
@@ -317,6 +357,37 @@
 			type: 'POST',
 			success: function(response){
                 $("#c2").load(location.href+" template/form_add_farmer.php")
+			},
+			error: function(error){
+                console.log(error)
+			}
+		});
+    }
+    function AddingPlant(id){
+        dataProduk = JSON.parse(localStorage.getItem("dataPlantManager"))
+        checkData = dataProduk.filter(dataProduk => dataProduk.id_tanaman == id);
+
+        var form_data = new FormData();
+        form_data.append("action","copy-plant");
+        form_data.append("nama-tanaman",checkData[0]['nama_tanaman']);
+        form_data.append("lokasi-tanaman",checkData[0]['lokasi_tanaman']);
+        form_data.append("kategori",checkData[0]['kategori']);
+        form_data.append("deskripsi",checkData[0]['deskripsi']);
+        form_data.append("harga",checkData[0]['harga']);
+        form_data.append("id_manager",checkData[0]['id_pengelola']);
+        form_data.append("alamat",checkData[0]['nama_alamat']);
+        form_data.append("gambar",checkData[0]['gambar']);
+        $.ajax({
+			url: 'php/Manager/MngCrudPlant.php',
+            dataType: 'json',
+            cache: false,
+			contentType: false,
+			processData: false,
+            data: form_data,
+			type: 'POST',
+			success: function(response){
+                alert("success")
+                setDataInTable(JSON.stringify(response))
 			},
 			error: function(error){
                 console.log(error)
