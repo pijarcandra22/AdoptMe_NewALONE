@@ -46,6 +46,21 @@
         font-size: 30pt;
       }
     }
+
+    .table-wrapper {
+      height: 25rem;
+      overflow: scroll;
+    }
+
+    td,
+    th {
+      text-align: center;
+      text-overflow: ellipsis;
+    }
+
+    thead {
+      background-color: #EFEFEF;
+    }
   </style>
 </head>
 
@@ -53,15 +68,28 @@
   <center>
     <div id="landing" class="position-relative">
       <div id="laporan" class="position-absolute top-50 start-50 translate-middle">
-        <div class="position-relative" style="border-radius: 10px 10px 0 0; padding: 20px; background-size:cover !important; height:200px; background:linear-gradient(180deg, rgba(255, 255, 255, 0) 95.76%, #FFFFFF 95.8%), linear-gradient(180deg, rgba(255, 255, 255, 0.341) 0%, rgba(2, 87, 5, 0.248) 55.26%), url(image/landing/c1.png);">
+        <div class="position-relative" style="border-radius: 10px 10px 0 0; padding: 20px; background-size:cover !important; height:100px; background:linear-gradient(180deg, rgba(255, 255, 255, 0) 95.76%, #FFFFFF 95.8%), linear-gradient(180deg, rgba(255, 255, 255, 0.341) 0%, rgba(2, 87, 5, 0.248) 55.26%), url(image/landing/c1.png);">
           <div style="width: max-content;" class="position-absolute bottom-0 start-50 translate-middle-x">
             <h1 id="pay_title">PAYING PAGE</h1>
           </div>
         </div>
         <div style="padding: 20px;">
           <form action="">
-            <div id="pay_check"></div>
-            <!--<textarea type="text" class="form-control" id="pay_idplant" placeholder="Plant Id; Separate id with ',' (Semi-collon) without space example: 1,2,39,13" style="height:200px"></textarea>-->
+            <div class="table-wrapper">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nama Tanaman</th>
+                    <th scope="col">Harga</th>
+                    <th scope="col">Check</th>
+                  </tr>
+                </thead>
+                <tbody class="table_body">
+
+                </tbody>
+              </table>
+            </div>
             <div class="input-group mb-3" style="margin: 10px 0 0 0 !important;">
               <label class="input-group-text" for="pay_proveplant">Bukti Pembayaran</label>
               <input type="file" class="form-control" id="pay_proveplant">
@@ -92,11 +120,18 @@
 
     function check_create(response) {
       data = JSON.parse(response)
-      $("#pay_check").empty()
+      $(".table_body").empty()
       Object.keys(data).forEach(function(key) {
-        $("#pay_check").append(
-          '<input type="checkbox" class="btn-check pay_check_data" id="plant-' + data[key]['id_tanaman'] + '" checked autocomplete="off" value="' + data[key]['id_tanaman'] + '">' +
-          '<label class="btn btn-outline-success m-1" for="plant-' + data[key]['id_tanaman'] + '">Checked</label>'
+        $(".table_body").append(
+
+          ` 
+          <tr>
+                  <th scope="row">` + data[key]['id_tanaman'] + `</th>
+                  <td>` + data[key]['nama_tanaman'] + `</td>
+                  <td>` + data[key]['harga'] + `</td>
+                  <td><input type="checkbox" class="pay_check_data form-check-input" id="plant-` + data[key]['id_tanaman'] + `" checked autocomplete="off" value="` + data[key]['id_tanaman'] + `"></td>
+                </tr>`
+
         )
       })
     }
@@ -104,47 +139,48 @@
     $('#pay_report_but').on('click', function() {
       id_tanaman_check = ''
       $(".pay_check_data").each(function(index, element) {
-        if($(element).is(":checked")){
+        if ($(element).is(":checked")) {
           id_tanaman_check += $(element).val() + ','
         }
       })
-      id_tanaman_check = id_tanaman_check.slice(0,-1);
+      id_tanaman_check = id_tanaman_check.slice(0, -1);
       alert(id_tanaman_check);
-      // $("#pay_proveplant").removeClass("is-invalid")
+      $("#pay_proveplant").removeClass("is-invalid")
 
-      // var form_data = new FormData();
+      var form_data = new FormData();
 
-      // var ins = document.getElementById('pay_proveplant').files.length;
-      // if(ins == 0) {
-      //     $("#pay_proveplant").addClass("is-invalid")
-      //     return;
-      // }for (var x = 0; x < ins; x++) {
-      //     form_data.append("gambar", document.getElementById('pay_proveplant').files[x]);
-      // }
-      // form_data.append("id" , id_tanaman_check);
-      // $.ajax({
-      // 	url: 'php/Adopter/AdpPaying.php',
-      //     cache: false,
-      // 	contentType: false,
-      // 	processData: false,
-      //     data: form_data,
-      // 	type: 'POST',
-      // 	success: function(response){
-      //         if (window.confirm(response)){
-      //             if(localStorage.getItem("dataAdopter")===null){
-      //                 document.location.replace('/')
-      //             }else{
-      //                 dataAkun = JSON.parse(localStorage.getItem("dataAdopter"))
-      //                 location.replace(dataAkun['username']);
-      //             }
-      //         }
-      // 	},
-      // 	error: function(error){
-      //         if (window.confirm(error)){
-      //             document.location.replace('/')
-      //         }
-      // 	}
-      // });
+      var ins = document.getElementById('pay_proveplant').files.length;
+      if (ins == 0) {
+        $("#pay_proveplant").addClass("is-invalid")
+        return;
+      }
+      for (var x = 0; x < ins; x++) {
+        form_data.append("gambar", document.getElementById('pay_proveplant').files[x]);
+      }
+      form_data.append("id", id_tanaman_check);
+      $.ajax({
+        url: 'php/Adopter/AdpPaying.php',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,
+        type: 'POST',
+        success: function(response) {
+          if (window.confirm(response)) {
+            if (localStorage.getItem("dataAdopter") === null) {
+              document.location.replace('/')
+            } else {
+              dataAkun = JSON.parse(localStorage.getItem("dataAdopter"))
+              location.replace(dataAkun['username']);
+            }
+          }
+        },
+        error: function(error) {
+          if (window.confirm(error)) {
+            document.location.replace('/')
+          }
+        }
+      });
     })
     $("#landing").css({
       "height": window.innerHeight + "px"
