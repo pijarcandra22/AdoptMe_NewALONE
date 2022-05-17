@@ -6,4 +6,3 @@
             WHERE DATEDIFF(tb_tanaman.tanggal_transaksi,CURDATE())<0
             AND `status` = 'waiting';";
     mysqli_query($conn, $sql);
-?>
