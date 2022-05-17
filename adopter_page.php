@@ -222,6 +222,17 @@
         $("#c2").load("template/form_adopter_plant.php")
         $("#m1").load("template/modal_see_report.php")
 
+        $.ajax({
+            url: 'php/Admin/UpdatePlant.php',
+            type: 'GET',
+            success: function(response) {
+                alert('success')
+            },
+            error: function(error) {
+                console.log(error)
+            }
+        });
+
         function callReport(id) {
             dataReportFarmer = JSON.parse(localStorage.getItem("adopterDanTanaman"))
             console.log(dataReportFarmer)
@@ -240,5 +251,6 @@
     </script>
     <script src="js/adopter.js"></script>
 </body>
+
 
 </html>
