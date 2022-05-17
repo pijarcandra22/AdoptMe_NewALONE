@@ -12,10 +12,10 @@
 
     $sql = "UPDATE `tb_tanaman` SET `status`='waiting',`id_adopter`=$id, `tanggal_transaksi` =  NOW() WHERE nama_tanaman = '$namaTanaman' AND id_pengelola = '$pengelolaTanaman' AND `status`='' ORDER BY `id_tanaman` DESC LIMIT $banyakAdopt";
     mysqli_query($conn, $sql);
-    $sql = "SELECT ta.*, pe.nama_pengelola FROM `tb_tanaman` AS ta LEFT JOIN `tb_pengelola` AS pe USING (id_pengelola) WHERE ta.`id_adopter`=$id AND ta.`status` = 'waiting' AND ta.nama_tanaman = '$namaTanaman'";
+    $sql = "SELECT ta.*, pe.nama_pengelola FROM `tb_tanaman` AS ta LEFT JOIN `tb_pengelola` AS pe 
+            USING (id_pengelola) WHERE ta.`id_adopter`=$id AND ta.`status` = 'waiting'";
     $readTable  = mysqli_query($conn, $sql);
     $totalBayar = 0;
-    $id_tanaman = '';
     $table ='<table>
                 <tr>
                     <th>id Tanaman</th>
@@ -30,7 +30,6 @@
                     <td>".$getTableData['nama_pengelola']."</td>
                     <td>".$getTableData['harga']."</td>
                 </tr>";
-        $id_tanaman .= $getTableData['id_tanaman'].',';
         $totalBayar += (int)$getTableData['harga'];
     };
     $table .= '<tr><td colspan="3" style="border-top:solid 1px black">Biaya Total</td><td style="border-top:solid 1px black">'.$totalBayar.'</td></tr>';
@@ -44,22 +43,23 @@
     
     try {
         $mail->SMTPDebug = 0;                                       
-        $mail->isSMTP();                                            
-        $mail->Host       = 'mail.adoptplant.com';                    
+        $mail->isSMTP();
+        $mail->Mailer     = 'smtp';                                      
+        $mail->Host       = 'smtp.gmail.com';                    
         $mail->SMTPAuth   = true;                             
-        $mail->Username   = 'help@adoptplant.com';                 
+        $mail->Username   = 'adoptmeindonesia2022@gmail.com';                 
         $mail->Password   = 'adoptme2022';                        
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;                              
         $mail->Port       = 587;  
     
-        $mail->setFrom('help@adoptplant.com', 'AdoptMe Admin');           
+        $mail->setFrom('adoptmeindonesia2022@gmail.com', 'AdoptMe Admin');           
         $mail->addAddress($email);
          
         $mail->isHTML(true);                                  
         $mail->Subject = 'Subject';
         $mail->Body    = 'Your adoption successfull. Please Transfer to Permata Bank: 01237816664/Lavandaia Dharma Bal(IDR), Please click this link to send your evidence of transfer<br>';
         $mail->Body   .= $table;
-        $mail->Body   .= '<br><a href="https://adoptplant.com/pay_page.php?id='.$id_tanaman.'" style=" margin:10px 0; background-color:#12491E;padding: 10px 20px; color:white; border-radius:10px !important;">UPLOAD BUKTI PEMBAYARAN</a><br>';
+        $mail->Body   .= '<br><a href="https://adoptplant.com/pay_page.php?id='.$id.'" style=" margin:10px 0; background-color:#12491E;padding: 10px 20px; color:white; border-radius:10px !important;">UPLOAD BUKTI PEMBAYARAN</a><br>';
         $mail->AltBody = 'Body in plain text for non-HTML mail clients';
         $mail->send();
         echo "1";

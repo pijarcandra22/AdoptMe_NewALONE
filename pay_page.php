@@ -78,7 +78,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
   <script>
-    data = '<?= $_GET['id'] ?>'.slice(0, -1);
+    data = '<?= $_GET['id'] ?>';
     $.ajax({
       url: 'php/Adopter/AdpCheckPaying.php?id=' + data,
       type: 'GET',
@@ -102,26 +102,15 @@
     }
 
     $('#pay_report_but').on('click', function() {
+      id_tanaman_check = ''
       $(".pay_check_data").each(function(index, element) {
-        alert($(element).val())
+        if($(element).is(":checked")){
+          id_tanaman_check += $(element).val() + ','
+        }
       })
-      //$("#pay_idplant").removeClass("is-invalid")
-      //$("#pay_proveplant").removeClass("is-invalid")
-
-      // idTanaman   = $("#pay_idplant").val().split(',')
-      // for (i in idTanaman){
-      //     idTanaman[i] = idTanaman[i].trim()
-      //     idTanaman[i] = parseInt(idTanaman[i])
-      // }
-      // idTanaman = idTanaman.filter(function(value, index, arr){ 
-      //     if(isNaN(value) == false){
-      //         return value
-      //     }
-      // });
-      // if(idTanaman.length==0){
-      //     $("#pay_idplant").addClass("is-invalid")
-      //     return
-      // }
+      id_tanaman_check = id_tanaman_check.slice(0,-1);
+      alert(id_tanaman_check);
+      // $("#pay_proveplant").removeClass("is-invalid")
 
       // var form_data = new FormData();
 
@@ -132,7 +121,7 @@
       // }for (var x = 0; x < ins; x++) {
       //     form_data.append("gambar", document.getElementById('pay_proveplant').files[x]);
       // }
-      // form_data.append("id" , idTanaman.toString());
+      // form_data.append("id" , id_tanaman_check);
       // $.ajax({
       // 	url: 'php/Adopter/AdpPaying.php',
       //     cache: false,
