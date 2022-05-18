@@ -36,7 +36,6 @@ function createPlant() {
     $alamat         = $_POST['alamat'];
     $status_plant   = $_POST['status'];
     $image          = uploadImage('gambar',"../../image/plantimg/");
-    
     for($i=0;$i<$jumlah;$i++){
         $sql = 'INSERT INTO `tb_tanaman`(`status`, `nama_tanaman`, `lokasi_tanaman`, `id_pengelola`, `kategori`, `gambar`, `harga`, `deskripsi`, `nama_alamat`)
         VALUES ("'.$status_plant.'","'.$namaTanaman.'","'.$lokasiTanaman.'","'.$idPengelola.'","'.$kategiri.'","'.$image.'","'.$harga.'","'.$deskripsi.'", "'.$alamat.'")';
@@ -97,9 +96,11 @@ function updatePlant() {
     $alamat         = $_POST['alamat'];
     $deskripsi      = $_POST['deskripsi'];
     $harga          = $_POST['harga'];
-    $idTanaman      = $_POST['id_tanaman'];
     $idPengelola    = $_POST['id_manager'];
+    $jmlBaru        = $_POST['jmlBaru'];
+    $jmlLama        = $_POST['jmlLama'];
     $image          = "";
+
     if(!isset($_POST['gambarSebelum'])){
         $image          = uploadImage('gambar',"../../image/plantimg/");
     }else{
@@ -111,6 +112,8 @@ function updatePlant() {
             `deskripsi`='$deskripsi',`nama_alamat`='$alamat'
             WHERE `nama_tanaman`= '$namaTanamanlama' AND `id_pengelola`= '$idPengelola'";
     $conn -> query($sql);
+
+    
     readAllPlant($idPengelola);
 }
 

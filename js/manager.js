@@ -106,6 +106,8 @@ $( document ).ready(function() {
         harga       = $("#update_pprice").val()
         id          = $("#update_pid").val()
         gambar      = $("#update_pimg_before").val()
+        jumlahBaru  = $("#update_jml_new").val()
+        jumlahLama  = $("#update_jml").val()
 
         var form_data = new FormData();
         var ins = document.getElementById('update_pimg').files.length;
@@ -116,6 +118,7 @@ $( document ).ready(function() {
                 form_data.append("gambar", document.getElementById('update_pimg').files[x]);
             }
         }
+
         dataProduk = JSON.parse(localStorage.getItem("dataPlantManager"))
         checkData = dataProduk.filter(dataProduk => dataProduk.id_tanaman == id);
         form_data.append("nama-tanaman-lama",checkData[0]['nama_tanaman'])
@@ -127,6 +130,8 @@ $( document ).ready(function() {
         form_data.append("deskripsi",deskripsi);
         form_data.append("harga",harga);
         form_data.append("id_tanaman",id);
+        form_data.append("jmlBaru",jumlahBaru);
+        form_data.append("jmlLama",jumlahLama);
         form_data.append("id_manager",dataAkunManager['id_pengelola'])
         $.ajax({
 			url: 'php/Manager/MngCrudPlant.php',
@@ -232,16 +237,6 @@ function setDataInTable(response){
                     '</div>'+
                 '</div>'+
             '</div>'
-            // "<tr class='table-body-green'>"+
-            //     "<th scope='row'>"+(parseInt(key)+1)+"</th>"+
-            //     "<td>"+data[key]['nama_tanaman']+"</td>"+
-            //     "<td><div style='background-image:url(image/plantimg/"+data[key]['gambar']+");width:50px; height:50px; border-radius:50%; background-size:cover'></div></td>"+
-            //     "<td>"+statusTanaman+"</td>"+
-            //     "<td>"+
-            //         "<button class='btn btn-success' onclick='callModal("+data[key]['id_tanaman']+")' data-bs-toggle='modal' data-bs-target='#modal_plant'><i class='fas fa-pencil-ruler'></i></button>"+
-            //         "<button class='btn btn-success' onclick='AddingPlant("+data[key]['id_tanaman']+")' style='margin-left:10px'><i class='fas fa-plus'></i></button>"+
-            //     "</td>"+
-            // "</tr>"
         );
     });
     localStorage.setItem("dataPlantManager", JSON.stringify(data));
