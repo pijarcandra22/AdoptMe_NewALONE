@@ -302,6 +302,33 @@
       dataProduk = JSON.parse(localStorage.getItem("dataPlantManager"))
       checkData = dataProduk.filter(dataProduk => dataProduk.id_tanaman == id);
 
+      $("#namaUpdateTanaman").html(checkData[0]['nama_tanaman'])
+      $("#dataJmlTanaman").html("Belum Teradopsi : " + checkData[0]['jumlah_takadop'] 
+                                + " Waiting : " + checkData[0]['jumlah_waiting'] +
+                                " Adopsi : " +  checkData[0]['tanaman_adopsi'])
+      if (window.innerWidth <= 560) {
+        $("#back_img").css({
+          background: "white",
+        });
+      } else {
+        $("#back_img").css({
+          background: "linear-gradient(270.04deg, #FFFFFF 0.04%, #FFFFFF 79.15%, rgba(0, 0, 0, 0) 79.39%), linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), linear-gradient(180deg, rgba(2, 87, 5, 0.248) 0%, rgba(255, 255, 255, 0.341) 100%), url(image/plantimg/" +
+            checkData[0]["gambar"] +
+            ")",
+        });
+      }
+      $("#front_img").css({
+        background: "linear-gradient(180deg, rgba(2, 87, 5, 0.248) 0%, rgba(255, 255, 255, 0.341) 100%), url(image/plantimg/" +
+          checkData[0]["gambar"] +
+          ")",
+      });
+      $("#front_img").css({
+        "background-size": "cover",
+        "background-position": "center",
+      });
+      
+      $("#update_jml_new").val(checkData[0]['jumlah_takadop'])
+      $("#update_jml").val(checkData[0]['jumlah_takadop'])
       $('#update_pname').val(checkData[0]['nama_tanaman'])
       $('#update_paddress').val(checkData[0]['nama_alamat'])
       $('#update_pdesc').val(checkData[0]['deskripsi'])
