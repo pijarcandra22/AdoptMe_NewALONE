@@ -95,6 +95,18 @@
         display: none;
       }
     }
+
+    @media (max-width: 768px) {
+      .horizontal_scroll::-webkit-scrollbar {
+        display: none;
+      }
+
+      .horizontal_scroll {
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+      }
+    }
   </style>
 </head>
 
