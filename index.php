@@ -202,7 +202,7 @@
 
   <!-- Option 1: Bootstrap Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
+  <script src="js/money-formater.js"></script>
   <script>
     document.onreadystatechange = function() {
       if (document.readyState !== "complete") {
@@ -260,7 +260,7 @@
             lok: data[index]["nama_alamat"],
             nama: data[index]["nama_tanaman"],
             gambar: "plantimg/" + data[index]["gambar"],
-            harga: data[index]["harga"],
+            harga: formatMoney(data[index]["harga"]),
             des: data[index]["deskripsi"],
             pengelola: data[index]["nama_pengelola"],
             status_tanaman: status_tanaman,
@@ -343,7 +343,7 @@
               data[0]["harga"] +
               ")",
           });
-          $("#hargaTanaman").html(data[0]["harga"]);
+          $("#hargaTanaman").html(formatMoney(data[0]["harga"]));
           $("#con_namePlant").val(data[0]["nama_tanaman"]);
           $("#con_managerPlant").val(data[0]["id_pengelola"]);
           $("#con_email").val(dataAkun["email"]);
@@ -377,7 +377,7 @@
           lok: data[index]["nama_alamat"],
           nama: data[index]["nama_tanaman"],
           gambar: "plantimg/" + data[index]["gambar"],
-          harga: data[index]["harga"],
+          harga: formatMoney(data[index]["harga"]),
           des: data[index]["deskripsi"],
           pengelola: data[index]["nama_pengelola"],
           status_tanaman: status_tanaman,
