@@ -112,6 +112,12 @@
       display: none;
     }
 
+    #landing {
+      background: url(image/AdoptLanding.png);
+      background-size: cover;
+      background-position: center;
+    }
+
     @media (max-width: 960px) {
 
       #landing {

@@ -226,7 +226,7 @@
             url: 'php/Admin/UpdatePlant.php',
             type: 'GET',
             success: function(response) {
-                alert('success')
+                console.log('success')
             },
             error: function(error) {
                 console.log(error)
