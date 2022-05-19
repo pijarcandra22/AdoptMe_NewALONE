@@ -101,8 +101,23 @@ function updatePlant() {
     $jmlLama        = $_POST['jmlLama'];
     $image          = "";
 
+    if($jmlBaru>$jmlLama){
+        $jumlah = $jmlBaru - $jmlLama;
+        for($i=0;$i<$jumlah;$i++){
+            $sql = 'INSERT INTO `tb_tanaman`(`nama_tanaman`, `lokasi_tanaman`, `id_pengelola`, `kategori`, `gambar`, `harga`, `deskripsi`, `nama_alamat`)
+            VALUES ("'.$namaTanaman.'","'.$lokasiTanaman.'","'.$idPengelola.'","'.$kategiri.'","'.$image.'","'.$harga.'","'.$deskripsi.'", "'.$alamat.'")';
+            $conn -> query($sql);
+        }
+    }else if($jmlBaru<$jmlLama){
+        $jumlah = $jmlLama - $jmlBaru;
+        $sql            = "DELETE FROM tb_tanaman WHERE nama_tanaman = '$namaTanaman' 
+                           AND `status` = '' LIMIT $jumlah";
+        $conn->query($sql);
+    }
+
     if(!isset($_POST['gambarSebelum'])){
         $image          = uploadImage('gambar',"../../image/plantimg/");
+        unlink('../../image/plantimg/'.$_POST['gambarSebelum']);
     }else{
         $image          = $_POST['gambarSebelum'];
     }
