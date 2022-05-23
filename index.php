@@ -90,9 +90,22 @@
       display: none;
     }
 
+    #leafFront{
+      width: 100%;
+      height: 100vh;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+
     @media (max-width: 1200px) {
       #locList {
         display: none;
+      }
+    }
+
+    @media (max-width: 960px) {
+      #leafFront{
       }
     }
   </style>
@@ -105,25 +118,18 @@
       <img src="/img/Loader.gif" class="shadow bg-body" width="30%" style="border-radius: 50%" alt="" />
     </div>
   </div>
+  <div style="background-image: url(image/4025568.png); position: absolute; z-index:1;" id="leafFront"></div>
   <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
     <div class="carousel-inner" style="z-index: 0">
-      <div class="carousel-item active" id="1" style="height: 100%" data-bs-interval="10000">
+      <div class="carousel-item active" id="1" style="height: 100%" data-bs-interval="5000">
         <div id="c1"></div>
       </div>
-      <div class="carousel-item" id="2" style="height: 100%" data-bs-interval="10000">
+      <div class="carousel-item" id="2" style="height: 100%" data-bs-interval="5000">
         <div id="c2"></div>
       </div>
-      <div class="carousel-item" id="3" style="height: 100%" data-bs-interval="10000">
+      <div class="carousel-item" id="3" style="height: 100%" data-bs-interval="5000">
         <div id="c3"></div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
     </div>
   </div>
   <div class="container" style="margin-bottom: 50px">
