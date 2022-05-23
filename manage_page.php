@@ -18,17 +18,6 @@
   <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
   <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />
   <style>
-    h1 {
-      font-family: Roboto;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 113px;
-      padding-top: 69px;
-      line-height: 132px;
-      color: #FFFFFF;
-      text-shadow: 0px 0px 20px #000000;
-    }
-
     h3 {
       font-family: Roboto;
       font-style: normal;
@@ -97,13 +86,6 @@
       color: #FFFFFF;
     }
 
-    #namebackImg {
-      height: 287px;
-      text-align: right;
-      background: url(image/Mangrove1.png);
-      background-size: cover;
-    }
-
     .tabpad {
       margin-top: 88px;
     }
@@ -118,79 +100,72 @@
       background-position: center;
     }
 
+    .tabpad>h5 {
+      margin: 0;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 43px;
+      line-height: 50px;
+      text-align: center;
+      color: #FFFFFF;
+    }
+
+    .tabpad>h4 {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 16px;
+      color: white;
+      padding-top: 10px;
+      text-align: center;
+      margin: 0;
+    }
+
+    #page_heading {
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 113px;
+      line-height: 132px;
+      color: #FFFFFF;
+      text-shadow: 0px 0px 20px #000000;
+    }
+
+    .adp_plant_item {
+      line-height: 50px;
+      vertical-align: middle;
+      padding: 0 10px;
+      border-left: #12491E 2px solid;
+    }
     @media (max-width: 960px) {
-
-      #landing {
-        background: url(image/AdoptLanding.png);
-        background-size: cover;
-        background-position: center;
-      }
-
-      .tabpad>h5 {
-        margin: 0;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 43px;
-        line-height: 50px;
-        text-align: center;
-        color: #FFFFFF;
-      }
-
-      .tabpad>h4 {
-        font-style: normal;
-        font-weight: bold;
-        font-size: 14px;
-        line-height: 16px;
-        color: white;
-        padding-top: 10px;
-        text-align: center;
-        margin: 0;
-      }
-
       #page_heading {
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 113px;
-        line-height: 132px;
-        color: #FFFFFF;
-        text-shadow: 0px 0px 20px #000000;
-      }
-
-      .adp_plant_item {
-        line-height: 50px;
-        vertical-align: middle;
-        padding: 0 10px;
-        border-left: #12491E 2px solid;
-      }
-
-      h1 {
-        font-size: 80px;
-        padding-top: 69px;
+        font-size: 100px;
         line-height: 90px;
       }
 
-      #namebackImg {
-        height: 230px;
-      }
-
       .tabpad {
-        margin-top: 55px;
+        margin-top: 10px;
       }
     }
 
     @media (max-width: 480px) {
-      h1 {
-        font-size: 70px;
+      .manage_data_green {
+        width: auto;
+        height: auto;
       }
 
-      #namebackImg {
-        height: 160px;
-        display: flex;
+      .manage_data_white {
+        width: auto;
+        height: auto;
       }
 
       .tabpad {
-        margin-top: 55px;
+        display: flex;
+        padding: 0px 10px;
+      }
+
+      .tabpad>h5 {
+        font-size: 20px;
       }
 
       .out-480 {
@@ -198,7 +173,7 @@
       }
 
       .see-480 {
-        display: block;
+        display: inline;
       }
 
       .menu-flex {
@@ -463,7 +438,6 @@
         data: form_data,
         type: 'POST',
         success: function(response) {
-          alert("success")
           setDataInTable(JSON.stringify(response))
         },
         error: function(error) {
