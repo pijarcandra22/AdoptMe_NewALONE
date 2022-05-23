@@ -10,7 +10,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
-
+    <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -30,18 +30,20 @@
         .manage_data_green {
             width: 94px;
             height: 94px;
-            background: linear-gradient(0deg, rgba(18, 73, 30, 0.5), rgba(18, 73, 30, 0.5)), url(image/Mangrove1.png), #12491E;
+            background: #12491E;
             border-radius: 10px;
             background-size: cover;
+            color: #FFFFFF;
         }
 
         .manage_data_white {
-            border: 1px solid white;
+            border: 1px solid #12491E;
             border-radius: 10px;
             background-size: cover;
             width: 94px;
             height: 94px;
             margin: 0 12px;
+            color: #12491E;
         }
 
         h4 {
@@ -76,9 +78,14 @@
         }
 
         #landing {
-            background: url(image/AdoptLanding.png);
+            height: 100vh;
+        }
+
+        #landing-text {
             background-size: cover;
-            background-position: center;
+            height: 100vh;
+            background-repeat: no-repeat;
+            background-position: top center;
         }
 
         .tabpad {
@@ -92,7 +99,6 @@
             font-size: 43px;
             line-height: 50px;
             text-align: center;
-            color: #FFFFFF;
         }
 
         .tabpad>h4 {
@@ -100,7 +106,6 @@
             font-weight: bold;
             font-size: 14px;
             line-height: 16px;
-            color: white;
             padding-top: 10px;
             text-align: center;
             margin: 0;
@@ -118,13 +123,16 @@
         }
 
         #page_heading {
-            font-family: Roboto;
+            font-family: Satisfy;
             font-style: normal;
             font-weight: bold;
             font-size: 113px;
             line-height: 132px;
-            color: #FFFFFF;
-            text-shadow: 0px 0px 20px #000000;
+            color: #12491E;
+        }
+
+        #leafFront{
+            
         }
 
         @media (max-width: 960px) {
@@ -171,12 +179,13 @@
 
 <body>
     <div id="c1" style="z-index: 1; left:0; right:0; position:absolute"></div>
+    <div id="leafFront"></div>
     <div id="landing">
-        <div id="landing-text" class="position-relative" style="z-index:0">
+        <div id="landing-text" style="height: 70vh; background-image: url(image/leafFront.webp); position: absolute;" class="position-relative" style="z-index:0">
             <div class="container-xl position-absolute bottom-0 start-50 translate-middle-x">
                 <div class="row justify-content-sm-center">
                     <div class="col-12 col-sm-auto">
-                        <h1 id="page_heading">Adopter Page</h1>
+                        <h1 id="page_heading">Adopter</h1>
                     </div>
                     <div class="col-12 col-sm-auto">
                         <div style="display: flex;">
@@ -186,13 +195,13 @@
                                 <h5 id="adp_total_tanaman">99</h5>
                             </div>
                             <div class="tabpad manage_data_white">
-                                <h4 class="out-480">WAITING</h4>
-                                <h5 class="see-480">Waiting: </h5>
+                                <h4 class="out-480" style="color: #12491E;">WAITING</h4>
+                                <h5 class="see-480" style="color: #12491E;">Waiting: </h5>
                                 <h5 id="adp_waiting_tanaman">99</h5>
                             </div>
                         </div>
                         <div style="display: flex; height:max-content">
-                            <h3 id="adopter_name" style="margin-top:14px; color:white; margin-right:10px">Adopter Name</h3>
+                            <h3 id="adopter_name" style="margin-top:14px; color: #12491E; margin-right:10px">Adopter Name</h3>
                             <button onclick="signout()" class="btn btn-success" style="margin-top:8px; font-family:roboto; font-weight:bold; height: 40px; line-height: 10px !important; border-radius:30px; background-color:#12491E; border:none; padding:2px 10px !important; vertical-align:middle">Sign Out</button>
                         </div>
                     </div>
@@ -212,12 +221,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <script>
-        $("#landing").css({
-            "height": window.innerHeight + "px"
-        })
-        $("#landing-text").css({
-            "height": (window.innerHeight * 0.63) + "px"
-        })
         $("#c1").load("template/navbar.php?color=12491E&set=true")
         $("#c2").load("template/form_adopter_plant.php")
         $("#m1").load("template/modal_see_report.php")
