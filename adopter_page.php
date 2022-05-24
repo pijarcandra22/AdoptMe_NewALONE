@@ -83,9 +83,9 @@
 
         #landing-text {
             background-size: cover;
-            height: 100vh;
             background-repeat: no-repeat;
             background-position: top center;
+            height: 70vh;
         }
 
         .tabpad {
@@ -139,6 +139,7 @@
             #page_heading {
                 font-size: 100px;
                 line-height: 90px;
+                margin-bottom: 30px;
             }
 
             .tabpad {
@@ -173,6 +174,15 @@
             .see-480 {
                 display: inline;
             }
+
+            #page_heading{
+                margin-left: 20px;
+            }
+
+            #landing-text{
+                height: 50vh;
+                margin-bottom: 50px;
+            }
         }
     </style>
 </head>
@@ -181,8 +191,8 @@
     <div id="c1" style="z-index: 1; left:0; right:0; position:absolute"></div>
     <div id="leafFront"></div>
     <div id="landing">
-        <div id="landing-text" style="height: 70vh; background-image: url(image/leafFront.webp); position: absolute;" class="position-relative" style="z-index:0">
-            <div class="container-xl position-absolute bottom-0 start-50 translate-middle-x">
+        <div id="landing-text" style="background-image: url(image/leafFront.webp); position: absolute;" class="position-relative" style="z-index:0">
+            <div class="container-xl position-absolute bottom-0 start-50 translate-middle-x m-">
                 <div class="row justify-content-sm-center">
                     <div class="col-12 col-sm-auto">
                         <h1 id="page_heading">Adopter</h1>
@@ -221,7 +231,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <script>
-        $("#c1").load("template/navbar.php?color=12491E&set=true")
+        $("#c1").load("template/navbar.php?color=FFFFFF&set=true")
         $("#c2").load("template/form_adopter_plant.php")
         $("#m1").load("template/modal_see_report.php")
 

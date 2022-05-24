@@ -18,10 +18,6 @@
             color: #FFFFFF;
             margin-top:14px;
             color:#12491E;
-            margin-right:10px;
-            background-color:white;
-            padding: 5px 20px;
-            border-radius: 20px;
         }
         .table-head-green{
             font-family: Roboto;
@@ -58,6 +54,6 @@
     <div style="display: flex; margin-bottom:10px">
         <h3 id="title_form">Report Farmer List & Paying Salary</h3>
     </div>
-    <div id="plant_status" class="horizontal_scroll" style="padding-top:12px !important; padding-bottom: 15px !important;"></div>
-    <div class="row" id="dataReport"></div>
+    <div id="plant_status" class="horizontal_scroll d-flex" style="padding-top:12px !important; padding-bottom: 15px !important;"></div>
+    <div class="row g-3 justify-content-md-center" id="dataReport"></div>
 </html>

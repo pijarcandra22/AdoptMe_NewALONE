@@ -33,8 +33,11 @@ $( document ).ready(function() {
                     $("#plant_status").empty()
                     Object.keys(data).forEach(function(key){
                         $("#plant_status").append(
-                            '<button class="btn cat_plan" style="background:linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(image/plantimg/'+data[key]["gambar"]+'); background-position:center !important">'+
-                            data[key]["id_tanaman"]+' | '+ data[key]["nama_tanaman"]+' | '+data[key]["status"]+'</button>'
+                            '<button class="btn btn-outline-success d-flex justify-content-center align-items-center m-1 p-1 rounded-pill" style="padding-right:15px !important">'+
+                            '<label class="rounded-circle" style="background:linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(image/plantimg/'+
+                            data[key]["gambar"]+'); background-position:center; width:2rem; height:2rem; background-size:cover; margin-right:10px"></label>'+
+                            data[key]["id_tanaman"]+' | '+ data[key]["nama_tanaman"]+
+                            ' | '+data[key]["status"]+'</button>'
                         );
                         if(data[key]["status"]=="adopsi"){
                             readyplant += 1
