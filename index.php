@@ -90,7 +90,7 @@
       display: none;
     }
 
-    #leafFront{
+    #leafFront {
       width: 100%;
       height: 100vh;
       background-repeat: no-repeat;
@@ -101,6 +101,18 @@
     @media (max-width: 1200px) {
       #locList {
         display: none;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .horizontal_scroll::-webkit-scrollbar {
+        display: none;
+      }
+
+      .horizontal_scroll {
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
       }
     }
   </style>
