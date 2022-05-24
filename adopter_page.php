@@ -88,10 +88,6 @@
             height: 70vh;
         }
 
-        .tabpad {
-            margin-top: 20px;
-        }
-
         .tabpad>h5 {
             margin: 0;
             font-style: normal;
@@ -131,15 +127,10 @@
             color: #12491E;
         }
 
-        #leafFront{
-            
-        }
-
         @media (max-width: 960px) {
             #page_heading {
                 font-size: 100px;
                 line-height: 90px;
-                margin-bottom: 30px;
             }
 
             .tabpad {
@@ -192,7 +183,7 @@
     <div id="leafFront"></div>
     <div id="landing">
         <div id="landing-text" style="background-image: url(image/leafFront.webp); position: absolute;" class="position-relative" style="z-index:0">
-            <div class="container-xl position-absolute bottom-0 start-50 translate-middle-x m-">
+            <div class="container-xl position-absolute bottom-0 start-50 translate-middle-x">
                 <div class="row justify-content-sm-center">
                     <div class="col-12 col-sm-auto">
                         <h1 id="page_heading">Adopter</h1>
