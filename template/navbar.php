@@ -11,19 +11,19 @@ if (isset($_GET['set'])) {
 <!DOCTYPE html>
 <html lang="en">
 <style>
-  ::placeholder {
+  #searchForm::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: <?= '#' . $_GET['color'] ?> !important;
     opacity: 1;
     /* Firefox */
   }
 
-  :-ms-input-placeholder {
+  #searchForm:-ms-input-placeholder {
     /* Internet Explorer 10-11 */
     color: <?= '#' . $_GET['color'] ?> !important;
   }
 
-  ::-ms-input-placeholder {
+  #searchForm::-ms-input-placeholder {
     /* Microsoft Edge */
     color: <?= '#' . $_GET['color'] ?> !important;
   }
@@ -117,7 +117,7 @@ if (isset($_GET['set'])) {
           </li>
           <li class="nav-item">
             <form id="searchEngine" class="d-flex" style="border-bottom:1px solid <?= '#' . $_GET['color'] ?>;">
-              <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="background-color: transparent; border: none; width: 200px; font-size:14px; height:20px; color:<?= '#' . $_GET['color'] ?>">
+              <input id="searchForm" class="form-control" type="search" placeholder="Search" aria-label="Search" style="background-color: transparent; border: none; width: 200px; font-size:14px; height:20px; color:<?= '#' . $_GET['color'] ?>">
               <button style="font-size: 12px; background-color: transparent ; color: <?= '#' . $_GET['color'] ?>; border: none; height:20px;">
                 <i class='fas fa-search'></i>
               </button>

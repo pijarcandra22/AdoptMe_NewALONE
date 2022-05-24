@@ -18,6 +18,10 @@
   <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
   <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />
   <style>
+    .tabpad{
+      margin-top: 20px !important;
+    }
+
     h3 {
       font-family: Roboto;
       font-style: normal;
