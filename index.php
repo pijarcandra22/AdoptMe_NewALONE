@@ -95,7 +95,7 @@
       height: 100vh;
       background-repeat: no-repeat;
       background-size: cover;
-      background-position: center;
+      background-position: top center;
     }
 
     @media (max-width: 1200px) {
@@ -103,7 +103,7 @@
         display: none;
       }
     }
-
+    
     @media (max-width: 768px) {
       .horizontal_scroll::-webkit-scrollbar {
         display: none;
@@ -125,7 +125,7 @@
       <img src="/img/Loader.gif" class="shadow bg-body" width="30%" style="border-radius: 50%" alt="" />
     </div>
   </div>
-  <div style="background-image: url(image/4025568.png); position: absolute; z-index:1;" id="leafFront"></div>
+  <div style="background-image: url(image/leafFront.webp); position: absolute; z-index:1;" id="leafFront"></div>
   <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
     <div class="carousel-inner" style="z-index: 0">
       <div class="carousel-item active" id="1" style="height: 100%" data-bs-interval="5000">

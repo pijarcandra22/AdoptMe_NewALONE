@@ -11,10 +11,10 @@
     <link rel="stylesheet" href="css/landing_style.css">
     <div id="landing" style="background-color: white">
         <div class="position-relative" style="height:100vh;">
-            <div class="position-absolute top-50 start-50 translate-middle" style="text-align: center;">
+            <div class="position-absolute start-50 translate-middle" style="text-align: center; top: 55%">
                 <h1 class="landing_h1"><?=$data['plant_tittle']?></h1>
             </div>
-            <div class="position-absolute start-50 translate-middle-x" style="top: 72%">
+            <div class="position-absolute start-50 translate-middle-x" style="top: 80%">
                 <center>
                     <p class="landing_p"><?=$data['plant_desc']?></p>
                 </center>
