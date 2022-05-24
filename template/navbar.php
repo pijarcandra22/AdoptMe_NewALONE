@@ -63,7 +63,8 @@ if (isset($_GET['set'])) {
   }
 
   .linkColor a,
-  .linkColor button {
+  .linkColor button,
+  .linkColor span {
     color: black !important;
   }
 
@@ -99,7 +100,7 @@ if (isset($_GET['set'])) {
   <div class="container-fluid">
     <a class="navbar-brand" href="/" style="font-size: 25px; font-weight: bold; color:<?= '#' . $_GET['color'] ?>; font-family: Roboto;">AdoptPlant.com</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span style="color:<?= '#' . $_GET['color'] ?>"><i class="fas fa-grip-lines"></i></span>
+      <span style="color:<?= '#' . $_GET['color'] ?>;"><i class="fas fa-grip-lines"></i></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>

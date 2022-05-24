@@ -186,7 +186,7 @@
     </div>
   </div>
   <hr />
-  <div class="container" style="padding: 30px 0">
+  <div class="container">
     <div class="row" id="footer">
       <div class="col-12 col-sm-3">
         <h2>Adopt Plant</h2>
