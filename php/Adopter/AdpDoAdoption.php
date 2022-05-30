@@ -48,7 +48,7 @@
         $mail->Host       = 'smtp.gmail.com';                    
         $mail->SMTPAuth   = true;                             
         $mail->Username   = 'adoptmeindonesia2022@gmail.com';                 
-        $mail->Password   = 'adoptme2022';                        
+        $mail->Password   = '#Adoptme2022';                        
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;                              
         $mail->Port       = 587;  
     

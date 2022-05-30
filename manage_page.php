@@ -366,28 +366,6 @@
       $("#report_content").html(dataReport[0]['laporan'] + ' (' + dataReport[0]['tanggal_pelaporan'] + ')')
     }
 
-    function accReport(id) {
-      var form_data = new FormData();
-      form_data.append("action", "update-report");
-      form_data.append("id_perawatan", id);
-      form_data.append("status_report", "Mengunggu Proses");
-      $.ajax({
-        url: 'php/Manager/MngReport.php',
-        dataType: 'json',
-        cache: false,
-        contentType: false,
-        processData: false,
-        data: form_data,
-        type: 'POST',
-        success: function(response) {
-
-        },
-        error: function(error) {
-          console.log(error)
-        }
-      });
-    }
-
     function addFarmerToPlant(id) {
       var form_data = new FormData();
       form_data.append("action", "pairing-plant");
