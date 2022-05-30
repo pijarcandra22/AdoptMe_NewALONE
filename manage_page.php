@@ -18,6 +18,10 @@
   <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
   <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />
   <style>
+    .tabpad{
+      margin-top: 20px !important;
+    }
+
     h3 {
       font-family: Roboto;
       font-style: normal;
@@ -360,28 +364,6 @@
       })
       $("#report_nama").html(dataReport[0]['id_tanaman'] + ' | ' + dataReport[0]['nama_tanaman'])
       $("#report_content").html(dataReport[0]['laporan'] + ' (' + dataReport[0]['tanggal_pelaporan'] + ')')
-    }
-
-    function accReport(id) {
-      var form_data = new FormData();
-      form_data.append("action", "update-report");
-      form_data.append("id_perawatan", id);
-      form_data.append("status_report", "Mengunggu Proses");
-      $.ajax({
-        url: 'php/Manager/MngReport.php',
-        dataType: 'json',
-        cache: false,
-        contentType: false,
-        processData: false,
-        data: form_data,
-        type: 'POST',
-        success: function(response) {
-
-        },
-        error: function(error) {
-          console.log(error)
-        }
-      });
     }
 
     function addFarmerToPlant(id) {

@@ -275,7 +275,6 @@ function setDataInTable3(response){
                 "<td>"+data[key]['tanggal_pelaporan']+"</td>"+
                 "<td>"+
                     "<button class='btn btn-success' onclick='callReport("+data[key]['id_perawatan']+")' data-bs-toggle='modal' data-bs-target='#modal_see_report'><i class='fas fa-eye'></i></button>"+
-                    "<button id='acc"+id_report+"' class='btn btn-success' onclick='accReport("+data[key]['id_perawatan']+")' data-bs-toggle='modal' data-bs-target='#modal_farmerToPlant' style='margin-left:10px'><i class='far fa-credit-card'></i></button>"+
                 "</td>"+
             "</tr>"
         );

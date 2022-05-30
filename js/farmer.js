@@ -10,8 +10,11 @@ $( document ).ready(function() {
             $("#plant-that-manage").empty()
             Object.keys(data).forEach(function(key){
                 $("#plant-that-manage").append(
-                    '<button onclick="callModal('+data[key]["id_tanaman"]+')" data-bs-toggle="modal" data-bs-target="#modal_report_plant" class="btn cat_plan" style="background:linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(image/plantimg/'+data[key]["gambar"]+'); background-position:center !important">'+
-                    data[key]["nama_tanaman"]+' | Id Tanaman: '+data[key]["id_tanaman"]+'</button>'
+                    '<button onclick="callModal('+data[key]["id_tanaman"]+')" data-bs-toggle="modal" data-bs-target="#modal_report_plant" class="btn btn-outline-success d-flex justify-content-center align-items-center m-1 p-1 rounded-pill" style="padding-right:15px !important">'+
+                    '<label class="rounded-circle" style="background:linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(image/plantimg/'+
+                    data[key]["gambar"]+'); background-position:center; width:2rem; height:2rem; background-size:cover; margin-right:10px"></label>'+
+                    data[key]["id_tanaman"]+' | '+ data[key]["nama_tanaman"]+
+                    '</button>'
                 );
             });
             localStorage.setItem("plantNeedReport", JSON.stringify(data));
@@ -94,21 +97,23 @@ $( document ).ready(function() {
 })
 function setDataInTable(response){
     data = JSON.parse(response)
-    $("#tableReport").empty()
+    $("#dataReport").empty()
     Object.keys(data).forEach(function(key){
-        $("#tableReport").append(
-            "<tr class='table-body-green'>"+
-                "<th scope='row'>"+(parseInt(key)+1)+"</th>"+
-                "<td>"+data[key]['nama_tanaman']+"</td>"+
-                "<td>"+data[key]['lokasi_tanaman']+"</td>"+
-                "<td class='out-480'>"+data[key]['tanggal_pelaporan']+"</td>"+
-                "<td class='out-480'>"+data[key]['laporan']+"</td>"+
-                "<td class='out-480'><div style='background-image:url(image/report/"+data[key]['foto_pelaporan']+");width:50px; height:50px; border-radius:50%; background-size:cover'></div></td>"+
-                "<td>"+
-                    "<button class='btn btn-success' onclick='callReport("+data[key]['id_perawatan']+")' data-bs-toggle='modal' data-bs-target='#modal_see_report'><i class='fas fa-eye'></i></button>"+
-                "</td>"+
-            "</tr>"
-        );
+        var divElem = $('<div/>').load("template/report_content.php",{
+                                        width:"170",
+                                        lok:data[key]['nama_alamat'],
+                                        nama:data[key]['nama_tanaman'],
+                                        gambar:"report/"+data[key]['foto_pelaporan'],
+                                        status_tanaman:'display:none',
+                                        tanggal_pelaporan:data[key]['tanggal_pelaporan']
+                                    })
+                                .attr({"onclick":"callReport("+data[key]['id_perawatan']+")",
+                                        "data-bs-toggle":'modal',
+                                        "data-bs-target":'#modal_see_report',
+                                        "class":"col-auto",
+                                        "style":"margin-top: 20px"
+                                    });
+        divElem.appendTo('#dataReport');
     });
     localStorage.setItem("adopterDanTanaman", JSON.stringify(data));
 }

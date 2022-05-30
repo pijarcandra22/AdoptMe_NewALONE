@@ -10,7 +10,7 @@
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+  <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
@@ -18,15 +18,8 @@
   <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
   <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />
   <style>
-    h1 {
-      font-family: Roboto;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 113px;
-      padding-top: 69px;
-      line-height: 132px;
-      color: #FFFFFF;
-      text-shadow: 0px 0px 20px #000000;
+    .tabpad{
+      margin-top: 20px !important;
     }
 
     h3 {
@@ -35,25 +28,26 @@
       font-weight: bold;
       font-size: 24px;
       line-height: 28px;
-
       color: #12491E;
     }
 
     .manage_data_green {
       width: 94px;
       height: 94px;
-      background: linear-gradient(0deg, rgba(18, 73, 30, 0.5), rgba(18, 73, 30, 0.5)), url(image/Mangrove1.png), #12491E;
+      background: #12491E;
       border-radius: 10px;
       background-size: cover;
+      color: #FFFFFF;
     }
 
     .manage_data_white {
-      border: 1px solid rgba(18, 73, 30, 1);
+      border: 1px solid #12491E;
       border-radius: 10px;
       background-size: cover;
       width: 94px;
       height: 94px;
       margin: 0 12px;
+      color: #12491E;
     }
 
     h4 {
@@ -65,16 +59,6 @@
       padding-top: 10px;
       text-align: center;
       margin: 0;
-    }
-
-    h5 {
-      margin: 0;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 43px;
-      line-height: 50px;
-      text-align: center;
-      color: #FFFFFF;
     }
 
     .btn-adobt {
@@ -97,96 +81,85 @@
       color: #FFFFFF;
     }
 
-    #namebackImg {
-      height: 287px;
-      text-align: right;
-      background: url(image/Mangrove1.png);
-      background-size: cover;
+    #landing {
+      height: 100vh;
     }
 
-    .tabpad {
-      margin-top: 88px;
+    #landing-text {
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: top center;
+      height: 70vh;
+    }
+
+    .tabpad>h5 {
+      margin: 0;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 43px;
+      line-height: 50px;
+      text-align: center;
+    }
+
+    .tabpad>h4 {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 16px;
+      padding-top: 10px;
+      text-align: center;
+      margin: 0;
     }
 
     .see-480 {
       display: none;
     }
 
+    .adp_plant_item {
+      line-height: 50px;
+      vertical-align: middle;
+      padding: 0 10px;
+      border-left: #12491E 2px solid;
+    }
+
+    #page_heading {
+      font-family: Satisfy;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 113px;
+      line-height: 132px;
+      color: #12491E;
+    }
 
     @media (max-width: 960px) {
-
-      #landing {
-        background: url(image/AdoptLanding.png);
-        background-size: cover;
-        background-position: center;
-      }
-
-      .tabpad>h5 {
-        margin: 0;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 43px;
-        line-height: 50px;
-        text-align: center;
-        color: #FFFFFF;
-      }
-
-      .tabpad>h4 {
-        font-style: normal;
-        font-weight: bold;
-        font-size: 14px;
-        line-height: 16px;
-        color: white;
-        padding-top: 10px;
-        text-align: center;
-        margin: 0;
-      }
-
       #page_heading {
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 113px;
-        line-height: 132px;
-        color: #FFFFFF;
-        text-shadow: 0px 0px 20px #000000;
-      }
-
-      .adp_plant_item {
-        line-height: 50px;
-        vertical-align: middle;
-        padding: 0 10px;
-        border-left: #12491E 2px solid;
-      }
-
-      h1 {
-
-        font-size: 80px;
-        padding-top: 69px;
+        font-size: 100px;
         line-height: 90px;
       }
 
-      #namebackImg {
-        height: 230px;
-      }
-
       .tabpad {
-        margin-top: 55px;
+        margin-top: 10px;
       }
     }
 
     @media (max-width: 480px) {
-      h1 {
-        font-size: 70px;
+      .manage_data_green {
+        width: auto;
+        height: auto;
       }
 
-      #namebackImg {
-        height: 160px;
-        display: flex;
+      .manage_data_white {
+        width: auto;
+        height: auto;
       }
 
       .tabpad {
-        margin-top: 55px;
+        display: flex;
+        padding: 0px 10px;
+      }
+
+      .tabpad>h5 {
+        font-size: 20px;
       }
 
       .out-480 {
@@ -194,15 +167,16 @@
       }
 
       .see-480 {
-        display: block;
+        display: inline;
       }
 
-      .menu-flex {
-        display: flex !important;
+      #page_heading{
+        margin-left: 20px;
       }
 
-      .btn-adobt {
-        font-size: 16px;
+      #landing-text{
+        height: 50vh;
+        margin-bottom: 50px;
       }
     }
   </style>
@@ -211,11 +185,11 @@
 <body>
   <div id="c1" style="z-index: 1; left:0; right:0; position:absolute"></div>
   <div id="landing">
-    <div id="landing-text" class="position-relative" style="z-index:0">
+    <div id="landing-text" style="background-image: url(image/leafFront.webp); position: absolute;" class="position-relative" style="z-index:0">
       <div class="container-xl position-absolute bottom-0 start-50 translate-middle-x">
         <div class="row justify-content-sm-center">
           <div class="col-12 col-sm-auto">
-            <h1 id="page_heading">Farmer Page</h1>
+            <h1 id="page_heading">Farmer</h1>
           </div>
           <div class="col-12 col-sm-auto">
             <div style="display: flex;">
@@ -249,13 +223,7 @@
 
   <script>
     let id_ofFarmer
-    $("#landing").css({
-      "height": window.innerHeight + "px"
-    })
-    $("#landing-text").css({
-      "height": (window.innerHeight * 0.63) + "px"
-    })
-    $("#c1").load("template/navbar.php?color=12491E&set=true")
+    $("#c1").load("template/navbar.php?color=FFFFFF&set=true")
     $("#c2").load("template/form_report_farmer.php")
     $("#m1").load("template/modal_report_plant.php")
     $("#m2").load("template/modal_log_farmer.php")
