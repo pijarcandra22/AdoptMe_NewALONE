@@ -24,18 +24,18 @@
                 </div>
                 <div class="modal-footer d-flex flex-column gap-3" style="border: none; padding-bottom:40px">
                     <button type="button" class="btn btn-success" id="signinBut">SIGN IN</button>
-                    <p>Don't have an account? <a class="fw-bold" style="cursor: pointer; color: #12491E;" onclick="openModal(0)">SIGN UP</a></p>
+                    <p>Don't have an account? <a class="fw-bold" style="cursor: pointer; color: #12491E;" role="button" data-bs-target="#modal_signup" data-bs-toggle="modal" data-bs-dismiss="modal">SIGN UP</a></p>
                 </div>
             </form>
         </div>
     </div>
 </div>
-<div class="modal fade" id="modal_signup" tabindex="-1" aria-labelledby="modal_signup" aria-hidden="true">
+<div class="modal fade" id="modal_signup" tabindex="-1" aria-labelledby="modal_signup" aria-hidden="true" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <form id="signup" role="POST">
                 <div class="modal-header" style="border: none; padding-bottom:0">
-                    <button type="button" class="btn-close" onclick="exitModal()"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" style="padding:0 35px !important;">
                     <h5 class="header_modal mb-3">SIGN UP</h5>
@@ -64,58 +64,13 @@
                 </div>
                 <div class="modal-footer d-flex flex-column gap-3" style="border: none; padding-bottom:40px">
                     <button type="submit" class="btn btn-success">SIGN UP</button>
-                    <p>Already have an account? <a class="fw-bold" style="cursor: pointer; color: #12491E;" onclick="openModal(1)">SIGN IN</a></p>
+                    <p>Already have an account? <a class="fw-bold" style="cursor: pointer; color: #12491E;" role="button" data-bs-target="#modal_signin" data-bs-toggle="modal" data-bs-dismiss="modal">SIGN IN</a></p>
                 </div>
             </form>
         </div>
     </div>
 </div>
-<script>
-    var signin = new bootstrap.Modal(document.getElementById('modal_signin'), {
-        keyboard: false
-    })
-    var signup = new bootstrap.Modal(document.getElementById('modal_signup'), {
-        keyboard: false
-    })
 
-    function openModal(id) {
-        if (id == 1) {
-            signin.show()
-            signup.toggle()
-        } else {
-            signin.hide()
-            signup.toggle()
-        }
-    }
-
-    function exitModal() {
-        signin.toggle()
-        signup.toggle()
-    }
-    $('.seepass').on('click', function() {
-        if ($('#pass-in').attr('type') == "password" || $('#pass-up').attr('type') == "password") {
-            $('#pass-in').attr({
-                'type': 'text'
-            })
-            $('#pass-up').attr({
-                'type': 'text'
-            })
-            $('.seepass>i').attr({
-                'class': 'far fa-eye-slash'
-            })
-        } else {
-            $('#pass-in').attr({
-                'type': 'password'
-            })
-            $('#pass-up').attr({
-                'type': 'password'
-            })
-            $('.seepass>i').attr({
-                'class': 'far fa-eye'
-            })
-        }
-    })
-</script>
 
 </html>
 <script src="js/adopter.js"></script>
