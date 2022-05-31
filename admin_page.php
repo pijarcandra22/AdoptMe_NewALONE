@@ -225,7 +225,7 @@
             <div class="d-grid gap-2 menu-flex">
                 <button class="btn btn-adobt on" id="adopt_payment">Adopt Payment</button>
                 <button class="btn btn-adobt" id="manager_regis">Manager Register</button>
-                <button class="btn btn-adobt" id="category_regis">Category Register</button>
+                <button class="btn btn-adobt" id="category_regis">Category Manage</button>
             </div>
             </div>
             <div class="col-12 col-sm-9">
