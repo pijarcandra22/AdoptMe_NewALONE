@@ -242,7 +242,7 @@
 <script>
     let id_ofFarmer
     $("#c1").load("template/navbar.php?color=FFFFFF&set=true")
-    $("#c2").load("template/form_check_payment.php")
+    $("#c2").load("template/form_article_category.php")
     $("#m1").load("template/modal_bukti_pembayaran.php")
     $("#m2").load("template/modal_see_rek.php")
     $("#m3").load("template/modal_log_admin.php")
