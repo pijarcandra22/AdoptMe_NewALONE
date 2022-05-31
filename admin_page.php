@@ -225,7 +225,7 @@
             <div class="d-grid gap-2 menu-flex">
                 <button class="btn btn-adobt on" id="adopt_payment">Adopt Payment</button>
                 <button class="btn btn-adobt" id="manager_regis">Manager Register</button>
-                <button class="btn btn-adobt" id="category_regis">Category Register</button>
+                <button class="btn btn-adobt" id="category_regis">Category Manage</button>
             </div>
             </div>
             <div class="col-12 col-sm-9">
@@ -242,7 +242,7 @@
 <script>
     let id_ofFarmer
     $("#c1").load("template/navbar.php?color=FFFFFF&set=true")
-    $("#c2").load("template/form_check_payment.php")
+    $("#c2").load("template/form_article_category.php")
     $("#m1").load("template/modal_bukti_pembayaran.php")
     $("#m2").load("template/modal_see_rek.php")
     $("#m3").load("template/modal_log_admin.php")

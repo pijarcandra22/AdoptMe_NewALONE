@@ -36,11 +36,10 @@ function adoptAccept(){
 function farmerPay(){
     global $conn;
 
-    $sql = "SELECT trwt.id_perawatan, trwt.id_petani, (tanam.harga*0.075*COUNT(trwt.id_perawatan))
-            AS gaji, tpen.no_rekening, tpen.rek_nama FROM `tb_data_perwatan` AS trwt 
-            LEFT JOIN tb_tanaman AS tanam USING(id_tanaman)
-            LEFT JOIN tb_petani AS tpen ON trwt.id_petani = tpen.id_petani
-            WHERE trwt.status_pembayaran = 'Mengunggu Proses' GROUP BY trwt.id_petani;";
+    $sql = "SELECT tper.*, ta.harga*0.6 AS gaji, pe.nama_petani, pe.no_rekening, pe.rek_nama 
+            FROM `tb_data_perwatan` AS tper INNER JOIN tb_tanaman AS ta USING(id_tanaman)
+            LEFT JOIN tb_petani AS pe ON tper.id_petani = pe.id_petani GROUP BY tper.id_tanaman 
+            HAVING tper.status_pembayaran = 'Belum Dibayar';";
     $readTable = mysqli_query($conn, $sql);
     $rows = array();
     while ($getTableData = mysqli_fetch_assoc( $readTable )) $rows[]=$getTableData;
