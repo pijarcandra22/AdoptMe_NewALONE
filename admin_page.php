@@ -190,7 +190,7 @@
     </style>
 </head>
 <body>
-    <div id="c1" style="z-index: 1; left:0; right:0; position:absolute"></div>
+    <div id="c1" class="fixed-top"></div>
     <div id="landing">
         <div id="landing-text" style="background-image: url(image/leafFront.webp); position: absolute;" class="position-relative" style="z-index:0">
         <div class="container-xl position-absolute bottom-0 start-50 translate-middle-x">
