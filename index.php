@@ -95,12 +95,21 @@
       background-position: top center;
     }
 
+    .logo-sukma-image {
+      height: 3rem;
+    }
+
+    .logo-sukma-title {
+      font-size: 2rem;
+      color: #ff935d;
+    }
+
     @media (max-width: 1200px) {
       #locList {
         display: none;
       }
     }
-    
+
     @media (max-width: 768px) {
       .horizontal_scroll::-webkit-scrollbar {
         display: none;
@@ -110,6 +119,14 @@
         -ms-overflow-style: none;
         /* IE and Edge */
         scrollbar-width: none;
+      }
+
+      .logo-sukma-image {
+        height: 2.3rem;
+      }
+
+      .logo-sukma-title {
+        font-size: 1.3rem;
       }
     }
   </style>
@@ -182,31 +199,8 @@
       <div class="horizontal_scroll" id="c_good_content"></div>
     </div>
   </div>
-  <hr />
-  <div class="container">
-    <div class="row" id="footer">
-      <div class="col-12 col-sm-3">
-        <h2>Adopt Plant</h2>
-        <a href="">Tentang adoptMe</a><br />
-        <a href="">Kisah adoptMe</a><br />
-        <a href="">Blog</a><br />
-        <a href="">Menjadi Pengelola</a><br />
-        <a href="">Menjadi Adopter</a><br />
-        <h2 style="margin-top: 20px">About Us</h2>
-        <a href="" style="font-size: 25px; margin-right: 5px"><i class="fab fa-facebook"></i></a>
-        <a href="" style="font-size: 25px; margin-right: 5px"><i class="fab fa-twitter"></i></a>
-        <a href="" style="font-size: 25px"><i class="fab fa-instagram"></i></a>
-      </div>
-      <div class="col-12 col-sm-4">
-        <h2>Contact Us</h2>
-        Kantor AdoptPlant.com <br />
-        Gg. Sriti, Peguyangan, Kota Denpasar, Bali <br />
-        <br />
-        Senin-Minggu 09.00-18.00<br />
-        Email: adoptmeindonesia2022@gmail.com<br />
-      </div>
-    </div>
-  </div>
+
+  <?php include('template/footer.php'); ?>
   <div id="m1"></div>
   <div id="m2"></div>
 

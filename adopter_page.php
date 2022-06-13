@@ -18,10 +18,10 @@
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />
     <style>
-        .tabpad{
+        .tabpad {
             margin-top: 20px !important;
         }
-        
+
         h3 {
             font-family: Roboto;
             font-style: normal;
@@ -170,11 +170,11 @@
                 display: inline;
             }
 
-            #page_heading{
+            #page_heading {
                 margin-left: 20px;
             }
 
-            #landing-text{
+            #landing-text {
                 height: 50vh;
                 margin-bottom: 50px;
             }
@@ -213,14 +213,16 @@
                 </div>
             </div>
         </div>
-        <div class="container-xl">
+        <div class="container-xl mb-5">
             <div style="margin-top: 40px;">
                 <div id="c2"></div>
             </div>
             <div id="m1"></div>
             <div id="m2"></div>
         </div>
+        <?php include('template/footer.php'); ?>
     </div>
+
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
