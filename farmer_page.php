@@ -18,7 +18,7 @@
   <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
   <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />
   <style>
-    .tabpad{
+    .tabpad {
       margin-top: 20px !important;
     }
 
@@ -170,11 +170,11 @@
         display: inline;
       }
 
-      #page_heading{
+      #page_heading {
         margin-left: 20px;
       }
 
-      #landing-text{
+      #landing-text {
         height: 50vh;
         margin-bottom: 50px;
       }
@@ -203,7 +203,7 @@
         </div>
       </div>
     </div>
-    <div class="container-xl">
+    <div class="container-xl mb-5">
       <div style="margin-top: 50px;">
         <div class="row">
           <div class="col-12">
@@ -212,6 +212,7 @@
         </div>
       </div>
     </div>
+    <?php include('template/footer.php'); ?>
   </div>
   <div id="m1"></div>
   <div id="m2"></div>

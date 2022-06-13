@@ -18,7 +18,7 @@
   <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
   <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet" />
   <style>
-    .tabpad{
+    .tabpad {
       margin-top: 20px !important;
     }
 
@@ -121,7 +121,7 @@
       padding: 0 10px;
       border-left: #12491E 2px solid;
     }
-    
+
     #page_heading {
       font-family: Satisfy;
       font-style: normal;
@@ -130,6 +130,7 @@
       line-height: 132px;
       color: #12491E;
     }
+
     @media (max-width: 960px) {
       #page_heading {
         font-size: 100px;
@@ -177,13 +178,13 @@
         font-size: 16px;
       }
 
-      #page_heading{
+      #page_heading {
         margin-left: 20px;
       }
 
-      #landing-text{
-          height: 50vh;
-          margin-bottom: 50px;
+      #landing-text {
+        height: 50vh;
+        margin-bottom: 50px;
       }
     }
   </style>
@@ -219,7 +220,7 @@
         </div>
       </div>
     </div>
-    <div class="container-xl" style="margin-top: 50px">
+    <div class="container-xl mb-5" style="margin-top: 50px">
       <div class="row">
         <div class="col-12 col-sm-3">
           <div class="d-grid gap-2 menu-flex">
@@ -233,6 +234,7 @@
         </div>
       </div>
     </div>
+    <?php include('template/footer.php'); ?>
   </div>
   <div id="m1"></div>
   <div id="m2"></div>
@@ -274,9 +276,9 @@
       checkData = dataProduk.filter(dataProduk => dataProduk.id_tanaman == id);
 
       $("#namaUpdateTanaman").html(checkData[0]['nama_tanaman'])
-      $("#dataJmlTanaman").html("Belum Teradopsi : " + checkData[0]['jumlah_takadop'] 
-                                + " Waiting : " + checkData[0]['jumlah_waiting'] +
-                                " Adopsi : " +  checkData[0]['tanaman_adopsi'])
+      $("#dataJmlTanaman").html("Belum Teradopsi : " + checkData[0]['jumlah_takadop'] +
+        " Waiting : " + checkData[0]['jumlah_waiting'] +
+        " Adopsi : " + checkData[0]['tanaman_adopsi'])
       if (window.innerWidth <= 560) {
         $("#back_img").css({
           background: "white",
@@ -297,7 +299,7 @@
         "background-size": "cover",
         "background-position": "center",
       });
-      
+
       $("#update_jml_new").val(checkData[0]['jumlah_takadop'])
       $("#update_jml").val(checkData[0]['jumlah_takadop'])
       $('#update_pname').val(checkData[0]['nama_tanaman'])
