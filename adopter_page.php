@@ -249,9 +249,10 @@
             dataReport = dataReportFarmer.filter(dataReportFarmer => dataReportFarmer.id_perawatan == id);
 
             console.log(dataReport[0]['nama_tanaman'])
-            $("#report_img").html('<img src="' + 'image/report/' + dataReport[0]['foto_pelaporan'] + '" width="100%" alt="">')
+            $("#report_img").html('<img class="rounded-3" src="' + 'image/report/' + dataReport[0]['foto_pelaporan'] + '" width="100%" alt="" style="box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;">')
             $("#report_nama").html(dataReport[0]['id_tanaman'] + ' | ' + dataReport[0]['nama_tanaman'])
-            $("#report_content").html(dataReport[0]['laporan'] + ' (' + dataReport[0]['tanggal_pelaporan'] + ')')
+            $("#report_content").html(dataReport[0]['laporan'])
+            $(".modal-title").html("📅 " + dataReport[0]['tanggal_pelaporan'])
         }
 
         function signout() {
