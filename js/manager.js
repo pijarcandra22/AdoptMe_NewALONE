@@ -42,6 +42,7 @@ $( document ).ready(function() {
         $("#plant_desc").removeClass("is-invalid")
         $("#plant_price").removeClass("is-invalid")
         $("#plant_img").removeClass("is-invalid")
+        $("#dataPetani").removeClass("is-invalid")
 
         var form_data = new FormData();
         var ins = document.getElementById('plant_img').files.length;
@@ -59,9 +60,11 @@ $( document ).ready(function() {
         deskripsi   = $("#plant_desc").val()
         harga       = $("#plant_price").val()
         alamat      = $("#plant_address").val()
-        status_plant= $('#plant_status').val()      
+        status_plant= $('#plant_status').val()
+        id_petani   = $("#dataPetani option:selected").val()
         errorTotal  = 0
 
+        if(id_petani=="0"){errorTotal++;$("#dataPetani").addClass("is-invalid")}
         if(namaTanaman==""){errorTotal++;$("#plant_name").addClass("is-invalid")}
         if(lokasi==""){errorTotal++;$("#plant_loc").addClass("is-invalid")}
         if(kategori==""){errorTotal++;$("#plant_cat").addClass("is-invalid")}
@@ -79,6 +82,7 @@ $( document ).ready(function() {
         form_data.append("harga",harga);
         form_data.append("alamat",alamat);
         form_data.append("status",status_plant);
+        form_data.append("id_petani",id_petani);
         form_data.append("id_manager",dataAkunManager['id_pengelola']);
         $.ajax({
 			url: 'php/Manager/MngCrudPlant.php',
@@ -90,6 +94,15 @@ $( document ).ready(function() {
 			type: 'POST',
 			success: function(response){
                 setDataInTable(JSON.stringify(response))
+                $("#plant_name").val("")
+                $("#plant_loc").val("")
+                $("#plant_cat").val("")
+                $("#plant_number").val("")
+                $("#plant_desc").val("")
+                $("#plant_price").val("")
+                $("#plant_address").val("")
+                $('#plant_status').val("")
+                $('#dataPetani option:eq(0)').prop('selected', true)
 			},
 			error: function(error){
                 console.log(error)
@@ -108,6 +121,7 @@ $( document ).ready(function() {
         gambar      = $("#update_pimg_before").val()
         jumlahBaru  = $("#update_jml_new").val()
         jumlahLama  = $("#update_jml").val()
+        id_petani   = $("#id_petani").val()
 
         var form_data = new FormData();
         var ins = document.getElementById('update_pimg').files.length;
@@ -132,6 +146,7 @@ $( document ).ready(function() {
         form_data.append("id_tanaman",id);
         form_data.append("jmlBaru",jumlahBaru);
         form_data.append("jmlLama",jumlahLama);
+        form_data.append("id_petani",id_petani);
         form_data.append("id_manager",dataAkunManager['id_pengelola'])
         $.ajax({
 			url: 'php/Manager/MngCrudPlant.php',
@@ -278,9 +293,6 @@ function setDataInTable3(response){
                 "</td>"+
             "</tr>"
         );
-        if(data[key]['status_pembayaran'] != 'Belum Dibayar'){
-            $('#acc'+id_report).css({'display':'none'})
-        }
     });
     localStorage.setItem("dataReportFarmer", JSON.stringify(data));
 }

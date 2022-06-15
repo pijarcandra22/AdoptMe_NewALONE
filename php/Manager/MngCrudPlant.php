@@ -35,10 +35,11 @@ function createPlant() {
     $idPengelola    = $_POST['id_manager'];
     $alamat         = $_POST['alamat'];
     $status_plant   = $_POST['status'];
+    $id_petani      = $_POST['id_petani'];
     $image          = uploadImage('gambar',"../../image/plantimg/");
     for($i=0;$i<$jumlah;$i++){
-        $sql = 'INSERT INTO `tb_tanaman`(`status`, `nama_tanaman`, `lokasi_tanaman`, `id_pengelola`, `kategori`, `gambar`, `harga`, `deskripsi`, `nama_alamat`)
-        VALUES ("'.$status_plant.'","'.$namaTanaman.'","'.$lokasiTanaman.'","'.$idPengelola.'","'.$kategiri.'","'.$image.'","'.$harga.'","'.$deskripsi.'", "'.$alamat.'")';
+        $sql = 'INSERT INTO `tb_tanaman`(`status`, `nama_tanaman`, `lokasi_tanaman`, `id_pengelola`, `kategori`, `gambar`, `harga`, `deskripsi`, `nama_alamat`, `id_petani`)
+        VALUES ("'.$status_plant.'","'.$namaTanaman.'","'.$lokasiTanaman.'","'.$idPengelola.'","'.$kategiri.'","'.$image.'","'.$harga.'","'.$deskripsi.'", "'.$alamat.'", "'.$id_petani.'")';
         $conn -> query($sql);
     }
     readAllPlant($idPengelola);
@@ -54,9 +55,10 @@ function copyPlant(){
     $idPengelola    = $_POST['id_manager'];
     $alamat         = $_POST['alamat'];
     $image          = $_POST['gambar'];
+    $id_petani       = $_POST['id_petani'];
 
-    $sql = 'INSERT INTO `tb_tanaman`(`nama_tanaman`, `lokasi_tanaman`, `id_pengelola`, `kategori`, `gambar`, `harga`, `deskripsi`, `nama_alamat`)
-        VALUES ("'.$namaTanaman.'","'.$lokasiTanaman.'","'.$idPengelola.'","'.$kategiri.'","'.$image.'","'.$harga.'","'.$deskripsi.'", "'.$alamat.'")';
+    $sql = 'INSERT INTO `tb_tanaman`(`nama_tanaman`, `lokasi_tanaman`, `id_pengelola`, `kategori`, `gambar`, `harga`, `deskripsi`, `nama_alamat`, `id_petani`)
+        VALUES ("'.$namaTanaman.'","'.$lokasiTanaman.'","'.$idPengelola.'","'.$kategiri.'","'.$image.'","'.$harga.'","'.$deskripsi.'", "'.$alamat.'", "'.$id_petani.'")';
     
     $conn -> query($sql);
     
@@ -68,7 +70,7 @@ function readAllPlant($id) {
     // TODO : INNER JOIN (Kondisi Terakhir (inner join tb_data_perawatan)
     $sql = "SELECT COUNT(*) as jumlah_tanaman, COUNT(CASE WHEN ta.status='adopsi' THEN 1 END) as tanaman_adopsi,
     COUNT(CASE WHEN ta.status='waiting' THEN 1 END) as jumlah_waiting,COUNT(CASE WHEN ta.status='' THEN 1 END) as jumlah_takadop,ta.* 
-    FROM `tb_tanaman` AS ta GROUP BY ta.nama_tanaman HAVING id_pengelola = '$id'";
+    FROM `tb_tanaman` AS ta GROUP BY ta.nama_tanaman, ta.id_petani HAVING id_pengelola = '$id'";
     $readTable = mysqli_query($conn, $sql);
     $rows = array();
     while ($getTableData = mysqli_fetch_assoc( $readTable )) $rows[]=$getTableData;
@@ -99,13 +101,14 @@ function updatePlant() {
     $idPengelola    = $_POST['id_manager'];
     $jmlBaru        = $_POST['jmlBaru'];
     $jmlLama        = $_POST['jmlLama'];
+    $id_petani      = $_POST['id_petani'];
     $image          = "";
 
     if($jmlBaru>$jmlLama){
         $jumlah = $jmlBaru - $jmlLama;
         for($i=0;$i<$jumlah;$i++){
-            $sql = 'INSERT INTO `tb_tanaman`(`nama_tanaman`, `lokasi_tanaman`, `id_pengelola`, `kategori`, `gambar`, `harga`, `deskripsi`, `nama_alamat`)
-            VALUES ("'.$namaTanaman.'","'.$lokasiTanaman.'","'.$idPengelola.'","'.$kategiri.'","'.$image.'","'.$harga.'","'.$deskripsi.'", "'.$alamat.'")';
+            $sql = 'INSERT INTO `tb_tanaman`(`nama_tanaman`, `lokasi_tanaman`, `id_pengelola`, `kategori`, `gambar`, `harga`, `deskripsi`, `nama_alamat`, `id_petani`)
+            VALUES ("'.$namaTanaman.'","'.$lokasiTanaman.'","'.$idPengelola.'","'.$kategiri.'","'.$image.'","'.$harga.'","'.$deskripsi.'", "'.$alamat.'", "'.$id_petani.'")';
             $conn -> query($sql);
         }
     }else if($jmlBaru<$jmlLama){

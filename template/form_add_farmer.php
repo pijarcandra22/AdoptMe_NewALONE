@@ -67,6 +67,6 @@
         </div>
     </div>
     <script src="js/manager.js"></script>
-    <script>$("#c_maps").load("template/maps_farmerToPlant.php")</script>
+    <!--<script>$("#c_maps").load("template/maps_farmerToPlant.php")</script>-->
 
 </html>

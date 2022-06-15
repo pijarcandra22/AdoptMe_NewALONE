@@ -310,6 +310,7 @@
       $('#update_ploc').val(checkData[0]['lokasi_tanaman'])
       $('#update_pid').val(checkData[0]['id_tanaman'])
       $('#update_pimg_before').val(checkData[0]['gambar'])
+      $('#id_petani').val(checkData[0]['id_petani'])
       $('#modal_plant_bg').css({
         'background': 'linear-gradient(180deg, rgba(2, 87, 5, 0.248) 0%, rgba(255, 255, 255, 0.341) 100%), url(image/plantimg/' + checkData[0]['gambar'] + ')'
       })
@@ -405,6 +406,7 @@
       form_data.append("id_manager", checkData[0]['id_pengelola']);
       form_data.append("alamat", checkData[0]['nama_alamat']);
       form_data.append("gambar", checkData[0]['gambar']);
+      form_data.append("id_petani", checkData[0]['id_petani']);
       $.ajax({
         url: 'php/Manager/MngCrudPlant.php',
         dataType: 'json',

@@ -35,7 +35,10 @@
                 <h3>Add Plant</h3>
                 <form role="form" enctype = "multipart/form-data">
                     <input id="plant_name" class="form-control" style="margin-top:8px;" type="text" placeholder="Plant Name">
-                    <input id="plant_number" class="form-control" style="margin-top:8px;" type="text" placeholder="Number of Plant">
+                    <div class="input-group" style="margin-top:8px;">
+                        <input id="plant_number" class="form-control" type="text" placeholder="Number of Plant">
+                        <select class="form-select" style="padding: 3px 3px 3px 10px;" id="dataPetani"></select>
+                    </div>
                     <div class="form-floating" style="margin-top:8px; height:100px">
                         <textarea id="plant_desc" class="form-control" style="height:100px"></textarea>
                         <label for="floatingTextarea">Plant Description</label>
@@ -76,6 +79,13 @@
 </html>
 <script src="js/manager.js"></script>
 <script>
+    data = JSON.parse(localStorage.getItem("dataFarmerManager"));
+    $("#dataPetani").html("<option selected value='0'>Petani...</option>")
+    Object.keys(data).forEach(function(key){
+        $("#dataPetani").append(
+            "<option value='"+data[key]['id_petani']+"'>"+data[key]['nama_petani']+"</option>"
+        );
+    });
     function zoomThis(){
         if($("#zoomThis > i").attr('class')=="fas fa-compress"){
             $("#formOfPlant").css({'display':'none'})

@@ -68,6 +68,7 @@
                                     <button id="update-plant-but" type="button" style="font-family:Roboto; margin-left: 8px; font-weight:bold" class="btn btn-success" data-bs-dismiss="modal">UPDATE</button>
                                 </div>
                                 <input type="hidden" id="update_jml">
+                                <input type="hidden" id="id_petani">
                                 <input type="hidden" id="update_pimg_before">
                                 <input type="hidden" id="update_pid">
                             </form>
