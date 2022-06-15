@@ -43,10 +43,19 @@ if ($width < 190) {
         box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
         cursor: pointer;
     }
+
+    .plant-id {
+        border-radius: 0 0 10px 0;
+        font-weight: 600;
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    }
 </style>
-<div class="position-relative card" style="width:<?= $width ?>px; height:250px; background: linear-gradient(180deg, rgba(2, 87, 5, 0.248) 0%, rgba(255, 255, 255, 0.341) 100%), url(image/<?= $_POST['gambar'] ?>); <?php if (!$mini) {
-                                                                                                                                                                                                                        echo "box-shadow: 10px 0px 30px rgba(0, 0, 0, 0.5);";
-                                                                                                                                                                                                                    } ?> border-radius: 10px; background-size: cover;">
+<div class="position-relative card d-flex" style="width:<?= $width ?>px; height:250px; background: linear-gradient(180deg, rgba(2, 87, 5, 0.248) 0%, rgba(255, 255, 255, 0.341) 100%), url(image/<?= $_POST['gambar'] ?>); <?php if (!$mini) {
+                                                                                                                                                                                                                                echo "box-shadow: 10px 0px 30px rgba(0, 0, 0, 0.5);";
+                                                                                                                                                                                                                            } ?> border-radius: 10px; background-size: cover;">
+    <div>
+        <p class="plant-id px-2 py-1 bg-white d-inline-block">#<?= $_POST['id']; ?></p>
+    </div>
     <div class="position-absolute overlay" style="<?= $_POST['status_tanaman'] ?>"></div>
     <div style="<?= $_POST['status_tanaman'] ?>" class="position-absolute notready-badge top-0 start-0 mt-3 ms-2 px-2 py-1 rounded fw-bold">
         <p>Not Ready</p>
