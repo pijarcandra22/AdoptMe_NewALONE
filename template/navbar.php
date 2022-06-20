@@ -13,19 +13,23 @@ if (isset($_GET['set'])) {
 <style>
   #searchForm::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: <?= '#' . $_GET['color'] ?> !important;
+    color: <?= '#' . $_GET['color'] ?>;
     opacity: 1;
     /* Firefox */
   }
 
   #searchForm:-ms-input-placeholder {
     /* Internet Explorer 10-11 */
-    color: <?= '#' . $_GET['color'] ?> !important;
+    color: <?= '#' . $_GET['color'] ?>;
   }
 
   #searchForm::-ms-input-placeholder {
     /* Microsoft Edge */
-    color: <?= '#' . $_GET['color'] ?> !important;
+    color: <?= '#' . $_GET['color'] ?>;
+  }
+
+  #searchForm{
+    color: <?= '#' . $_GET['color'] ?>;
   }
 
   #iflog {
@@ -80,6 +84,15 @@ if (isset($_GET['set'])) {
     border-bottom: 1px solid black !important;
   }
 
+  .searchPlace {
+    color: black !important;
+  }
+
+  .inputSearch:focus {
+    border-color: none;
+    box-shadow: none;
+  }
+
   @media (max-width: 1020px) {
     .navbar {
       padding: 30px 40px;
@@ -117,10 +130,10 @@ if (isset($_GET['set'])) {
           </li>
           <li class="nav-item">
             <form id="searchEngine" class="d-flex" style="border-bottom:1px solid <?= '#' . $_GET['color'] ?>;">
-              <input id="searchForm" class="form-control" type="search" placeholder="Search" aria-label="Search" style="background-color: transparent; border: none; width: 200px; font-size:14px; height:20px; color:<?= '#' . $_GET['color'] ?>">
-              <button style="font-size: 12px; background-color: transparent ; color: <?= '#' . $_GET['color'] ?>; border: none; height:20px;">
+              <input id="searchForm" class="form-control inputSearch" type="search" placeholder="Search" aria-label="Search" style="background-color: transparent; border: none; width: 200px; font-size:14px; height:20px;">
+              <a href="#searchPlant" id="searchFormBut" style="font-size: 12px; background-color: transparent ; color: <?= '#' . $_GET['color'] ?>; border: none; height:20px;" type="button">
                 <i class='fas fa-search'></i>
-              </button>
+              </a>
             </form>
           </li>
           <li id="logset" class="nav-item">
@@ -141,6 +154,10 @@ if (isset($_GET['set'])) {
       $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
       $nav.toggleClass('linkColor', $(this).scrollTop() > $nav.height());
       $("#searchEngine").toggleClass('engscroll', $(this).scrollTop() > $nav.height());
+      $("#searchForm").toggleClass('searchPlace', $(this).scrollTop() > $nav.height());
     });
+    $('#searchFormBut').on('click', function () {
+      window.location.replace("index.php?query="+$("#searchForm").val()+"#searchPlant");
+    })
   });
 </script>

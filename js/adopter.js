@@ -108,7 +108,6 @@ $(document).ready(function () {
         e.stopImmediatePropagation();
         return false;
     });
-
 })
 
 function setDataInTable(response) {

@@ -31,7 +31,6 @@
     </style>
     <div style="display: flex; margin-bottom:10px">
         <h3 style="margin-top:14px; color:#12491E; margin-right:10px">Report Farmer List</h3>
-        <button class="btn btn-success" style="margin-top:8px; font-family:roboto; font-weight:bold; height: 40px; line-height: 10px !important; border-radius:30px; background-color:#12491E; border:none; padding:2px 10px !important; vertical-align:middle">Show Map <i class="bi bi-geo-alt"></i></button>
     </div>
     <div style="height: 450px !important; overflow-y:scroll">
         <table class="table" style="font-size: 12px;">

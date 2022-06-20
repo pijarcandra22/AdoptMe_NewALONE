@@ -153,7 +153,7 @@
       </div>
     </div>
   </div>
-  <div class="container" style="margin-bottom: 50px">
+  <div class="container" style="margin-bottom: 50px" id="searchPlant">
     <div id="c_location">
       <div class="row">
         <div class="col-12">
@@ -186,17 +186,23 @@
       </div>
       <!--<div id="map"></div>-->
     </div>
-    <div id="c_important" style="margin-top: 20px">
-      <h2>Vegetables</h2>
-      <div class="horizontal_scroll" id="c_important_content"></div>
+    <div id="defaultContent">
+      <div id="c_important" style="margin-top: 20px">
+        <h2>Vegetables</h2>
+        <div class="horizontal_scroll" id="c_important_content"></div>
+      </div>
+      <div id="c_invest" style="margin-top: 20px">
+        <h2>Good For Nature</h2>
+        <div class="horizontal_scroll" id="c_invest_content"></div>
+      </div>
+      <div id="c_good" style="margin-top: 20px">
+        <h2>Spesial Purpose</h2>
+        <div class="horizontal_scroll" id="c_good_content"></div>
+      </div>
     </div>
-    <div id="c_invest" style="margin-top: 20px">
-      <h2>Good For Nature</h2>
-      <div class="horizontal_scroll" id="c_invest_content"></div>
-    </div>
-    <div id="c_good" style="margin-top: 20px">
-      <h2>Spesial Purpose</h2>
-      <div class="horizontal_scroll" id="c_good_content"></div>
+    <div id="c_search" style="margin-top: 20px">
+      <h2></h2>
+      <div class="row g-3 justify-content-md-center" id="c_search_content"></div>
     </div>
   </div>
 
@@ -245,12 +251,21 @@
       callContent(dataProduk, "c_invest_content", "nature");
       callContent(dataProduk, "c_good_content", "spesialpurpose");
 
+      let paramaters = (new URL(document.URL)).searchParams;
+      if(paramaters.get("query") != null){
+        query = paramaters.get("query")
+        $("#defaultContent").css({'display':'none'})
+        dataProduk = JSON.parse(localStorage.getItem("dataTanaman"));
+        data = dataProduk.filter((dataProduk) => dataProduk.nama_tanaman.toLowerCase().includes(query));
+        callContent(data, "c_search_content", "");
+      }
+
       function callContent(data, className, kategori) {
         data = data.filter((data) => data.kategori.includes(kategori));
         console.log(data.length);
         for (i = 0; i < data.length; i++) {
           $("#" + className).append(
-            '<div class="" data-bs-toggle="modal" data-bs-target="#modal_adobt" style="display:inline-block; padding-right: 20px"></div>'
+            '<div class="col-auto" data-bs-toggle="modal" data-bs-target="#modal_adobt" style="display:inline-block; padding-right: 20px; margin-top:10px"></div>'
           );
         }
         var $c_important = $("#" + className + ">div");
@@ -260,7 +275,7 @@
             status_tanaman = "display:none";
           }
           $(element).load("template/adobt_content.php", {
-            width: "170",
+            width: "175",
             lok: data[index]["nama_alamat"],
             nama: data[index]["nama_tanaman"],
             gambar: "plantimg/" + data[index]["gambar"],

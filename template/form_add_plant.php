@@ -28,6 +28,11 @@
             font-style: normal;
             border-bottom: solid 1px #12491E;
         }
+        .inputSearch:focus {
+            border-color: none;
+            box-shadow: none;
+        }
+
     </style>
     <div class="row">
         <div class="col-12 col-sm-5" id="formOfPlant">
@@ -62,12 +67,12 @@
             </div>
         </div>
         <div class="col-12 col-sm-7" id="tablePlant">
-            <div style="display: flex; margin-bottom:10px; border-radius:5px; width:fit-content; background-color:white; padding:0 10px 5px 20px">
+            <div style="display: flex; margin-bottom:10px; border-radius:5px; width:fit-content; padding:0 10px 5px 0px">
                 <h3 style="margin-top:14px; color:#12491E; margin-right:10px;">Plant List</h3>
                 <button class="btn btn-success" style="display:none; margin-top:8px; font-family:roboto; font-weight:bold; height: 40px; line-height: 10px !important; border-radius:30px; background-color:#12491E; border:none; padding:2px 10px !important; vertical-align:middle">Show Map <i class="bi bi-geo-alt"></i></button>
-                <form class="d-flex" style="display:none !important; border-bottom:1px solid #12491E ; height: 24px; margin:14px 0 0 10px;">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search"  style="background-color: transparent; border: none; width: 100px; font-size:14px; height:20px; color:white">
-                    <button style="font-size: 12px; background-color: transparent ; color: #12491E; border: none; height:20px;">
+                <form class="d-flex" style="border-bottom:1px solid #12491E ; height: 24px; margin:14px 0 0 10px;">
+                    <input id="plantlist_search" class="form-control inputSearch" type="search" placeholder="Search" aria-label="Search"  style="background-color: transparent; border: none; width: 100px; font-size:14px; height:20px; color:#12491E">
+                    <button id="plantlist_search_but" type="button" style="font-size: 12px; background-color: transparent ; color: #12491E; border: none; height:20px;">
                         <i class='fas fa-search'></i>
                     </button>
                 </form>

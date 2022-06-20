@@ -5,7 +5,8 @@ $( document ).ready(function() {
         url: 'php/Manager/MngCrudPlant.php?action=read-all-plant&id='+dataAkunManager['id_pengelola'],
         type: 'GET',
         success: function(response){
-            setDataInTable(response)
+            data = JSON.parse(response)
+            setDataInTable(data)
         },
         error: function(error){
             console.log(error)
@@ -93,7 +94,8 @@ $( document ).ready(function() {
             data: form_data,
 			type: 'POST',
 			success: function(response){
-                setDataInTable(JSON.stringify(response))
+                data = JSON.parse(response)
+                setDataInTable(JSON.stringify(data))
                 $("#plant_name").val("")
                 $("#plant_loc").val("")
                 $("#plant_cat").val("")
@@ -157,7 +159,8 @@ $( document ).ready(function() {
             data: form_data,
 			type: 'POST',
 			success: function(response){
-                setDataInTable(JSON.stringify(response))
+                data = JSON.parse(response)
+                setDataInTable(JSON.stringify(data))
 			},
 			error: function(error){
                 console.log(error)
@@ -180,7 +183,8 @@ $( document ).ready(function() {
             data: form_data,
 			type: 'POST',
 			success: function(response){
-                setDataInTable(JSON.stringify(response))
+                data = JSON.parse(response)
+                setDataInTable(JSON.stringify(data))
 			},
 			error: function(error){
                 console.log(error)
@@ -227,14 +231,21 @@ $( document ).ready(function() {
 			}
 		});
     })
+
+    $('#plantlist_search_but').on('click', function(){
+        search = $("#plantlist_search").val()
+        dataProduk = JSON.parse(localStorage.getItem("dataPlantManager"));
+        console.log(dataProduk)
+        data = dataProduk.filter((dataProduk) => dataProduk.nama_tanaman.toLowerCase().includes(search));
+        setDataInTable(data)
+    })
 })
 
-function setDataInTable(response){
-    data = JSON.parse(response)
+function setDataInTable(data){
     $("#tableData").empty()
     Object.keys(data).forEach(function(key){
         $("#tableData").append(
-            '<div class="card mb-3" style="max-width: 540px; border:none">'+
+            '<div class="card mb-3 mx-3" style="max-width: 540px; border:none; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">'+
                 '<div class="row g-0">'+
                     '<div class="col-4 position-relative" style="background-image:url(image/plantimg/'+data[key]['gambar']+'); background-size:cover; border-radius:5px 0 0 5px">'+
                         '<div class="position-absolute top-50 end-0 translate-middle-y" style="margin-right:10px;">'+
