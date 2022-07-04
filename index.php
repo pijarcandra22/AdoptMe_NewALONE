@@ -265,7 +265,7 @@
         console.log(data.length);
         for (i = 0; i < data.length; i++) {
           $("#" + className).append(
-            '<div class="col-auto" data-bs-toggle="modal" data-bs-target="#modal_adobt" style="display:inline-block; padding-right: 20px; margin-top:10px"></div>'
+            '<div class="col-auto" data-bs-toggle="modal" data-bs-target="#modal_adobt" style="display:inline-block; padding-right: 0px; margin-top:10px"></div>'
           );
         }
         var $c_important = $("#" + className + ">div");
