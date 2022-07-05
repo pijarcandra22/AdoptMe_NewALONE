@@ -6,8 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-
+  <title>AdoptPlant.com | Pay Page</title>
+  <link rel="shortcut icon" href="image/logo.png"/>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
@@ -65,6 +65,11 @@
 </head>
 
 <body>
+  <div id="loader" class="position-relative" style="width: 100%; height:100vh">
+      <div class="position-absolute top-50 start-50 translate-middle">
+        <img src="image/loader.gif" class="shadow bg-body" width="80%" style="border-radius: 50%" alt="" />
+      </div>
+  </div>
   <center>
     <div id="landing" class="position-relative">
       <div id="laporan" class="position-absolute top-50 start-50 translate-middle">
@@ -107,6 +112,16 @@
 
   <script src="js/money-formater.js"></script>
   <script>
+    document.onreadystatechange = function() {
+        if (document.readyState !== "complete") {
+          document.querySelector("body").style.visibility = "hidden";
+          document.querySelector("#loader").style.visibility = "visible";
+        } else {
+          document.querySelector("#loader").style.display = "none";
+          document.querySelector("body").style.visibility = "visible";
+        }
+    };
+
     data = '<?= $_GET['id'] ?>';
     $.ajax({
       url: 'php/Adopter/AdpCheckPaying.php?id=' + data,

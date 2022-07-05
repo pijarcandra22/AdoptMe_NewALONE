@@ -4,8 +4,8 @@ php_value display_errors 1
 # DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES ABOVE HTID:18127607:
 
 RewriteEngine On
-RewriteRule ^admin?$ admin.php
-RewriteRule ^preview?$ preview.php
+RewriteRule ^admin?$ admin_page.php
+RewriteRule ^management?$ manage_page.php
 RewriteRule ^/?$ index.php
 RewriteRule ^user_setting?$ profile.php
 RewriteRule ^register?$ register.php

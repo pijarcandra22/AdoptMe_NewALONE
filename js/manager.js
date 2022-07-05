@@ -1,6 +1,7 @@
 $( document ).ready(function() {
     dataAkunManager = JSON.parse(localStorage.getItem("dataAkunManager"))
     $("#com_name").html(dataAkunManager['nama_pengelola'])
+    $("#manager_name").html(dataAkunManager['nama_pengelola'])
     $.ajax({
         url: 'php/Manager/MngCrudPlant.php?action=read-all-plant&id='+dataAkunManager['id_pengelola'],
         type: 'GET',
@@ -265,6 +266,7 @@ function setDataInTable(data){
             '</div>'
         );
     });
+    $("#mng_jml_tanaman").html(data.length)
     localStorage.setItem("dataPlantManager", JSON.stringify(data));
 }
 
@@ -282,6 +284,7 @@ function setDataInTable2(response){
             "</tr>"
         );
     });
+    $("#mng_jml_farmer").html(data.length)
     localStorage.setItem("dataFarmerManager", JSON.stringify(data));
 }
 

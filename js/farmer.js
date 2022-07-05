@@ -105,7 +105,8 @@ function setDataInTable(response){
                                         nama:data[key]['nama_tanaman'],
                                         gambar:"report/"+data[key]['foto_pelaporan'],
                                         status_tanaman:'display:none',
-                                        tanggal_pelaporan:data[key]['tanggal_pelaporan']
+                                        tanggal_pelaporan:data[key]['tanggal_pelaporan'],
+                                        id: data[key]['id_tanaman']
                                     })
                                 .attr({"onclick":"callReport("+data[key]['id_perawatan']+")",
                                         "data-bs-toggle":'modal',

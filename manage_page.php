@@ -6,8 +6,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-
+  <title>AdoptPlant.com | Management Page</title>
+  <link rel="shortcut icon" href="image/logo.png"/>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet" />
@@ -191,6 +191,11 @@
 </head>
 
 <body>
+  <div id="loader" class="position-relative" style="width: 100%; height:100vh">
+      <div class="position-absolute top-50 start-50 translate-middle">
+        <img src="image/loader.gif" class="shadow bg-body" width="80%" style="border-radius: 50%" alt="" />
+      </div>
+  </div>
   <div id="c1" style="z-index: 1; left:0; right:0; position:absolute"></div>
   <div id="landing">
     <div id="landing-text" style="background-image: url(image/leafFront.webp); position: absolute;" class="position-relative" style="z-index:0">
@@ -204,16 +209,16 @@
               <div class="tabpad manage_data_green">
                 <h4 class="out-480">PLANT</h4>
                 <h5 class="see-480">Plant: </h5>
-                <h5 id="adp_total_tanaman">99</h5>
+                <h5 id="mng_jml_tanaman">99</h5>
               </div>
               <div class="tabpad manage_data_white">
                 <h4 class="out-480" style="color: #12491E;">FARMER</h4>
                 <h5 class="see-480" style="color: #12491E;">Farmer: </h5>
-                <h5 id="adp_waiting_tanaman">99</h5>
+                <h5 id="mng_jml_farmer">99</h5>
               </div>
             </div>
             <div style="display: flex; height:max-content">
-              <h3 id="adopter_name" style="margin-top:14px; color:#12491E; margin-right:10px">Adopter Name</h3>
+              <h3 id="manager_name" style="margin-top:14px; color:#12491E; margin-right:10px">Adopter Name</h3>
               <button onclick="signout()" class="btn btn-success" style="margin-top:8px; font-family:roboto; font-weight:bold; height: 40px; line-height: 10px !important; border-radius:30px; background-color:#12491E; border:none; padding:2px 10px !important; vertical-align:middle">Sign Out</button>
             </div>
           </div>
@@ -243,9 +248,18 @@
 
   <!-- Option 1: Bootstrap Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
+  <script src="js/manager.js"></script>
   <script>
     let id_ofFarmer
+    document.onreadystatechange = function() {
+        if (document.readyState !== "complete") {
+          document.querySelector("body").style.visibility = "hidden";
+          document.querySelector("#loader").style.visibility = "visible";
+        } else {
+          document.querySelector("#loader").style.display = "none";
+          document.querySelector("body").style.visibility = "visible";
+        }
+    };
     $("#c1").load("template/navbar.php?color=FFFFFF&set=true")
     $("#c2").load("template/form_add_plant.php")
     $("#m1").load("template/modal_plant.php")
@@ -270,6 +284,11 @@
       $("#fmanage").removeClass("on");
       $("#c2").load("template/form_check_report.php")
     });
+
+    function signout(){
+        localStorage.removeItem("dataAkunManager")
+        document.location.replace("/")
+    }
 
     function callModal(id) {
       dataProduk = JSON.parse(localStorage.getItem("dataPlantManager"))

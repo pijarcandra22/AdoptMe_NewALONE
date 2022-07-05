@@ -126,7 +126,7 @@ if (isset($_GET['set'])) {
             <a class="nav-link active fw-bold" aria-current="page" href="#">Contact</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active fw-bold" aria-current="page" href="#">Management</a>
+            <a class="nav-link active fw-bold" aria-current="page" href="/management">Management</a>
           </li>
           <li class="nav-item">
             <form id="searchEngine" class="d-flex" style="border-bottom:1px solid <?= '#' . $_GET['color'] ?>;">

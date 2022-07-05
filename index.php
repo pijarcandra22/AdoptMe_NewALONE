@@ -6,7 +6,8 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
+  <title>AdoptPlant.com</title>
+  <link rel="shortcut icon" href="image/logo.png"/>
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
@@ -104,6 +105,14 @@
       color: #ff935d;
     }
 
+    #c_search_content > .col-auto{
+      padding-right: 0;
+    }
+
+    #defaultContent .col-auto{
+      padding-right: 10px;
+    }
+
     @media (max-width: 1200px) {
       #locList {
         display: none;
@@ -133,12 +142,12 @@
 </head>
 
 <body>
-  <div id="c4"></div>
-  <div id="loader" class="position-relative" style="width: 100% !important">
-    <div class="position-absolute top-50 start-50 translate-middle">
-      <img src="/img/Loader.gif" class="shadow bg-body" width="30%" style="border-radius: 50%" alt="" />
-    </div>
+  <div id="loader" class="position-relative" style="width: 100%; height:100vh">
+      <div class="position-absolute top-50 start-50 translate-middle">
+        <img src="image/loader.gif" class="shadow bg-body" width="80%" style="border-radius: 50%" alt="" />
+      </div>
   </div>
+  <div id="c4"></div>
   <div style="background-image: url(image/leafFront.webp); position: absolute; z-index:1;" id="leafFront"></div>
   <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
     <div class="carousel-inner" style="z-index: 0">
@@ -215,13 +224,13 @@
   <script src="js/money-formater.js"></script>
   <script>
     document.onreadystatechange = function() {
-      if (document.readyState !== "complete") {
-        document.querySelector("body").style.visibility = "hidden";
-        document.querySelector("#loader").style.visibility = "visible";
-      } else {
-        document.querySelector("#loader").style.display = "none";
-        document.querySelector("body").style.visibility = "visible";
-      }
+        if (document.readyState !== "complete") {
+          document.querySelector("body").style.visibility = "hidden";
+          document.querySelector("#loader").style.visibility = "visible";
+        } else {
+          document.querySelector("#loader").style.display = "none";
+          document.querySelector("body").style.visibility = "visible";
+        }
     };
     dataAkun = JSON.parse(localStorage.getItem("dataAdopter"));
     $(document).ready(function() {
@@ -265,7 +274,7 @@
         console.log(data.length);
         for (i = 0; i < data.length; i++) {
           $("#" + className).append(
-            '<div class="col-auto" data-bs-toggle="modal" data-bs-target="#modal_adobt" style="display:inline-block; padding-right: 0px; margin-top:10px"></div>'
+            '<div class="col-auto" data-bs-toggle="modal" data-bs-target="#modal_adobt" style="display:inline-block; margin-top:10px"></div>'
           );
         }
         var $c_important = $("#" + className + ">div");

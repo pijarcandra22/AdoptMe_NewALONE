@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>AdoptPlant.com | Admin Page</title>
+    <link rel="shortcut icon" href="image/logo.png"/>
     <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
@@ -190,6 +191,11 @@
     </style>
 </head>
 <body>
+    <div id="loader" class="position-relative" style="width: 100%; height:100vh">
+        <div class="position-absolute top-50 start-50 translate-middle">
+            <img src="image/loader.gif" class="shadow bg-body" width="80%" style="border-radius: 50%" alt="" />
+        </div>
+    </div>
     <div id="c1" class="fixed-top"></div>
     <div id="landing">
         <div id="landing-text" style="background-image: url(image/leafFront.webp); position: absolute;" class="position-relative" style="z-index:0">
@@ -241,8 +247,17 @@
 </html>
 <script>
     let id_ofFarmer
+    document.onreadystatechange = function() {
+        if (document.readyState !== "complete") {
+          document.querySelector("body").style.visibility = "hidden";
+          document.querySelector("#loader").style.visibility = "visible";
+        } else {
+          document.querySelector("#loader").style.display = "none";
+          document.querySelector("body").style.visibility = "visible";
+        }
+    };
     $("#c1").load("template/navbar.php?color=FFFFFF&set=true")
-    $("#c2").load("template/form_article_category.php")
+    $("#c2").load("template/form_check_payment.php")
     $("#m1").load("template/modal_bukti_pembayaran.php")
     $("#m2").load("template/modal_see_rek.php")
     $("#m3").load("template/modal_log_admin.php")
